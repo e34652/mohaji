@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>강의 조회</title>
+</head>
+<body>
+<div class="container">
+    <!-- 헤더 부분 -->
+    <div class="header">
+        <a href="메인페이지링크"><img src="학교로고주소" alt="학교 로고"></a>
+        <div class="float-right">
+            <!-- 로그인/로그아웃 버튼 -->
+            <span class="mr-2">00님 로그인</span>
+            <button class="btn btn-primary">로그인</button>
+            <!-- 혹은 로그아웃 버튼 -->
+            <!-- <button class="btn btn-danger">로그아웃</button> -->
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">수강신청</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">나의 강의실</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">게시판</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 강의 조회 부분 -->
+    <h1>강의 조회</h1>
+    <!-- 교양/전공 필수 버튼 영역 -->
+    <div class="toggle-area">
+        <label>
+            <input type="radio" name="category" value="all" class="mr-2" checked> 전체
+        </label>
+        <label>
+            <input type="radio" name="category" value="major" class="mr-2"> 전공 필수
+        </label>
+        <label>
+            <input type="radio" name="category" value="liberal"> 교양
+        </label>
+    </div>
+
+    <!-- 키워드 검색 입력 폼 -->
+    <form th:action="@{/search}" method="GET" class="form-inline float-right">
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="keyword" class="sr-only">키워드 검색</label>
+            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 검색">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">검색</button>
+    </form>
+</div>
+<!-- 강의 목록 표시 -->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">구분</th>
+        <th scope="col">전공</th>
+        <th scope="col">강의명</th>
+        <th scope="col">차시수</th>
+        <th scope="col">신청하기</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 강의 목록 동적 표시 -->
+    <tr th:each="course : ${couRegList}">
+        <td th:text="${course.category}"></td>
+        <td th:text="${course.major}"></td>
+        <td th:text="${course.lectureName}"></td>
+        <td th:text="${course.hours}"></td>
+        <td><button class="btn btn-primary">신청하기</button></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+<!-- 푸터 부분 -->
+<footer class="footer">
+    © 2024 Mohaji University. All rights reserved.
+</footer>
+</body>
+</html>
