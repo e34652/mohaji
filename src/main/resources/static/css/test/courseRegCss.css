@@ -3,9 +3,19 @@ body {
     background-color: #ffffff; /* 푸른계열 배경색 */
 }
 
+
 .header {
     background-color: #ffffff; /* 헤더 배경색 */
     padding: 10px;
+}
+
+.header > * {
+    margin-left: 100px; /* 왼쪽 마진 */
+    margin-right: 100px; /* 오른쪽 마진 */
+}
+
+.header > *:not(:last-child) {
+    margin-right: 200px; /* 마지막 요소를 제외한 간격 조정 */
 }
 
 .toggle-area {
@@ -31,8 +41,10 @@ body {
     margin-right: 10px;
 }
 
-.category-checkbox {
-    display: none;
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer; /* 커서를 포인터로 변경 */
 }
 
 .category-checkbox + span:before {
@@ -43,7 +55,6 @@ body {
     height: 20px;
     text-align: center;
     border: 1px solid #ccc;
-    cursor: pointer;
 }
 
 .category-checkbox:checked + span:before {
