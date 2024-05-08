@@ -1,0 +1,16 @@
+view 디렉토리 참고
+
+(/) 메인
+main.html : 처음 접속시 나타나는 페이지(로그인이동버튼, 공지사항 게시판 출력)
+
+(/reg)
+courseReg.html : 수강신청 버튼을 누르면 나오는 수강가능 과목 조회 페이지
+
+(/myPage) 수강신청
+regList.html : 나의 수강내역(수강중)을 확인할 수 있는 페이지
+regInfo.html : 나의 수강현황(수강중,완료)을 확인할 수 있는 페이지
+regResult.html : 나의 수강성적(수강중,완료)을 확인할 수 있는 페이지
+userInfo.html : 나의 정보를 확인,수정 할 수 있는 페이지
+myPC.html : PC 등록하는 곳
+
+
