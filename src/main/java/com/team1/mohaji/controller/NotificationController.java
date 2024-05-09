@@ -2,7 +2,7 @@ package com.team1.mohaji.controller;
 
 import com.team1.mohaji.dto.NotificationDto;
 import com.team1.mohaji.service.imple.NotificationService;
-import groovy.util.logging.Slf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

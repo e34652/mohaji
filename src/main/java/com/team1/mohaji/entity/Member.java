@@ -18,7 +18,11 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-
+    public enum Role {
+        STUDENT,
+        ADMIN,
+        PROFESSOR
+    }
 
 
 
