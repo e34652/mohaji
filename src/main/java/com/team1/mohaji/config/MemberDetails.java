@@ -1,0 +1,43 @@
+package com.team1.mohaji.config;
+
+import com.team1.mohaji.entity.Member;
+import com.team1.mohaji.repository.MemberRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class MemberDetails implements UserDetailsService {
+
+    private MemberRepository memberRepository;
+
+    public MemberDetails(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Override
+    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        String userName, password = null;
+        List<GrantedAuthority> authorities = null;
+
+
+        List<Member> memberList = memberRepository.findByLoginId(username);
+        if (memberList.size() == 0) {
+            throw new UsernameNotFoundException("User details 확인 불가: " + username);
+        } else{
+            userName = memberList.get(0).getLoginId();
+            password = memberList.get(0).getPassword();
+            authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
+        }
+
+        return new User(userName,password,authorities);
+    }
+}
