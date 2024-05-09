@@ -3,9 +3,19 @@ body {
     background-color: #fff; /* 푸른계열 배경색 */
 }
 
+
 .header {
     background-color: #fff; /* 헤더 배경색 */
     padding: 10px;
+}
+
+.header > * {
+    margin-left: 100px; /* 왼쪽 마진 */
+    margin-right: 100px; /* 오른쪽 마진 */
+}
+
+.header > *:not(:last-child) {
+    margin-right: 200px; /* 마지막 요소를 제외한 간격 조정 */
 }
 
 .toggle-area {
@@ -24,4 +34,32 @@ body {
     background-color: #dcdcdc; /* 푸터 회색 배경색 */
     padding: 20px;
     text-align: center;
+
+}
+
+
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer; /* 커서를 포인터로 변경 */
+}
+
+.category-checkbox + span:before {
+    content: "\2714";
+    display: inline-block;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.category-checkbox:checked + span:before {
+    background-color: #007bff;
+    color: #fff;
 }

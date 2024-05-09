@@ -1,0 +1,62 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CourseDetail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="card-title mb-0">강의 상세 정보</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>학과 | </strong> 컴퓨터공학</li>
+                        <li class="list-group-item"><strong>교수 | </strong> 노승탁</li>
+                        <li class="list-group-item"><strong>과목명 | </strong> Java 처음부터 배우기</li>
+                        <li class="list-group-item"><strong>과목유형 | </strong> 전공 필수</li>
+                        <li class="list-group-item"><strong>과목설명 | </strong> 처음 시작하는 Java 기초부터 학습합니다.</li>
+                        <li class="list-group-item"><strong>커리큘럼 | </strong>
+                            <ol>
+                                <li>개발환경설치</li>
+                                <li>변수와 타입</li>
+                                <li>연산자</li>
+                                <li>조건문과 반복문</li>
+                                <li>배열</li>
+                                <li>클래스</li>
+                                <li>인터페이스</li>
+                                <li>익명객체</li>
+                                <li>람다식</li>
+                                <li>IO</li>
+                            </ol>
+                        </li>
+                        <li class="list-group-item"><strong>취득 가능 학점:</strong> 3점</li>
+                    </ul>
+
+                    <!--
+                     <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>학과 | </strong> <span th:text="${courseDetail.department}"></span></li>
+    <li class="list-group-item"><strong>교수 | </strong> <span th:text="${courseDetail.professor}"></span></li>
+    <li class="list-group-item"><strong>과목명 | </strong> <span th:text="${courseDetail.subjectName}"></span></li>
+    <li class="list-group-item"><strong>과목유형 | </strong> <span th:text="${courseDetail.subjectType}"></span></li>
+    <li class="list-group-item"><strong>과목설명 | </strong> <span th:text="${courseDetail.description}"></span></li>
+    <li class="list-group-item"><strong>커리큘럼 | </strong>
+        <ol>
+            <li th:each="curriculum : ${courseDetail.curriculum}" th:text="${curriculum}"></li>
+        </ol>
+    </li>
+    <li class="list-group-item"><strong>취득 가능 학점:</strong> <span th:text="${courseDetail.credit}"></span>점</li>
+</ul>
+                     -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -9,6 +9,11 @@ public class myCourseController {
     ///myPage/main
     @GetMapping("/")
     public String myCourse(){
-        return "view/courseReg";
+        return "view/myPage/myPC";
+    }
+
+    @GetMapping("/courseDetailPage")
+    public String courseDetailPage(){
+        return "view/modalPop/courseDetail";
     }
 }
