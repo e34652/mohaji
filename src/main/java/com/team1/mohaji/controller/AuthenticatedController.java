@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @Slf4j
 public class AuthenticatedController {
-    @Autowired
-    Service serviceInterface;
-
-
+    
     @GetMapping("/authenticated")
         public String getAuthenticated(){
 
