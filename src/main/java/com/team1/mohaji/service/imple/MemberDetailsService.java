@@ -1,32 +1,41 @@
-package com.team1.mohaji.config;
+package com.team1.mohaji.service.imple;
 
+import com.team1.mohaji.config.MemberDetail;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class MemberDetails implements UserDetailsService {
+public class MemberDetailsService implements UserDetailsService {
 
     private MemberRepository memberRepository;
 
-    public MemberDetails(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+//    // /login + Post + FormUrlEncoded + username,password 모두 성립하면
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        // Optional으로 NPE를 방지한다.
+//        List<Member> memberList = memberRepository.findByLoginId(username);
+//        if(memberList.isPresent()){
+//            return new MemberDetail(memberList.get());
+//        }else{
+//            return null;
+//        }
+//    }
 
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         String userName, password = null;
         List<GrantedAuthority> authorities = null;
-
 
         List<Member> memberList = memberRepository.findByLoginId(username);
         if (memberList.size() == 0) {
