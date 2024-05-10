@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <title>페이지 제목</title>
-    <!-- 여기에 필요한 CSS 파일들을 추가 -->
-    <link rel="stylesheet" href="..." />
-  </head>
-  <body>
-    <!-- 헤더 포함 -->
-    <div th:replace="header.html"></div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Page</title>
+</head>
+<body>
 
-    <!-- 나머지 내용 -->
-    ...
-  </body>
+<!-- Importing header -->
+<div th:replace="~{view/share/menuheader :: menuheader}"></div>
+
+<!-- Content of the page -->
+<div class="content">
+    <h1>Welcome to our website!</h1>
+    <p>This is the main content of the page.</p>
+</div>
+
+</body>
 </html>

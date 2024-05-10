@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko" class="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
+    />
+    <meta
+      name="csrf-token"
+      content="WDGfpHvbFwikWZUztuWzTaOUmnBotbPcOs9lZWsl"
+    />
+
+    <link
+    rel="stylesheet"
+    href="css/navi/index2.css"
+    media="all"
+  />
+
+    <link
+      rel="stylesheet"
+      href="css/navi/index1.css"
+      media="all"
+    />
+  
+
+    <link
+      rel="stylesheet"
+      href="css/navi/main.css"
+      media="all"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://lms.ssu.ac.kr/lib/vector-icons/index.min.css"
+    />
+
+    <script src="https://lms.ssu.ac.kr/js/coursecatalog-bootstrap.js"></script>
+    <script src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
+    <script src="https://lms.ssu.ac.kr/js/polyfill.js"></script>
+
+    <script>
+      var MIX_APP_URL = "https://lms.ssu.ac.kr";
+      var API_V1_ENDPOINT = "https://lms.ssu.ac.kr" + "/api/v1";
+    </script>
+
+    <title>모하지대학교 LMS</title>
+  </head>
+  <body class="">
+    <!-- header -->
+    <script>
+        window.xnSubMenuHelper = {
+            // 서브 메뉴를 표시/숨김한다.
+            showHideSubMenuWrapper: function(e, event_name, target_class_name) {
+                e.stopPropagation();
+                if (target_class_name == "xn-header-menu-wrapper") this.mouseoverMenuWrapper = (event_name == "mouseenter");
+                else if (target_class_name == "xn-sub-menu-wrapper") this.mouseoverSubMenuWrapper = (event_name == "mouseenter");
+                xnSubMenuHelper.clearMouseoverSubMenuTimer();
+        
+                if (event_name == "mouseenter") {
+                    xnSubMenuHelper.setMouseoverSubMenuTimer();
+                } else if (event_name == "mouseleave") {
+                    xnSubMenuHelper.setMouseoverSubMenuTimer();
+                }
+            },
+        
+            // 서브 메뉴를 표시/숨김 애니메이션을 수행한다.
+            showHideSubMenuAnim: function() {
+                if (!this.mouseoverMenuWrapper && !this.mouseoverSubMenuWrapper) {
+                    if ($(".xn-sub-menu-outer-wrapper").css("display") != "block") return;
+        
+                    $( ".xn-sub-menu-outer-wrapper" )
+                    .stop()
+                    .animate({
+                        "height": "0px"
+                    }, 600, function() {
+                        $(this).hide();
+                    });
+                } else {
+                    const subMenuWrapperElement = $( ".xn-sub-menu-outer-wrapper" );
+                    const currentHeight = subMenuWrapperElement.height();
+                    const wrapperHeight = subMenuWrapperElement.css('height', 'auto').height();
+                    subMenuWrapperElement.height(currentHeight);
+        
+                    $( ".xn-sub-menu-outer-wrapper" )
+                    .show()
+                    .stop()
+                    .animate({
+                        "height": wrapperHeight + "px"
+                    });
+                }
+            },
+        
+            // 타이버를 제거한다.
+            clearMouseoverSubMenuTimer: function() {
+                if (this.mouseoverSubMenuTimer != null) clearTimeout(this.mouseoverSubMenuTimer);
+            },
+        
+            // 타이머를 수행시킨다.
+            setMouseoverSubMenuTimer: function() {
+                this.mouseoverSubMenuTimer = setTimeout(function() { xnSubMenuHelper.showHideSubMenuAnim(); }, 400);
+            },
+        
+            // 서브 메뉴에 마우스 오버하면, 해당 대 메뉴에 hover 효과가 표시된다.
+            onmouseenterSubMenuItemWrapper: function(target) {
+                var index = $(target).index();
+                $($(".xn-header-menu-wrapper #menu-main li").get(index)).find("a").addClass("hover");
+            },
+        
+            // 해당 대 메뉴에 hover 효과를 모두 제거한다.
+            onmouseleaveSubMenuItemWrapper: function(target) {
+                $(".xn-header-menu-wrapper #menu-main li").find("a").removeClass("hover");
+            }
+        };
+        </script>
+        
+        <!-- header -->
+            <!-- 일반 헤더와 OER 헤더가 분리되어 있다. -->
+                                <!-- header -->
+        <script>
+        function weirdNavbarMobileToggle() {
+          var hiddenElems = document.getElementsByClassName('navbar-hidden');
+          if (!!hiddenElems && hiddenElems.length > 0) {
+            var hiddenElem = hiddenElems[0]
+            hiddenElem.classList.remove('navbar-hidden');
+            return;
+          }
+          var elem = document.getElementsByClassName('navbar-collapse')[0]
+          elem.className += " " + 'navbar-hidden';
+        }
+        </script>
+    <header id="header">
+      <nav
+        class="navbar navbar-light navbar-static-top navbar-expand-md"
+        role="navigation"
+      >
+        <div class="container">
+          <div class="navbar-header">
+            <div class="float-left">
+              <button
+                class="navbar-toggler"
+                type="button"
+                onclick="weirdNavbarMobileToggle()"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-controls="bs-example-navbar-collapse-1"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <div class="float-left xn-main-catalog-header-logo-wrap">
+              <a href="https://lms.ssu.ac.kr">
+                <div class="xn-main-catalog-header-logo">
+                  <img
+                    class="xn-main-catalog-header-logo-image"
+                    src="/img/main/navi.png"
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="xn-main-menu-wrap">
+              <div class="desktop">
+                <div class="xn-header-menu-wrapper">
+                    
+                  <ul class="xn-header-menu" id="xn-header-menu">
+                    <li
+                      id="menu-item-a"
+                      class="menu-item"
+                    >
+                      <a data-role="menu">사이트소개</a>
+                    </li>
+                    <li
+                      id="menu-item-b"
+                      class="menu-item"
+                    >
+                      <a data-role="menu">수강신청</a>
+                    </li>
+                    <li
+                      id="menu-item-c"
+                      class="menu-item"
+                    >
+                      <a data-role="menu">지원센터</a>
+                      
+                    </li>
+                    <li
+                      id="menu-item-d"
+                      class="menu-item"
+                    >
+                      <a href="/myPage/regInfo">마이페이지</a>
+                    </li>
+                    
+                  </ul>
+                </div>
+                <div class="xn-sub-menu-outer-wrapper">
+                  <div class="xn-sub-menu-outer-containar">
+                    <span class="xn-sub-menu-item-bg"></span>
+                    <div class="xn-sub-menu-wrapper pull-right">
+                      <ul
+                        class="xn-sub-menu-item-wrapper"
+                        onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
+                        onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
+                      >
+                        <li
+                          id="menu-item-a1"
+                          class="menu-item"
+                        >
+                          <a
+                            href="미구현"
+                            >소개</a
+                          >
+                        </li>
+                      </ul>
+                      <ul
+                        class="xn-sub-menu-item-wrapper"
+                        onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
+                        onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
+                      >
+                        <li
+                          id="menu-item-b1"
+                          class="menu-item"
+                        >
+                          <a href="/courseReg" data-role="menu"
+                            >수강신청</a
+                          >
+                        </li>
+                      </ul>
+                      <ul
+                        class="xn-sub-menu-item-wrapper"
+                        onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
+                        onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
+                      >
+                        <li
+                          id="menu-item-c1"
+                          class="menu-item"
+                        >
+                          <a
+                            href="미구현"
+                            >공지사항</a
+                          >
+                        </li>
+                        <li
+                          id="menu-item-c2"
+                          class="menu-item"
+                        >
+                          <a href="미구현" data-role="menu">공통기준</a>
+                        </li>
+                      </ul>
+                      <ul
+                        class="xn-sub-menu-item-wrapper"
+                        onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
+                        onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
+                      >
+                        <li
+                          id="menu-item-d6"
+                          class="menu-item"
+                        >
+                          <a
+                            href="/myPage/regList"
+                            >수강중인 강의</a
+                          >
+                        </li>
+                        <li
+                          id="menu-item"
+                          class="menu-item"
+                        >
+                          <a
+                            href="/myPage/regInfo"
+                            >수강 이력</a
+                          >
+                        </li>
+                        <li
+                        id="menu-item-d1"
+                        class="menu-item"
+                      >
+                        <a
+                          href="/myPage/regResult"
+                          >나의 성적</a
+                        >
+                      </li>
+                      <li
+                      id="menu-item-d2"
+                      class="menu-item"
+                    >
+                      <a
+                        href="/myPage/myPC"
+                        >내 PC 등록</a
+                      >
+                    </li>
+                      <!--혜빈님 컨트롤러 요청명 따라 갈 것   -->
+                        <li
+                        id="menu-item-d3"
+                        class="menu-item"
+                      >
+                        <a
+                          href="/myPage/userInfo"
+                          data-role="menu"
+                          >내 정보</a
+                        >
+                      </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>   
+        </div>
+      </nav>
+    </header>
+    <script>
+        $(document).ready(function() {
+            if ($(".xn-sub-menu-item-wrapper").length == 0) return;
+        
+            // 메뉴 영역이 아니면, 서브메뉴를 숨긴다.
+            $(".xn-header-menu-wrapper").bind("mouseenter", function(e) {
+                xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseenter", "xn-header-menu-wrapper");
+            });
+            $(".xn-header-menu-wrapper").on("mouseleave", function(e) {
+                xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseleave", "xn-header-menu-wrapper");
+            });
+        
+            $(".xn-sub-menu-wrapper").on("mouseenter", function(e) {
+                xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseenter", "xn-sub-menu-wrapper");
+            });
+            $(".xn-sub-menu-wrapper").on("mouseleave", function(e) {
+                xnSubMenuHelper.showHideSubMenuWrapper(e, "mouseleave", "xn-sub-menu-wrapper");
+            });
+        });
+        </script>
+
+    <!-- content -->
+    <div id="popup-root" data-catalog_id=""></div>
+    <main id="content">
+      <div id="root">
+        <div id="visual">
+          <img src="/img/main/banner.jpg"/>
+          <div class="visual-container">
+         
+            
+            <div class="main-slogan-wrap"></div>
+            
+            <div class="xn-main-login-container"> <!-- 우측 파란배경 -->
+              
+              <div class="xn-main-login-container-title-wrap">
+                <span class="xn-main-login-container-title">통합 로그인</span>
+              </div>
+              <div class="xn-sso-login-btn-wrap">
+                <a
+                  class="btn btn-primary btn-login xn-sso-login-btn"
+                  type="button"
+                  href="https://lms.ssu.ac.kr/login"
+                >
+                  <span class="xn-sso-login-icon"></span>
+                  통합 로그인 >
+                </a>
+              </div>
+              <div class="xnm2_btnbox_wrap"></div> <!-- 통합 로그인 배경 -->
+            </div>
+          </div>
+        </div>
+      <!-- Add Font -->
+        <!-- 이미지 넣을 공간 -->
+        <style>
+          .xn-change_language-container{display:none;}
+          @media (min-width:768px) and (max-width:1280px){
+            #content{padding-top:0 !important;}
+          }
+        </style>
+        <div id="xnm2_content">
+            <div class="xnp-manual-wrap ">		
+            <div class="xnp-manual">			
+              <div class="manual-link link3">
+                <a href="#" target="_blank">
+                  <i></i><span class="manual-text-y"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div id="xnm2_main_board">
+            <div class="xnp-widget-container">
+             
+              <div id="widget-63eafc6c32524a62162a55f7" class="widget xnp-widget-board"
+                 data-locale="ko"
+                 data-widget_id="63eafc6c32524a62162a55f7"
+                 data-widget_type="board">
+              </div>
+        
+              <div id="widget-63eafc78e0e2b377f867b922" class="widget xnp-widget-menual"
+                 data-locale="ko"
+                 data-widget_id="63eafc78e0e2b377f867b922"
+                 data-widget_type="board">
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        
+        
+                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>
+                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>
+            </div>
+        
+            </main>
+
+        
+        <div id="xnm2_content">
+            <!-- 로그인 버튼 밑에 공간 -->
+            <div class="xnp-manual-wrap">
+            
+                <div class="xnp-manual">
+                
+                </div>
+            </div>  
+        </div>
+    </main>
+    <!-- footer -->
+    <!-- footer -->
+    <!-- footer -->
+    <footer id="footer">
+      <div class="xn-main-catalog-footer-upper">
+        <span></span>
+       
+        </div>
+      </div>
+      <div class="xn-main-catalog-footer-border"></div>
+      <div class="xn-main-catalog-footer-info">
+        <a href="https://lms.ssu.ac.kr">
+          <div class="xn-main-footer-logo">
+            <!-- 이곳에 푸터 로고를 넣어주세요 -->
+            <img
+              class="xn-main-footer-logo-image"
+              alt="숭실대학교 LMS"
+              src="https://lms.ssu.ac.kr/customs/main/footer_logo.png"
+            />
+          </div>
+        </a>
+        
+        <span class="xn-main-footer-copyright"
+          ><div id="xnm2_footer">
+            <div class="xnm2_ft_top">
+              <div class="xnm2_wrap">
+        
+              </div>
+            </div>
+            <div class="xnm2_ft_bot">
+  
+                <h2></h2>
+                <ul class="xnm2_adr">
+                  <li>서울시 동작구 상도로 369 숭실대학교</li>
+                  <li>
+                    COPYRIGHT© 2021 SOONGSIL UNIVERSITY. ALL RIGHTS RESERVED.
+                  </li>
+                </ul>
+      
+                
+              </div>
+            </div>
+          </div></span
+        >
+      </div>
+    </footer>
+  </body>
+</html>
