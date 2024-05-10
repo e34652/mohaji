@@ -1,6 +1,16 @@
 view 디렉토리 참고
 디렉토리 이름변경이나 추가시 꼭 수정해주세요
 
+***share
+타임리프 뷰템플릿 입니다.
+각 태그 내용이 있어서 만들고계신 페이지에 복붙사용하면 편리합니다.
+링크는 간편하게 이곳에서 수정후 저장해 사용하면 됩니다.
+
+header.html 을 사용하려면  <th:block th:fragment="header">  태그를 확인하시고
+해당 페이지 필요한 위치에 아래 태그를 붙여넣으면 됩니다. (경로/html이름 :: 설정한이름)
+예시) <header th:replace="~{view/share/header :: header}"></header>
+
+
 (/) 메인
 main.html : 처음 접속시 나타나는 페이지(로그인이동버튼, 공지사항 게시판 출력)
 
@@ -20,7 +30,7 @@ userInfo.html : 나의 정보를 확인,수정 할 수 있는 페이지
 myPC.html : PC 등록하는 곳
 
 
-(/modalPop) 모달팝업으로 만들어지는 페이지
+(/modalPop) 모달팝업으로 만들어지는 페이지/모달팝업 페이지 따로 만드실분만
 courseDetail.html : 수강신청에서 강의 상세정보 볼수있는 모달페이지
 
 (/board) 게시판
@@ -28,7 +38,6 @@ noticeBoard.html : 공지게시판
 resourceBoard.html : 자료실
 questionBoard.html : 질문게시판
 assignmentBoard.html : 과제실
-
 
 (/classroom) 강의실
 course.html : 차시에 대한 리스트 동영상이 나오는 페이지.
