@@ -14,8 +14,8 @@ public class ProjectSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) //CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/authenticated").authenticated()
-                        .requestMatchers("/unauthenticated").permitAll())
+                .requestMatchers("/authenticated").authenticated()
+                .requestMatchers("/unauthenticated").permitAll())
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
