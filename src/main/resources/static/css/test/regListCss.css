@@ -1,3 +1,4 @@
+
 /* style.css */
 body {
     background-color: #fff; /* 웹배경색 */
@@ -39,30 +40,42 @@ body {
     margin: 0 10px; /* 네비게이션 바 아이템 간격 */
 }
 
-.table th:nth-child(1),
-.table td:nth-child(1) {
-    width: 10%; /* 구분 칼럼의 너비 조정 */
+
+/* 사이드바 스타일 */
+.sidebar {
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+    border-right: none; /* 오른쪽 테두리 제거 */
+    border-bottom: none; /* 아래쪽 테두리 제거 */
 }
 
-.table th:nth-child(2),
-.table td:nth-child(2) {
-    width: 15%; /* 전공 칼럼의 너비 조정 */
+.sidebar-sticky {
+    padding: 20px;
 }
 
-.table th:nth-child(3),
-.table td:nth-child(3) {
-    width: 40%; /* 강의명 칼럼의 너비 조정 */
+.sidebar-sticky h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 15px;
 }
 
-.table th:nth-child(4),
-.table td:nth-child(4) {
-    width: 10%; /* 차시수 칼럼의 너비 조정 */
+.sidebar-sticky ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-/*.table th:nth-child(5),*/
-/*.table td:nth-child(5) {*/
-/*    width: 25%; !* 신청하기 버튼 칼럼의 너비 조정 *!*/
-/*}*/
+.sidebar-sticky ul li a {
+    color: #000;
+    text-decoration: none;
+}
+
+.sidebar-sticky ul li a:hover {
+    text-decoration: underline;
+}
+
 
 /* 추가된 스타일 */
 .container {
@@ -86,4 +99,3 @@ body {
     margin-top: 20px; /* 푸터 상단 여백 추가 */
     justify-content: center; /* 항목들을 가운데 정렬 */
 }
-

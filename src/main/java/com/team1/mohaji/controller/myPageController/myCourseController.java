@@ -9,7 +9,16 @@ public class myCourseController {
     ///myPage/main
     @GetMapping("/")
     public String myCourse(){
-        return "view/myPage/myPC";
+        return "view/main";
+    }
+
+    @GetMapping("courseReg")
+    public  String coutseReg(){
+        return "view/courseReg";
+    }
+    @GetMapping("/regList")
+        public String myList(){
+        return "view/myPage/regList";
     }
 
     @GetMapping("/courseDetailPage")

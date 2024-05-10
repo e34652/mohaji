@@ -1,3 +1,4 @@
+<!-- PC 등록 페이지 -->
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -14,7 +15,7 @@
 <body>
 <div class="container">
     <h1>PC 등록 페이지</h1>
-    <button class="btn btn-primary" onclick="registerPC()">PC 등록</button>
+    <button class="btn btn-primary" onclick="showConfirmationModal()">PC 등록</button>
     <div class="pc-count">
         <p>현재 등록된 PC 수: <span id="pcCount">0</span>/3 (최대)</p>
         <p>등록된 PC 주소:</p>
@@ -33,11 +34,46 @@
                 </button>
             </div>
             <div class="modal-body">
+                <p id="ipAddress"></p>
                 현재 PC를 등록하시겠습니까?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <button type="button" class="btn btn-primary" onclick="confirmRegistration()">확인</button>
+                <button type="button" class="btn btn-primary" onclick="registerPC()">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 등록 완료 모달 -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">등록 완료</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                PC가 성공적으로 등록되었습니다.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 등록 실패 모달 -->
+<div class="modal fade" id="failureModal" tabindex="-1" role="dialog" aria-labelledby="failureModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="failureModalLabel">등록 실패</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                PC 등록에 실패하였습니다.
             </div>
         </div>
     </div>
@@ -46,11 +82,16 @@
 <script th:inline="javascript">
     /*[[${ipAddress}]]*/ // 타임리프를 사용하여 모델 값(ipAddress)을 스크립트로 전달받습니다.
 
+    function showConfirmationModal() {
+        var ipAddress =[[${ipAddress}]];
+        document.getElementById('ipAddress').textContent = 'IP 주소: ' + ipAddress;
+        $('#confirmModal').modal('show');
+    }
+
     function registerPC() {
-        // 모델에서 받은 IP 주소를 사용하여 PC 등록 요청을 서버로 보냅니다.
-        var ipAddress = [[${ipAddress}]];
         var pcList = document.getElementById('pcList');
         var pcCount = document.getElementById('pcCount');
+        var ipAddress = [[${ipAddress}]];
 
         // 등록된 PC 수가 최대 3대 이하인 경우에만 등록 가능
         if (parseInt(pcCount.textContent) < 3) {
@@ -60,7 +101,7 @@
             // 삭제 버튼 생성 및 이벤트 처리 추가
             var deleteButton = document.createElement('button');
             deleteButton.textContent = '삭제';
-            deleteButton.className = 'delete-btn btn btn-danger btn-sm';
+            deleteButton.className = 'btn btn-primary';
             deleteButton.onclick = function() {
                 pcList.removeChild(listItem);
                 pcCount.textContent = parseInt(pcCount.textContent) - 1;
@@ -69,37 +110,13 @@
             listItem.appendChild(deleteButton);
             pcList.appendChild(listItem);
             pcCount.textContent = parseInt(pcCount.textContent) + 1;
+
+            $('#confirmModal').modal('hide');
+            $('#successModal').modal('show');
         } else {
-            alert('최대 등록 가능한 PC 수를 초과하였습니다.');
+            $('#confirmModal').modal('hide');
+            $('#failureModal').modal('show');
         }
-
-
-        // fetch('/registerPC?ip=' + ipAddress) // IP 주소를 쿼리 문자열로 전달합니다.
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data.success) {
-        //             // 성공적으로 등록된 경우 PC 목록을 업데이트합니다.
-        //             var pcList = document.getElementById('pcList');
-        //             var pcCount = document.getElementById('pcCount');
-        //
-        //             // 등록된 PC 수가 최대 3대 이하인 경우에만 등록 가능
-        //             if (parseInt(pcCount.textContent) < 3) {
-        //                 var listItem = document.createElement('li');
-        //                 listItem.textContent = ipAddress;
-        //                 pcList.appendChild(listItem);
-        //                 pcCount.textContent = parseInt(pcCount.textContent) + 1;
-        //             } else {
-        //                 alert('최대 등록 가능한 PC 수를 초과하였습니다.');
-        //             }
-        //         } else {
-        //             // 등록에 실패한 경우 처리
-        //             alert('PC 등록에 실패하였습니다.');
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error('PC 등록 중 오류 발생:', error);
-        //         alert('PC 등록 중 오류가 발생하였습니다.');
-        //     });
     }
 </script>
 
