@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class myCourseController {
 
     ///myPage/main
-    @GetMapping("/")
+    @GetMapping("/a")
     public String myCourse(){
         return "view/main";
     }
