@@ -47,7 +47,7 @@ implementation 'org.webjars:jquery:3.6.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 //	security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 //	test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
