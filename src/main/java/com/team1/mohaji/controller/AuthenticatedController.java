@@ -15,7 +15,7 @@ public class AuthenticatedController {
 
     @GetMapping("/authenticated")
         public String getAuthenticated(){
-log.info("{}", serviceInterface.findMemberByNum(1));
-        return "/view/test";
+
+        return "/view/main";
         }
 }
