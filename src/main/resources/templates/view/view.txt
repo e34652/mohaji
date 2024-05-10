@@ -1,14 +1,3 @@
-view 디렉토리 참고
-디렉토리 이름변경이나 추가시 꼭 수정해주세요
-
-***share
-타임리프 뷰템플릿 입니다.
-각 태그 내용이 있어서 만들고계신 페이지에 복붙사용하면 편리합니다.
-링크는 간편하게 이곳에서 수정후 저장해 사용하면 됩니다.
-
-header.html 을 사용하려면  <th:block th:fragment="header">  태그를 확인하시고
-해당 페이지 필요한 위치에 아래 태그를 붙여넣으면 됩니다. (경로/html이름 :: 설정한이름)
-예시) <header th:replace="~{view/share/header :: header}"></header>
 
 
 (/) 메인
@@ -41,7 +30,3 @@ assignmentBoard.html : 과제실
 
 (/classroom) 강의실
 course.html : 차시에 대한 리스트 동영상이 나오는 페이지.
-
-
-
-
