@@ -1,39 +1,26 @@
-section {
-    position: relative;
-    max-width: 1200px; /* 섹션의 최대 너비 지정 */
-    max-height: 70px;
-    margin: auto; /* 섹션을 가운데 정렬합니다. */
-    margin-top: 30px;
-    margin-bottom: 50px;
-    padding-top: 5rem; /* 섹션 내부 여백 추가 */
 
-    background-color: #F1F1F1;
-    /*background-image: url('/static/img/main/secondNavi.png'); !* 배경 이미지 설정 *!*/
+.miniNavi {
+    position: relative;
+    max-width: 1400px; /* 섹션의 최대 너비 지정 */
+    max-height: 134px;
+    margin: auto; /* 섹션을 가운데 정렬합니다. */
+    margin-top: 1.5px;
+    margin-bottom: 50px;
+    padding-top: 2.8rem; /* 섹션 내부 여백 추가 */
+    padding-bottom: 2.5rem;
+    background-image: url('/img/main/secondNavi.png'); /* 배경 이미지 설정 */
     background-size: cover; /* 배경 이미지를 섹션에 맞게 확장합니다. */
     background-position: center; /* 배경 이미지를 섹션 가운데로 정렬합니다. */
     text-align: center; /* 섹션 내부의 요소들을 가운데 정렬합니다. */
 
 
 }
-
-
-section h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-
+.miniNavi h1 {
+    color: #ffffff;
 }
-
-
-
-section > * {
+.miniNavi > * {
     margin-top: 0px; /* 섹션 내부 요소의 상단 마진 */
     margin-bottom: 500px; /* 섹션 내부 요소의 하단 마진 */
 }
 
-/*section img {*/
-/*    max-width: 100%; !* 이미지의 최대 너비를 섹션에 맞게 설정합니다. *!*/
-/*    height: auto; !* 이미지의 높이를 자동으로 조정하여 비율을 유지합니다. *!*/
-/*}*/
+
