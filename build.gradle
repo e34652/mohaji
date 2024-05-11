@@ -27,8 +27,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 //	thymeleaf
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+//jQuery
+implementation 'org.webjars:jquery:3.6.0'
 
 //	mybatis
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'

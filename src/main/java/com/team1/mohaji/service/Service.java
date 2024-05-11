@@ -1,8 +1,8 @@
 package com.team1.mohaji.service;
 
-import com.team1.mohaji.dto.Dto;
+import com.team1.mohaji.dto.MemberDto;
 
 public interface Service {
 
-    public Dto findMemberByNum(long num);
+    public MemberDto findMemberByNum(long num);
 }

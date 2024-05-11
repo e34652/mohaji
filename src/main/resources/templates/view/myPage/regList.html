@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>강의 조회</title>
+    <!-- 부트스트랩 CDN 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/test/regListCss.css}">
+
+</head>
+<body>
+<!-- 헤더 부분 -->
+<div class="header">
+    <a href="메인페이지링크"><img src="학교로고주소" alt="학교 로고"></a>
+    <div class="float-right">
+        <!-- 로그인/로그아웃 버튼 -->
+        <span class="mr-2">00님 로그인</span>
+        <button class="btn btn-primary">로그인</button>
+        <!-- 혹은 로그아웃 버튼 -->
+        <!-- <button class="btn btn-danger">로그아웃</button> -->
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+<!-- 네비게이션 바 -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">수강신청</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/regList">나의 강의실</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">게시판</a>
+        </li>
+    </ul>
+</nav>
+
+
+<!-- 사이드바와 테이블 -->
+<div class="container-fluid">
+    <div class="row">
+        <!-- 사이드바 -->
+        <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h3>나의 강의</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">수강상태</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">수강현황</a>
+                    </li>
+                </ul>
+                <h3>수강성적</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">수강성적확인</a>
+                    </li>
+                </ul>
+                <h3>나의정보</h3>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">회원정보수정</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">비밀번호찾기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registerPC">PC 등록</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <!-- 강의 조회 부분 -->
+
+        <!-- 교양/전공 필수 버튼 영역 -->
+       <div class="toggle-area">
+           <h1>수강 상태</h1><br>
+            <label>
+                <input type="radio" name="category" value="all" class="mr-2" checked> 전체
+            </label>
+            <label>
+                <input type="radio" name="category" value="major" class="mr-2"> 전공 필수
+            </label>
+            <label>
+                <input type="radio" name="category" value="liberal"> 교양
+            </label>
+
+            <!-- 키워드 검색 입력 폼 -->
+            <form th:action="@{/search}" method="GET" class="form-inline float-right">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="keyword" class="sr-only">강의명으로 검색</label>
+                    <input type="text" class="form-control" id="keyword" name="keyword" placeholder="키워드 검색">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">검색</button>
+            </form>
+           <!-- 강의 목록 표시 -->
+           <table class="table">
+               <thead>
+               <tr>
+                   <th scope="col">구분</th>
+                   <th scope="col">전공</th>
+                   <th scope="col">강의명</th>
+                   <th scope="col">차시수</th>
+                   <th scope="col">학점</th>
+                   <th scope="col">신청하기</th>
+               </tr>
+               </thead>
+               <tbody>
+               <!-- 강의 목록 동적 표시 db 사용시 오픈 -->
+               <!--       <tr th:each="course : ${couRegList}">
+                          <td th:text="${course.category}"></td>
+                          <td th:text="${course.major}"></td>
+                          <button class="btn btn-link lecture-detail-btn" th:attr="data-lecture-id=${course.id}">강의 상세 정보</button>
+                          <td th:text="${course.lectureName}"></td> 위랑 이 라인 코드 비교해서 봐야함
+                          <td th:text="${course.hours}"></td>
+                          <td th:text="${course.credit}"></td>
+                          <td><button class="btn btn-primary">신청하기</button></td>
+
+                      </tr> -->
+               <!-- 조건에따라 신청중인 과목이라면 수강중으로 바꾸거나 리트스에서 제외하기 -->
+
+               <tr>
+                   <td>전필</td>
+                   <td>컴퓨터공학</td>
+                   <td><a th:href="@{/courseDetailPage}">Java 처음부터 배우기</a></td>
+                   <td>10</td>
+                   <td>3</td>
+                   <td><button class="btn btn-primary">신청하기</button></td>
+               </tr>
+               <tr>
+                   <td>교양</td>
+                   <td>도예</td>
+                   <td><a th:href="@{/courseDetailPage}">유약별 조합식</a></td>
+                   <td>10</td>
+                   <td>2</td>
+                   <td><button class="btn btn-primary">신청하기</button></td>
+               </tr>
+               </tbody>
+           </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 부트스트랩 자바스크립트 CDN 추가 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

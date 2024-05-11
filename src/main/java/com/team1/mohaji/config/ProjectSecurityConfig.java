@@ -1,13 +1,9 @@
 package com.team1.mohaji.config;
 
-import com.team1.mohaji.entity.Member;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -18,23 +14,11 @@ public class ProjectSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) //CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
                 .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/authenticated", "/notification/**")
-                        .hasRole(Member.Role.STUDENT.name())
-                .requestMatchers("/register").permitAll())
-                .formLogin(login->login
-                        .defaultSuccessUrl("/mypage"))
-                .logout(logout->logout
-                        .logoutSuccessUrl("/login")
-                        .invalidateHttpSession(true) //로그아웃 이후 세션 전체 삭제
-                )
+                .requestMatchers("/authenticated").authenticated()
+                .requestMatchers("/unauthenticated").permitAll())
+                .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
 
 }
