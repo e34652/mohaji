@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" class="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,20 +15,19 @@
 
     <link
     rel="stylesheet"
-    href="css/common/index2.css"
+    href="/css/common/index2.css"
     media="all"
   />
 
     <link
       rel="stylesheet"
-      href="css/common/index1.css"
+      href="/css/common/index1.css"
       media="all"
     />
-  
 
     <link
       rel="stylesheet"
-      href="css/common/main.css"
+      href="/css/common/main.css"
       media="all"
     />
 
@@ -53,6 +53,7 @@
     <title>모하지대학교 LMS</title>
   </head>
   <body class="">
+  <div sec:authorize="isAnonymous()">
     <!-- header -->
     <script>
         window.xnSubMenuHelper = {
@@ -338,7 +339,7 @@
                 <a
                   class="btn btn-primary btn-login xn-sso-login-btn"
                   type="button"
-                  href="https://lms.ssu.ac.kr/login"
+                  href="/login"
                 >
                   <span class="xn-sso-login-icon"></span>
                   통합 로그인 >
@@ -385,6 +386,10 @@
           </div>
         
         </div>
+        
+        
+<!--                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>-->
+<!--                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>-->
             </div>
         
             </main>
@@ -422,8 +427,8 @@
           </div>
         </a>
         
-        <span class="xn-main-footer-copyright"
-          ><div id="xnm2_footer">
+        <span class="xn-main-footer-copyright">
+          <div id="xnm2_footer">
             <div class="xnm2_ft_top">
               <div class="xnm2_wrap">
         
@@ -443,9 +448,9 @@
               </div>
             </div>
           </div>
-      </span
-        >
+      </span>
       </div>
     </footer>
+  </div>
   </body>
 </html>

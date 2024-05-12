@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 
     @GetMapping("/main")
-    public String getMypage(Model model, Authentication authentication){
+        public String getMypage(Model model, Authentication authentication){
         model.addAttribute("username", authentication.getName());
         model.addAttribute("role", authentication.getAuthorities().toString());
         return "/view/main";
