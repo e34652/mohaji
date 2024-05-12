@@ -6,20 +6,52 @@
 </head>
 <body>
 
-<!--<div th:replace="~{header :: header}">...</div>-->
+<!-- content -->
+<div id="popup-root" data-catalog_id=""></div>
+<main id="content">
 
-<h1>HOME</h1>
+        <div id="xnm2_content">
+            <div class="xnp-manual-wrap ">
+                <div class="xnp-manual">
+                    <div class="manual-link link3">
+                        <a href="#" target="_blank">
+                            <i></i><span class="manual-text-y"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="xnm2_main_board">
+                <div class="xnp-widget-container">
+
+                    <div id="widget-63eafc6c32524a62162a55f7" class="widget xnp-widget-board"
+                         data-locale="ko"
+                         data-widget_id="63eafc6c32524a62162a55f7"
+                         data-widget_type="board">
+                    </div>
+
+                    <div id="widget-63eafc78e0e2b377f867b922" class="widget xnp-widget-menual"
+                         data-locale="ko"
+                         data-widget_id="63eafc78e0e2b377f867b922"
+                         data-widget_type="board">
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 
-<h1>여기가 첫페이지가 된다고 가정</h1>
+
+    </div>
+
+</main>
 
 
-<div sec:authorize="isAnonymous()">
-    <a th:href="@{/login}">LogIn</a>
-</div>
 
-<!--<div th:replace="~{footer :: footer}">...</div>-->
-
+</main>
+<!-- footer -->
+<!-- footer -->
+<!-- footer -->
 
 </body>
 </html>

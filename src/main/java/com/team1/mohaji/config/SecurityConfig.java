@@ -16,13 +16,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) //CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/static/**", "/js/**", "/css/**", "/img/**", "/json/**", "/resources/**", "/error").permitAll()
                         .requestMatchers("/", "/main").permitAll()
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/authenticated", "/notification/**").authenticated()
                         .anyRequest().authenticated())
-                .formLogin(loginConfigurer->loginConfigurer.defaultSuccessUrl("/mypage").failureUrl("/login?error=true").permitAll())
+                .formLogin(loginConfigurer->loginConfigurer.defaultSuccessUrl("/",true).failureUrl("/login?error=true").permitAll())
                 .logout(logoutConfigurer -> logoutConfigurer.invalidateHttpSession(true).permitAll())
-                .httpBasic(Customizer.withDefaults());
+                    .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 
@@ -30,5 +30,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 
 }
