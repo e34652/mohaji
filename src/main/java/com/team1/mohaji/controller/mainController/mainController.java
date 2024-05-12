@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class mainController {
 
-    @GetMapping("/")
+    @GetMapping("/aa")
     public  String main1()
-    {return "/view/myPage/main";}
+    {return "/view/main";}
 
-    @GetMapping("/main")
+    @GetMapping("/dd")
     public  String main2(){
     return "/view/main";
 }
