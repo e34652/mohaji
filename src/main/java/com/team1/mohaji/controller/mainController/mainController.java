@@ -10,7 +10,7 @@ public class mainController {
 
     @GetMapping("/")
     public  String main1()
-    {return "/view/myPage/mypPC";}
+    {return "/view/myPage/main";}
 
     @GetMapping("/main")
     public  String main2(){
