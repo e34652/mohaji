@@ -443,7 +443,7 @@ a:visited {
 }
 #content #visual {
   position: relative;
-  background: url(/customs/main/main_visual.png) no-repeat top;
+
 }
 #content #visual .visual-container {
   width: 984px;
