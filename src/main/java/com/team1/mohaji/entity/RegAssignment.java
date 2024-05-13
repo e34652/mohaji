@@ -2,6 +2,9 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
+//과제제출정보
 @Entity
 @Table(name = "reg_asgn")
 public class RegAssignment {
@@ -15,7 +18,7 @@ public class RegAssignment {
     private Assignment assignment;
 
     @ManyToOne
-    @JoinColumn(name = "stu_id", referencedColumnName = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     private Student student;
 
     @Column(name = "att_id")

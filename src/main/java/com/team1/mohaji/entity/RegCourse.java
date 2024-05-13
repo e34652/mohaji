@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class RegCourse {
     @Id
     @ManyToOne
-    @JoinColumn(name = "stu_id", referencedColumnName = "student_id")
+    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     private Student student;
 
     @Id

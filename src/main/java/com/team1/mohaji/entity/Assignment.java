@@ -2,6 +2,8 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "asgn")
 public class Assignment {
@@ -21,10 +23,10 @@ public class Assignment {
     private Integer asgnDesc;
 
     @Column(name = "asgn_rdate", nullable = false)
-    private Date asgnRdate;
+    private LocalDateTime asgnRdate;
 
     @Column(name = "asgn_ddate", nullable = false)
-    private Date asgnDdate;
+    private LocalDateTime asgnDdate;
 
     // Getters and setters
 }
