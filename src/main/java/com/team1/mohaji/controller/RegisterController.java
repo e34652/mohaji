@@ -27,7 +27,7 @@ public class RegisterController {
         try {
             String hashPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashPassword);
-            
+
             savedUser = memberRepository.save(user);
             if (savedUser.getId() > 0) {
                 response = ResponseEntity
