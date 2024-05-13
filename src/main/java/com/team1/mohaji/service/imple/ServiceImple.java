@@ -1,17 +1,17 @@
 package com.team1.mohaji.service.imple;
 
-import com.team1.mohaji.dto.MemberDto;
-import com.team1.mohaji.mapper.MemberMapper;
+import com.team1.mohaji.dto.Dto;
+import com.team1.mohaji.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Service
 public class ServiceImple implements com.team1.mohaji.service.Service {
     @Autowired
-MemberMapper memberMapper;
+    Mapper memberMapper;
 
     @Override
-    public MemberDto findMemberByNum(long num) {
-        MemberDto memberDto = memberMapper.selectMemberByNum(num);
+    public Dto findMemberByNum(long num) {
+        Dto memberDto = memberMapper.selectMemberByNum(num);
         return memberDto;
 
     }

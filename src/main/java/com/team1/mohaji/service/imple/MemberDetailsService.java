@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//이 클래스는 사용자 정보를 DB에서 가져온 뒤 authentication 객체 생성
 @Service
 public class MemberDetailsService implements UserDetailsService {
 
@@ -44,7 +45,7 @@ public class MemberDetailsService implements UserDetailsService {
             userName = memberList.get(0).getLoginId();
             password = memberList.get(0).getPassword();
             authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
+            authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole()));
         }
 
         return new User(userName,password,authorities);

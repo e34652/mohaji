@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" class="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,20 +15,19 @@
 
     <link
     rel="stylesheet"
-    href="css/navi/index2.css"
+    href="/css/common/index2.css"
     media="all"
   />
 
     <link
       rel="stylesheet"
-      href="css/navi/index1.css"
+      href="/css/common/index1.css"
       media="all"
     />
-  
 
     <link
       rel="stylesheet"
-      href="css/navi/main.css"
+      href="/css/common/main.css"
       media="all"
     />
 
@@ -53,6 +53,7 @@
     <title>모하지대학교 LMS</title>
   </head>
   <body class="">
+  <div sec:authorize="isAnonymous()">
     <!-- header -->
     <script>
         window.xnSubMenuHelper = {
@@ -156,7 +157,7 @@
               </button>
             </div>
             <div class="float-left xn-main-catalog-header-logo-wrap">
-              <a href="https://lms.ssu.ac.kr">
+              <a href="/main">
                 <div class="xn-main-catalog-header-logo">
                   <img
                     class="xn-main-catalog-header-logo-image"
@@ -262,7 +263,7 @@
                           class="menu-item"
                         >
                           <a
-                            href="/myPage/regList"
+                            href="/regList"
                             >수강중인 강의</a
                           >
                         </li>
@@ -271,28 +272,11 @@
                           class="menu-item"
                         >
                           <a
-                            href="/myPage/regInfo"
+                            href="/regInfo"
                             >수강 이력</a
                           >
                         </li>
-                        <li
-                        id="menu-item-d1"
-                        class="menu-item"
-                      >
-                        <a
-                          href="/myPage/regResult"
-                          >나의 성적</a
-                        >
-                      </li>
-                      <li
-                      id="menu-item-d2"
-                      class="menu-item"
-                    >
-                      <a
-                        href="/myPage/myPC"
-                        >내 PC 등록</a
-                      >
-                    </li>
+
                       <!--혜빈님 컨트롤러 요청명 따라 갈 것   -->
                         <li
                         id="menu-item-d3"
@@ -355,7 +339,7 @@
                 <a
                   class="btn btn-primary btn-login xn-sso-login-btn"
                   type="button"
-                  href="https://lms.ssu.ac.kr/login"
+                  href="/login"
                 >
                   <span class="xn-sso-login-icon"></span>
                   통합 로그인 >
@@ -373,7 +357,7 @@
             #content{padding-top:0 !important;}
           }
         </style>
-        <div id="xnm2_content">
+        <div id="xnm2_content1">
             <div class="xnp-manual-wrap ">		
             <div class="xnp-manual">			
               <div class="manual-link link3">
@@ -404,8 +388,8 @@
         </div>
         
         
-                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>
-                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>
+<!--                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>-->
+<!--                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>-->
             </div>
         
             </main>
@@ -437,14 +421,14 @@
             <!-- 이곳에 푸터 로고를 넣어주세요 -->
             <img
               class="xn-main-footer-logo-image"
-              alt="숭실대학교 LMS"
+              alt="모하지대학교 LMS"
               src="https://lms.ssu.ac.kr/customs/main/footer_logo.png"
             />
           </div>
         </a>
         
-        <span class="xn-main-footer-copyright"
-          ><div id="xnm2_footer">
+        <span class="xn-main-footer-copyright">
+          <div id="xnm2_footer">
             <div class="xnm2_ft_top">
               <div class="xnm2_wrap">
         
@@ -454,18 +438,19 @@
   
                 <h2></h2>
                 <ul class="xnm2_adr">
-                  <li>서울시 동작구 상도로 369 숭실대학교</li>
+                  <li>서울시 성북구 정릉동 모하지대학교</li>
                   <li>
-                    COPYRIGHT© 2021 SOONGSIL UNIVERSITY. ALL RIGHTS RESERVED.
+                    COPYRIGHT© 2024 MOHAJI UNIVERSITY. ALL RIGHTS RESERVED.
                   </li>
                 </ul>
       
                 
               </div>
             </div>
-          </div></span
-        >
+          </div>
+      </span>
       </div>
     </footer>
+  </div>
   </body>
 </html>
