@@ -1,14 +1,14 @@
 package com.team1.mohaji.repository;
 
-import com.team1.mohaji.entity.Member;
+import com.team1.mohaji.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Integer> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    List<Member> findByLoginId(String loginId);
+    List<Student> findByStudentId(int studentId);
 
 }

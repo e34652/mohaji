@@ -1,4 +1,4 @@
-package com.team1.mohaji.controller;
+package com.team1.mohaji.controller.loginController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
