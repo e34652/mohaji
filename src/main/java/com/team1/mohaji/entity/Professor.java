@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name="professors")
 public class Professor extends BaseEntity {
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false, unique=true)
     private Member member;
 

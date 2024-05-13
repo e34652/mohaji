@@ -15,6 +15,9 @@ public class Member extends BaseEntity {
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     private Student student;
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private Professor professor;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,11 +47,11 @@ public class Member extends BaseEntity {
 
     @NotBlank
     @Email(message = "이메일 형식을 확인해주세요")
-    @Column(nullable = false)
+    @Column(nullable = false, unique=true)
     private String email;
 
-    @Column(name="email_confirmed", columnDefinition = "boolean default false")
-    private boolean emailConfirmed;
+    @Column(name="email_confirmed")
+    private boolean emailConfirmed=false;
 
     @NotBlank
     @Pattern(regexp = "\\d{3}-\\d{4}-\\d{4}", message = "010-0000-0000 형태로 입력해주세요")
@@ -58,12 +61,12 @@ public class Member extends BaseEntity {
     @Column(name="last_login")
     private LocalDateTime lastLogin;
 
-    @Column(name="login_fail_count", columnDefinition = "int default 0")
+    @Column(name="login_fail_count")
     @Max(value = 5)
-    private int loginFailCount;
+    private int loginFailCount=0;
 
-    @Column(name="lock_out_enabled", columnDefinition = "boolean default false")
-    private boolean lockOutEnabled;
+    @Column(name="lock_out_enabled")
+    private boolean lockOutEnabled=false;
 
     public enum Role {
       STUDENT,
