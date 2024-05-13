@@ -36,7 +36,7 @@ public class MemberDetails implements UserDetailsService {
             userName = memberList.get(0).getLoginId();
             password = memberList.get(0).getPassword();
             authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole()));
+            authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
         return new User(userName,password,authorities);
