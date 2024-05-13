@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 #header.oer .btn-join {
   display: none;
 }
@@ -162,12 +164,12 @@ body.mypage #header .navbar-static-top .container {
   height: 35px;
 
 
-  background: url(./xnm2_log_ico7.png) no-repeat left top;
+  background: no-repeat left top;
 }
 
 /* login 챙혻��*/
 #content #visual .xn-main-login-container {
-  background: rgba(0, 0, 0, 0.4) url(login_bg.png);
+  background: rgba(0, 0, 0, 0.4) url(#);
   width: 280px;
   height: 260px;
   margin-top: -20px;
@@ -289,7 +291,7 @@ body.mypage #header .navbar-static-top .container {
   display: inline-block;
   float: right;
   cursor: pointer;
-  background: url(download.svg) no-repeat center center;
+  background: url(#) no-repeat center center;
   background-size: cover;
 }
 #content .xnp-manual-wrap .manual-prof .ic_link {
@@ -299,7 +301,7 @@ body.mypage #header .navbar-static-top .container {
   display: inline-block;
   float: right;
   cursor: pointer;
-  background: url(link_icon.svg) no-repeat center center;
+  background: url(#) no-repeat center center;
   background-size: cover;
 }
 
@@ -441,7 +443,6 @@ body.mypage #header .navbar-static-top .container {
   right: 0;
   width: 45px;
   height: 45px;
-  background: url(more_tab.png) no-repeat center center;
   line-height: 20px;
   border: 1px solid #ddd;
   border-radius: 100px;
@@ -1298,7 +1299,7 @@ body.mypage #header .navbar-static-top .container {
   .xn-main-menu-wrap
   .xn-sub-menu-outer-wrapper
   .xn-sub-menu-item-bg {
-
+ background: url(#) no-repeat;
   margin-top: 0px;
   height: 175px;
   display: inline-block;
@@ -1336,6 +1337,8 @@ body.mypage #header .navbar-static-top .container {
 #xnm2_visual,
 #content .main_visual_slide,
 #content #visual .visual-container {
+  display: flex;
+  justify-content: center;
   height: 540px;
   padding: 0;
 }
@@ -1394,16 +1397,32 @@ body.mypage #header .navbar-static-top .container {
   max-width: 1250px;
 }
 /* positoin */
+/*#content #visual .xn-main-login-container {*/
+/*  box-sizing: border-box;*/
+/*  float: none;*/
+/*  position: absolute;*/
+/*  padding: 0 calc(100% - 330px) 0px 30px;*/
+/*  top: 0;*/
+/*  left: 50%;*/
+/*  margin: 0px 0 0px 295px;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  background: rgba(25, 61, 119, 0.9);*/
+/*}*/
+
+/* positoin */
 #content #visual .xn-main-login-container {
   box-sizing: border-box;
   float: none;
   position: absolute;
-  padding: 0 calc(100% - 330px) 0 30px;
+  padding: 0 calc((100vw - 330px) / 2) 0px 30px;
   top: 0;
   left: 50%;
-  margin: 0 0 0 295px;
-  width: 100%;
-  height: 100%;
+  transform: translateX(50%);
+  width: 80%; /* 너비를 화면의 80%로 설정 */
+  height: 105%; /* 높이를 화면의 100%로 설정 */
+  max-width: 1000px; /* 최대 너비 설정 */
+  max-height: 800px; /* 최대 높이 설정 */
   background: rgba(25, 61, 119, 0.9);
 }
 #content #visual .xn-main-login-container .xn-main-login-container-title-wrap {
@@ -1538,7 +1557,36 @@ body.mypage #header .navbar-static-top .container {
   width: 35px;
   height: 35px;
 }
-
+#content .xnp-manual-wrap .manual-stu .ic_ico1,
+#content .xnp-manual-wrap .manual-prof .ic_ico1 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-stu .ic_ico2,
+#content .xnp-manual-wrap .manual-prof .ic_ico2 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-prof .ic_ico3 {
+  background: url(".#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-prof .ic_ico4 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-prof .ic_ico5 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-prof .ic_ico6 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
+#content .xnp-manual-wrap .manual-prof .ic_ico8 {
+  background: url("#") no-repeat left top;
+  background-size: 100%;
+}
 #content .xnp-manual-wrap .manual-stu .box .manual-text,
 #content .xnp-manual-wrap .manual-prof .box .manual-text {
   display: block;
@@ -1560,7 +1608,7 @@ body.mypage #header .navbar-static-top .container {
   width: 6px;
   height: 10px;
   margin-top: -5px;
-  background: url("./xnm2_log_arw.png") no-repeat left top;
+  background: url("#") no-repeat left top;
 }
 .xnm2-link {
   padding-right: 20px;
@@ -1592,7 +1640,7 @@ body.mypage #header .navbar-static-top .container {
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
-  background: url(./xnm2_link.png) no-repeat left top;
+  background: url(#) no-repeat left top;
   background-size: 100%;
 }
 .xnm2-link > li:nth-child(1) > a {
@@ -1613,7 +1661,7 @@ body.mypage #header .navbar-static-top .container {
   border-color: #ffde00;
 }
 .xnm2-link > li:hover > a:before {
-  background: url(./xnm2_link_ov.png) no-repeat left top;
+  background: url(.#) no-repeat left top;
   background-size: 100%;
 }
 /* btn */
@@ -1714,27 +1762,27 @@ body.mypage #header .navbar-static-top .container {
   left: 20px;
 }
 .xnm2_banner .inner ul li .xnm2_ic1 {
-  background: url("./xnm2_banner_ic1.png") no-repeat left top;
+  background: url("#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li .xnm2_ic2 {
-  background: url("./xnm2_banner_ic2.png") no-repeat left top;
+  background: url("#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li .xnm2_ic3 {
-  background: url("./xnm2_banner_ic3.png") no-repeat left top;
+  background: url("#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li .xnm2_ic4 {
-  background: url("./xnm2_banner_ic4.png") no-repeat left top;
+  background: url("#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li .xnm2_ic5 {
-  background: url("./xnm2_banner_ic5.png") no-repeat left top;
+  background: url(".#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li .xnm2_ic6 {
-  background: url("./xnm2_banner_ic6.png") no-repeat left top;
+  background: url("#") no-repeat left top;
   background-size: 100%;
 }
 .xnm2_banner .inner ul li > a {
@@ -1830,11 +1878,11 @@ body.mypage #header .navbar-static-top .container {
   background-color: #4fb228 !important;
 }
 .xnm2_banner .inner ul li dl dd a i.xnm2_ic_mac {
-  background: url("./xnm2_ic_mac.png") no-repeat center center;
+  background: url(".#") no-repeat center center;
   background-size: 26px;
 }
 .xnm2_banner .inner ul li dl dd a i.xnm2_ic_apple {
-  background: url("./xnm2_ic_apple.png") no-repeat center center;
+  background: url("#") no-repeat center center;
   background-size: 26px;
 }
 
@@ -1846,7 +1894,7 @@ body.mypage #header .navbar-static-top .container {
   right: 10px;
   width: 35px;
   height: 35px;
-  background: url(./xnm2_log_ico7.png) no-repeat left top;
+  background: url(#) no-repeat left top;
 }
 
 /* Board */
@@ -1984,7 +2032,7 @@ body.mypage #header .navbar-static-top .container {
   margin: 0;
   padding: 0;
   line-height: 1;
-  background: #f5f5f5 url("./xnm2_more.png") no-repeat center center;
+  background: #f5f5f5 url(#) no-repeat center center;
 }
 /* list */
 #content
@@ -2073,7 +2121,7 @@ body.mypage #header .navbar-static-top .container {
 /* Footer */
 #footer {
   position: relative;
-  z-index: 5;
+  z-index: 0;
   overflow: visible;
 }
 #footer .footer_link,
@@ -2645,6 +2693,7 @@ body.mypage #header .navbar-static-top .container {
 
   /* Main */
   #content {
+
     padding-top: 80px;
   }
   #xnm2_visual,
@@ -2668,6 +2717,7 @@ body.mypage #header .navbar-static-top .container {
 
   /* login */
   #content #visual {
+
     height: 540px;
   }
   #content #visual .xn-main-login-container .xn-sso-login-btn,
@@ -2685,6 +2735,7 @@ body.mypage #header .navbar-static-top .container {
     .xn-main-login-container
     .xn-general-login-btn-wrap
     .xn-general-login-btn {
+    text-align: center;
     display: block;
     height: auto;
     width: 100%;
@@ -3004,7 +3055,7 @@ body.mypage #header .navbar-static-top .container {
     margin-top: -0.5vw;
   }
   .xn-main-catalog-header-logo {
-    background: url(header_logo_mo.png);
+    background: url(#);
     width: 240px !important;
     height: 51px !important;
     margin-top: 15px;
@@ -3306,7 +3357,7 @@ body.mypage #header .navbar-static-top .container {
   margin: auto;
   width: 100%;
   height: 100%;
-  background: url(./xnm_visual_buttom.png) no-repeat center center;
+  background: url(#) no-repeat center center;
   background-size: 100%;
   opacity: 0;
   transition: 0.3s;
@@ -3472,7 +3523,7 @@ body.oer #content {
   border-radius: 0;
   background: #13bec9;
   margin-left: -30px;
-  margin-top: 40px;
+  margin-top: 75px;
   margin-bottom: 15px;
   line-height: 60px;
   text-align: left;
@@ -3528,7 +3579,7 @@ body.oer #content {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: url(xnm2_arrow_right_ico.png) no-repeat center center;
+  background: url(#) no-repeat center center;
   margin-right: 20px;
 }
 #content .xnp-manual-wrap {
@@ -3560,7 +3611,18 @@ body.oer #content {
   height: 31px;
   margin-right: 10px;
 }
-
+.manual-link.link1 a i {
+  background: url(#) no-repeat;
+}
+.manual-link.link2 a i {
+  background: url(#) no-repeat;
+}
+.manual-link.link3 a i {
+  background: url(#) no-repeat;
+}
+.manual-link.link4 a i {
+  background: url(#) no-repeat;
+}
 .xn-mypage .manual-link.link1 {
   margin-top: 25px;
 }
@@ -3596,10 +3658,10 @@ body.oer #content {
   height: 42px;
 }
 .manual-wrap a:nth-child(1) i {
-  background: url(xnm2_prof_manual_ico.png) no-repeat center center;
+  background: url(#) no-repeat center center;
 }
 .manual-wrap a:nth-child(2) i {
-  background: url(xnm2_stu_manual_ico.png) no-repeat center center;
+  background: url(#) no-repeat center center;
 }
 #footer .xn-main-catalog-footer-upper {
   justify-content: end;
@@ -3636,7 +3698,7 @@ body.oer #content {
   .xnbw-top-container
   .xnbw-title:after {
   display: inline-block;
-  content: "怨듭��ы빆";
+  content: "공지사항";
   margin-left: 7px;
   color: #333;
 }
@@ -3803,8 +3865,9 @@ body.oer #content {
 }
 @media (max-width: 500px) {
   .xn-main-catalog-header-logo {
+
     width: 180px !important;
-    background: url(header_logo.png);
+    background: url(#);
     background-size: cover;
   }
   #content .xnp-manual-wrap .xnp-manual {

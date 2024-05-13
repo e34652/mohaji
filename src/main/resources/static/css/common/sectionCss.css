@@ -1,7 +1,8 @@
 
 .miniNavi {
+    z-index: 0;
     position: relative;
-    max-width: 1400px; /* 섹션의 최대 너비 지정 */
+    max-width: 100%; /* 섹션의 최대 너비 지정 */
     max-height: 134px;
     margin: auto; /* 섹션을 가운데 정렬합니다. */
     margin-top: 1.5px;

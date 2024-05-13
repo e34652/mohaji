@@ -8,10 +8,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
     />
-    <meta
-      name="csrf-token"
-      content="WDGfpHvbFwikWZUztuWzTaOUmnBotbPcOs9lZWsl"
-    />
+<!--    <meta-->
+<!--      name="csrf-token"-->
+<!--      content="WDGfpHvbFwikWZUztuWzTaOUmnBotbPcOs9lZWsl"-->
+<!--    />-->
 
     <link
     rel="stylesheet"
@@ -324,15 +324,14 @@
     <main id="content">
       <div id="root">
         <div id="visual">
-          <img src="/img/main/banner.jpg"/>
-          <div class="visual-container">
-         
+
+<!--        <div class="visual-container">-->
             
-            <div class="main-slogan-wrap"></div>
-            
-            <div class="xn-main-login-container"> <!-- 우측 파란배경 -->
+              <div class="main-slogan-wrap"></div>
+          <img class="mohajimo" src="/img/main/banner.jpg" style="display: block; margin: 0 auto;">
+               <div class="xn-main-login-container"> <!-- 우측 파란배경 -->
               
-              <div class="xn-main-login-container-title-wrap">
+                <div class="xn-main-login-container-title-wrap">
                 <span class="xn-main-login-container-title">통합 로그인</span>
               </div>
               <div class="xn-sso-login-btn-wrap">
@@ -347,7 +346,7 @@
               </div>
               <div class="xnm2_btnbox_wrap"></div> <!-- 통합 로그인 배경 -->
             </div>
-          </div>
+<!--          </div>-->
         </div>
       <!-- Add Font -->
         <!-- 이미지 넣을 공간 -->
@@ -357,34 +356,171 @@
             #content{padding-top:0 !important;}
           }
         </style>
+
+<!--        여기는 공지사항 게시판 아래 리스트 예시는 정적으로 보여주는 샘플용 그아래 db용 코드 있음-->
         <div id="xnm2_content1">
-            <div class="xnp-manual-wrap ">		
-            <div class="xnp-manual">			
-              <div class="manual-link link3">
-                <a href="#" target="_blank">
-                  <i></i><span class="manual-text-y"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-          
           <div id="xnm2_main_board">
             <div class="xnp-widget-container">
-             
-              <div id="widget-63eafc6c32524a62162a55f7" class="widget xnp-widget-board"
-                 data-locale="ko"
-                 data-widget_id="63eafc6c32524a62162a55f7"
-                 data-widget_type="board">
+
+<!--              교수공지-->
+              <div id="widget-63eafc6c32524a62162a55f7" class="widget xnp-widget-board">
+              <div class="xn-widget">
+                <div class="xn-widget-container board">
+                  <div class="xnbw-top-container">
+                    <div class="xnbw-title-wrap">
+                      <div class="xnbw-title">교수</div>
+                      <div class="xnbw-sub-title"></div>
+                    </div><div class="xnbw-category-wrap">
+                    <div class="xnbw-category-tab-wrap">
+                      <div class="xnbw-all-tab selected">전체</div>
+                      <div class="xnbw-category-tab ">한국어</div>
+                      <div class="xnbw-category-tab ">영어</div>
+                      <div class="xnbw-category-tab ">중국어</div>
+                      <div class="xnbw-category-tab ">베트남어</div>
+                    </div><button class="xnbw-more-tab" style="color: #000000">+</button>
+                  </div></div><ul class="xnbw-items-container">
+                  <li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category"></div>
+                      <div class="xnbw-post-list-title xn-common-title">[중간/기말고사] LMS 활용 방법 안내</div>
+                      <div class="xnbw-post-list-created">2024.04.12</div>
+                    </div>
+                  </li>
+                  <li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category"></div>
+                      <div class="xnbw-post-list-title xn-common-title">2024-1학기 &lt;학과 및 진로지도교수별 LMS 비교과 강의실 개설&gt; 신청 안내</div>
+                      <div class="xnbw-post-list-created">2024.03.19</div>
+                    </div>
+                  </li>
+                  <li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category">
+                      </div><div class="xnbw-post-list-title xn-common-title">2024학년도 &lt;온라인 명품강좌&gt; 개발 참여강좌 모집</div>
+                      <div class="xnbw-post-list-created">2024.03.13</div>
+                    </div>
+                  </li>
+                  <li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category"></div>
+                      <div class="xnbw-post-list-title xn-common-title">2024-1학기 예비군 참여 학생 학습권 보호를 위한 수업 보충자료 제공 요청</div>
+                      <div class="xnbw-post-list-created">2024.03.08</div>
+                    </div>
+                  </li>
+                </ul>
+                </div>
               </div>
-        
-              <div id="widget-63eafc78e0e2b377f867b922" class="widget xnp-widget-menual"
-                 data-locale="ko"
-                 data-widget_id="63eafc78e0e2b377f867b922"
-                 data-widget_type="board">
-              </div>
-            </div>
           </div>
-        
+              <!--  학생공지-->
+              <div id="widget-63eafc78e0e2b377f867b922" class="widget xnp-widget-menual">
+                <div class="xn-widget">
+                  <div class="xn-widget-container board">
+                    <div class="xnbw-top-container">
+                      <div class="xnbw-title-wrap">
+                        <div class="xnbw-title">학습자</div>
+                        <div class="xnbw-sub-title"></div>
+                      </div><div class="xnbw-category-wrap">
+                      <div class="xnbw-category-tab-wrap">
+                        <div class="xnbw-all-tab selected">전체</div>
+                      </div><button class="xnbw-more-tab"  style="color: #000000">+</button>
+                    </div></div><ul class="xnbw-items-container">
+                    <li class="xnbw-item-container">
+                      <div class="xnbw-board-post-list">
+                        <div class="xnbw-post-list-category"></div>
+                        <div class="xnbw-post-list-title xn-common-title">2024-1학기 K-MOOC 수강 수요조사</div>
+                        <div class="xnbw-post-list-created">2024.03.07</div>
+                      </div></li><li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category"></div>
+                      <div class="xnbw-post-list-title xn-common-title">2024-1학기 LMS 고도화 항목 안내(학습자용)</div>
+                      <div class="xnbw-post-list-created">2024.02.21</div>
+                    </div></li><li class="xnbw-item-container">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category">
+                      </div><div class="xnbw-post-list-title xn-common-title">2023학년도 겨울계절제 개설 예정과목 강의계획서 안내(학사과정)</div>
+                      <div class="xnbw-post-list-created">2023.11.20</div>
+                    </div>
+                  </li>
+                    <li class="xnbw-item-container">
+                      <div class="xnbw-board-post-list">
+                        <div class="xnbw-post-list-category">
+                        </div>
+                        <div class="xnbw-post-list-title xn-common-title">전체 학생(재학생, 휴학생) 개인 정보 갱신 안내</div>
+                        <div class="xnbw-post-list-created">2023.11.14</div>
+                      </div>
+                    </li>
+                  </ul>
+                  </div>
+                </div>
+              </div>
+
+<!--              아래는 동적으로 db에서 값을 가져올때 반복문 코드 참고-->
+<!--              &lt;!&ndash; 학생 공지사항 리스트 &ndash;&gt;-->
+<!--              <div class="student-announcement">-->
+<!--                <div class="widget xnp-widget-menual">-->
+<!--                  <div class="xn-widget">-->
+<!--                    <div class="xn-widget-container board">-->
+<!--                      <div class="xnbw-top-container">-->
+<!--                        <div class="xnbw-title-wrap">-->
+<!--                          <div class="xnbw-title">학습자</div>-->
+<!--                          <div class="xnbw-sub-title"></div>-->
+<!--                        </div>-->
+<!--                        <div class="xnbw-category-wrap">-->
+<!--                          <div class="xnbw-category-tab-wrap">-->
+<!--                            <div class="xnbw-all-tab selected">전체</div>-->
+<!--                          </div>-->
+<!--                          <button class="xnbw-more-tab" style="color: #000000">+</button>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <ul class="xnbw-items-container">-->
+<!--                        &lt;!&ndash; 반복문 시작 &ndash;&gt;-->
+<!--                        <li class="xnbw-item-container" th:each="studentAnnouncement : ${stuBoard}">-->
+<!--                          <div class="xnbw-board-post-list">-->
+<!--                            <div class="xnbw-post-list-category"></div>-->
+<!--                            <div class="xnbw-post-list-title xn-common-title" th:text="${studentAnnouncement.title}"></div>-->
+<!--                            <div class="xnbw-post-list-created" th:text="${studentAnnouncement.date}"></div>-->
+<!--                          </div>-->
+<!--                        </li>-->
+<!--                        &lt;!&ndash; 반복문 끝 &ndash;&gt;-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
+<!--              &lt;!&ndash; 교수 공지사항 리스트 &ndash;&gt;-->
+<!--              <div class="professor-announcement">-->
+<!--                <div class="widget xnp-widget-board">-->
+<!--                  <div class="xn-widget">-->
+<!--                    <div class="xn-widget-container board">-->
+<!--                      <div class="xnbw-top-container">-->
+<!--                        <div class="xnbw-title-wrap">-->
+<!--                          <div class="xnbw-title">교수</div>-->
+<!--                          <div class="xnbw-sub-title"></div>-->
+<!--                        </div>-->
+<!--                        <div class="xnbw-category-wrap">-->
+<!--                          <div class="xnbw-category-tab-wrap">-->
+<!--                            <div class="xnbw-all-tab selected">전체</div>-->
+<!--                          </div>-->
+<!--                          <button class="xnbw-more-tab" style="color: #000000">+</button>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <ul class="xnbw-items-container">-->
+<!--                        &lt;!&ndash; 반복문 시작 &ndash;&gt;-->
+<!--                        <li class="xnbw-item-container" th:each="professorAnnouncement : ${proBoard}">-->
+<!--                          <div class="xnbw-board-post-list">-->
+<!--                            <div class="xnbw-post-list-category"></div>-->
+<!--                            <div class="xnbw-post-list-title xn-common-title" th:text="${professorAnnouncement.title}"></div>-->
+<!--                            <div class="xnbw-post-list-created" th:text="${professorAnnouncement.date}"></div>-->
+<!--                          </div>-->
+<!--                        </li>-->
+<!--                        &lt;!&ndash; 반복문 끝 &ndash;&gt;-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
         </div>
         
         
@@ -405,8 +541,7 @@
             </div>  
         </div>
     </main>
-    <!-- footer -->
-    <!-- footer -->
+
     <!-- footer -->
     <footer id="footer">
       <div class="xn-main-catalog-footer-upper">
@@ -415,16 +550,14 @@
         </div>
       </div>
       <div class="xn-main-catalog-footer-border"></div>
-      <div class="xn-main-catalog-footer-info">
-        <a href="https://lms.ssu.ac.kr">
-          <div class="xn-main-footer-logo">
-            <!-- 이곳에 푸터 로고를 넣어주세요 -->
-            <img
+      <div class="xn-main-catalog-footer-info" style="background-color: #333333 ">
+        <a href="/main">
+<            <img
               class="xn-main-footer-logo-image"
               alt="모하지대학교 LMS"
-              src="https://lms.ssu.ac.kr/customs/main/footer_logo.png"
+              src="/img/main/navi.png" style="  margin-left: 7%; width: 10%;
+  height: auto;"
             />
-          </div>
         </a>
         
         <span class="xn-main-footer-copyright">
