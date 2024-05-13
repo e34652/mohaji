@@ -19,8 +19,8 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/img/**" ,"/js/**").permitAll() // "모든 외부링크 적용 허용"
                         .requestMatchers("/", "/main").permitAll() // "/"와 "/main" 경로에 대한 요청은 모두 허용합니다.
                         .requestMatchers("/register").permitAll() // "/register" 경로에 대한 요청은 모두 허용합니다.
-//                        .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.
-                        .anyRequest().permitAll())// 그 외의 모든 요청은 인증이 필요합니다.
+                        .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.
+//                        .anyRequest().permitAll())// 그 외의 모든 요청은 인증이 필요합니다.
                 .formLogin(loginConfigurer -> loginConfigurer // 폼 로그인을 구성합니다.
                         .defaultSuccessUrl("/main",true) // 로그인 성공 시 기본 URL("/main")로 리다이렉트합니다.
                         .failureUrl("/login?error=true") // 로그인 실패 시 "/login?error=true" URL로 리다이렉트합니다.
