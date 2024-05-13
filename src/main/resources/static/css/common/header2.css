@@ -6,7 +6,7 @@
   background-color: hsla(0, 0%, 100%, 0.9);
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   min-width: 1024px;
 }

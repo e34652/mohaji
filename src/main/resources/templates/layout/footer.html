@@ -2,26 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="footer">
     <head>
-        <link rel="stylesheet" href="css/navi/index2.css" media="all" />
 
-        <link rel="stylesheet" href="css/navi/index1.css" media="all" />
-
-        <link rel="stylesheet" href="css/navi/main.css" media="all" />
+        <link
+                rel="stylesheet"
+                href="/css/common/main.css"
+                media="all"
+        />
 
         <link
                 rel="stylesheet"
                 href="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css"
         />
+
         <link
                 rel="stylesheet"
                 href="https://lms.ssu.ac.kr/lib/vector-icons/index.min.css"
         />
-        <script
-                src="https://lms.ssu.ac.kr/js/coursecatalog-bootstrap.js"
-        ></script>
-        <script
-                src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"
-        ></script>
+
+        <script src="https://lms.ssu.ac.kr/js/coursecatalog-bootstrap.js"></script>
+        <script src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
         <script src="https://lms.ssu.ac.kr/js/polyfill.js"></script>
 
         <script>
@@ -32,27 +31,26 @@
         <title>MohajiUniv LMS</title>
     </head>
 
-<footer id="footer">
-    <div class="xn-main-catalog-footer-upper">
-        <span></span>
+    <!-- footer -->
+    <footer id="footer">
+        <div class="xn-main-catalog-footer-upper">
+            <span></span>
 
-    </div>
-    </div>
-    <div class="xn-main-catalog-footer-border"></div>
-    <div class="xn-main-catalog-footer-info">
-        <a href="https://lms.ssu.ac.kr">
-            <div class="xn-main-footer-logo">
-                <!-- 이곳에 푸터 로고를 넣어주세요 -->
+        </div>
+        </div>
+        <div class="xn-main-catalog-footer-border"></div>
+        <div class="xn-main-catalog-footer-info" style="background-color: #333333 ">
+            <a href="/main">
                 <img
-                        class="xn-main-footer-logo-image"
-                        alt="모하지대학교 LMS"
-                        src="https://lms.ssu.ac.kr/customs/main/footer_logo.png"
-                />
-            </div>
-        </a>
+                    class="xn-main-footer-logo-image"
+                    alt="모하지대학교 LMS"
+                    src="/img/main/navi.png" style=" margin-left: 7%;  width: 10%;
+  height: auto;"
+            />
+            </a>
 
-        <span class="xn-main-footer-copyright"
-        ><div id="xnm2_footer">
+            <span class="xn-main-footer-copyright">
+          <div id="xnm2_footer">
             <div class="xnm2_ft_top">
               <div class="xnm2_wrap">
 
@@ -71,7 +69,8 @@
 
               </div>
             </div>
-    </div></span
-        >
-    </div>
-</footer>
+        </div>
+        </span>
+        </div>
+        </div>
+    </footer>

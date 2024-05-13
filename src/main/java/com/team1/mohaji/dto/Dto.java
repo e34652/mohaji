@@ -9,7 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class Dto {
-
     private long num;
+    private String email;
+    private String id;
     private String name;
+    private String password;
+    private String role;
+    private String createdAt;
 }
