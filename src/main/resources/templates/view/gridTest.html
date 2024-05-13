@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GridTest</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css"/>
+</head>
+<body>
+
+<div id="grid"></div>
+
+<button id="ajaxButton">버튼</button>
+<script>
+    function executeAjax() {
+        $.ajax({
+            // 버튼을 누르면 컨트롤러로 아래의 요청이 가서 서비스 로직 결과물을 json 형태로 받아옵니다 << json으로 받아와야 그리드에 들어간다고 합니다
+            url: "/test/getList",
+            method: "POST",
+            dataType: "JSON",
+            contentType: "application/json; charset=UTF-8",
+            // 컨트롤러 리턴변수명과 일치시킬 필요 없습니다
+            success: function (result) {
+                console.dir(result);
+                //*** tui.Grid의 객체 생성
+                var grid = new tui.Grid({
+                    //*** 생성한 객체를 dom 요소와 id를 통해 맵핑 << 필수
+                    el: document.getElementById('grid'),
+                    // 가로 세로 스크롤 설정
+                    scrollX: false,
+                    scrollY: false,
+                    //*** name을 return 받은 전달 객체의 필드와 일치 << 필수
+                    columns: [{
+                            header: '회원 번호',
+                            name: 'num'
+                        }, {
+                            header: '회원 아이디',
+                            name: 'id'
+                        }, {
+                            header: '비밀번호',
+                            name: 'password'
+                        }, {
+                            header: '이름',
+                            name: 'name'
+                        },{
+                            header: '이메일',
+                            name: 'email'
+                        },{
+                            header: '권한',
+                            name: 'role'
+                        }]
+
+                }); //grid
+                // 불러온 데이터들을 set 하는 메소드, 없으면 데이터 출력이 안됨 << 필수
+                grid.resetData(result);
+            }// suc
+        }); //ajax
+    }
+
+    document.getElementById("ajaxButton").addEventListener("click", executeAjax);
+</script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
