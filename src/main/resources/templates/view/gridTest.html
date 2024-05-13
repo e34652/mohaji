@@ -13,47 +13,49 @@
 <script>
     function executeAjax() {
         $.ajax({
-            // 버튼을 누르면 컨트롤러로 아래의 요청이 가서 서비스 로직 결과물을 json 형태로 받아옵니다 << json으로 받아와야 그리드에 들어간다고 합니다
             url: "/test/getList",
             method: "POST",
             dataType: "JSON",
             contentType: "application/json; charset=UTF-8",
-            // 컨트롤러 리턴변수명과 일치시킬 필요 없습니다
             success: function (result) {
                 console.dir(result);
-                //*** tui.Grid의 객체 생성
+                tui.Grid.applyTheme('stripe'); // 테마 적용
                 var grid = new tui.Grid({
-                    //*** 생성한 객체를 dom 요소와 id를 통해 맵핑 << 필수
                     el: document.getElementById('grid'),
-                    // 가로 세로 스크롤 설정
                     scrollX: false,
                     scrollY: false,
-                    //*** name을 return 받은 전달 객체의 필드와 일치 << 필수
                     columns: [{
-                            header: '회원 번호',
-                            name: 'num'
-                        }, {
-                            header: '회원 아이디',
-                            name: 'id'
-                        }, {
-                            header: '비밀번호',
-                            name: 'password'
-                        }, {
-                            header: '이름',
-                            name: 'name'
-                        },{
-                            header: '이메일',
-                            name: 'email'
-                        },{
-                            header: '권한',
-                            name: 'role'
-                        }]
-
-                }); //grid
-                // 불러온 데이터들을 set 하는 메소드, 없으면 데이터 출력이 안됨 << 필수
+                        header: '회원 번호',
+                        name: 'num'
+                    }, {
+                        header: '회원 아이디',
+                        name: 'id'
+                    }, {
+                        header: '비밀번호',
+                        name: 'password'
+                    }, {
+                        header: '이름',
+                        name: 'name',
+                        sortable: true,
+                        resizable: true,
+                        editor: 'text',
+                        filter: {
+                            type: 'text',
+                            showApplyBtn: true,
+                            showClearBtn: true
+                        }
+                    }, {
+                        header: '이메일',
+                        name: 'email'
+                    }, {
+                        header: '권한',
+                        name: 'role'
+                    }
+                    ]
+                });
                 grid.resetData(result);
-            }// suc
-        }); //ajax
+            }
+        });
     }
 
     document.getElementById("ajaxButton").addEventListener("click", executeAjax);
