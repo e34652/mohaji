@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,6 +13,10 @@ import java.time.LocalDateTime;
         @UniqueConstraint(columnNames = "student_code")
 })
 public class Student extends BaseEntity {
+
+    @OneToMany(mappedBy = "student")
+    private List<RegCourse> RegCourse;
+
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false, unique=true)
