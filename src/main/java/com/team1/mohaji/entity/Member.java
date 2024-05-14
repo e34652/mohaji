@@ -10,7 +10,9 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name="members")
+@Table(name="members", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"login_id", "email"})
+})
 public class Member extends BaseEntity {
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
@@ -30,7 +32,7 @@ public class Member extends BaseEntity {
 
     @NotBlank
     @Size(min=5, message="아이디는 5글자 이상이어야 합니다")
-    @Column(name="login_id", unique = true, nullable = false)
+    @Column(name="login_id", nullable = false, unique = true)
     private String loginId;
 
     @NotBlank
@@ -51,11 +53,11 @@ public class Member extends BaseEntity {
 
     @NotBlank
     @Email(message = "이메일 형식을 확인해주세요")
-    @Column(nullable = false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name="email_confirmed")
-    private boolean emailConfirmed=false;
+    @Column(name="email_confirmed", columnDefinition = "boolean default false")
+    private boolean emailConfirmed;
 
     @NotBlank
     @Pattern(regexp = "\\d{3}-\\d{4}-\\d{4}", message = "010-0000-0000 형태로 입력해주세요")
@@ -65,12 +67,13 @@ public class Member extends BaseEntity {
     @Column(name="last_login")
     private LocalDateTime lastLogin;
 
-    @Column(name="login_fail_count")
+    @Column(name="login_fail_count", columnDefinition = "int default 0")
     @Max(value = 5)
-    private int loginFailCount=0;
+    @Min(value = 0)
+    private int loginFailCount;
 
-    @Column(name="lock_out_enabled")
-    private boolean lockOutEnabled=false;
+    @Column(name="lock_out_enabled", columnDefinition = "boolean default false")
+    private boolean lockOutEnabled;
 
     public enum Role {
       STUDENT,

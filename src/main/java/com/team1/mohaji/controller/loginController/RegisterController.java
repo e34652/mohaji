@@ -6,13 +6,16 @@ import com.team1.mohaji.entity.Student;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.repository.ProfRepository;
 import com.team1.mohaji.repository.StudentRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Validated
 @RestController
 public class RegisterController {
 
@@ -29,7 +32,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Member member) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody Member member) {
         Member savedUser = null;
         ResponseEntity response = null;
         try {

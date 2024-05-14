@@ -1,13 +1,16 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="students")
+@Table(name = "students", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "student_code")
+})
 public class Student extends BaseEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -19,8 +22,9 @@ public class Student extends BaseEntity {
     @Column(name = "student_id")
     private int studentId;
 
-    @Column(name = "dept_id")
-    private int deptId = 1;
+    @Column(name = "dept_id", columnDefinition = "int default 1")
+    @Min(value=1)
+    private int deptId=1;
 
     @Column(name = "student_code", unique = true)
     private String studentCode;
@@ -29,6 +33,7 @@ public class Student extends BaseEntity {
     private LocalDateTime admissionDate;
 
     @Column(name = "year")
+    @Min(value=1)
     private int year;
 
     @Enumerated(EnumType.STRING)
