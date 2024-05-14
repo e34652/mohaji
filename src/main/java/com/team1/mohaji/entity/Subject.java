@@ -25,7 +25,7 @@ public class Subject {
 
     // Assuming Pro is another entity, not provided in SQL
     @ManyToOne
-    @JoinColumn(name = "pro_id", nullable = false)
+    @JoinColumn(name = "prof_id", nullable = false)
     private Professor professor;
 
     @Column(name = "sub_name", nullable = false, length = 90)
