@@ -11,14 +11,12 @@ public class RegSession {
 
     @Id
     @ManyToOne
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     private RegCourse regCourse;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "session_ID", referencedColumnName = "session_ID"),
-            @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
-    })
+    @JoinColumn(name = "session_ID", referencedColumnName = "session_ID")
     private Session session;
 
     @NotBlank

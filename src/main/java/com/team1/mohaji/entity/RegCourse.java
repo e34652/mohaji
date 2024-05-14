@@ -23,7 +23,7 @@ public class RegCourse {
 
     @Id
     @ManyToOne(optional = true)
-    @JoinColumn(name = "sub_id" , referencedColumnName = "student_id")
+    @JoinColumn(name = "sub_id" , referencedColumnName = "sub_id")
     private Subject subject;
 
     @Column(name = "cc_id", length = 30) // 공통기준 테이블 /select
@@ -32,7 +32,7 @@ public class RegCourse {
     @NotBlank
     @Enumerated(EnumType.STRING)
     @Column(name = "rc_stat", length = 15 ,nullable = false)
-    private String rcStat;
+    private RcStat rcStat;
 
     @NotBlank
     @Column(name = "rc_progress" , precision = 4, scale = 1, columnDefinition = "0")
