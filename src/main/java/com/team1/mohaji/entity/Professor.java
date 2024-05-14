@@ -1,13 +1,16 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name="professors")
+@Table(name = "professors", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "prof_code")
+})
 public class Professor extends BaseEntity {
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -16,13 +19,14 @@ public class Professor extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "prof_id")
+    @Column(name = "prof_id", unique = true)
     private int profId;
 
-    @Column(name = "dept_id")
-    private int deptId = 1;
+    @Column(name = "dept_id", columnDefinition = "int default 1")
+    @Min(value=1)
+    private int deptId=1;
 
-    @Column(name = "prof_code", unique = true)
+    @Column(name = "prof_code")
     private String profCode;
 
     @Column(name = "appointed_date")
