@@ -2,9 +2,15 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "session")
 public class Session {
+
+    @OneToMany(mappedBy = "session")
+    private List<RegSession> regSessions;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "session_ID")

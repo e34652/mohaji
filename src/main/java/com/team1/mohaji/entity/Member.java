@@ -22,7 +22,7 @@ public class Member extends BaseEntity {
     private Professor professor;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberIp> memberIp;
+    private List<MemberIp> memberIps;
 
 
     @Id

@@ -1,10 +1,17 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import org.apache.ibatis.annotations.One;
+
+import java.util.List;
 
 @Entity
 @Table(name = "subject")
 public class Subject {
+
+    @OneToMany(mappedBy = "subject")
+    private List<RegCourse> RegCourse;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sub_id")
@@ -16,8 +23,8 @@ public class Subject {
 
     // Assuming Pro is another entity, not provided in SQL
     @ManyToOne
-    @JoinColumn(name = "pro_id", nullable = false)
-    private Pro pro;
+    @JoinColumn(name = "prof_id", nullable = false)
+    private Professor professor;
 
     @Column(name = "sub_name", nullable = false)
     private String subName;
