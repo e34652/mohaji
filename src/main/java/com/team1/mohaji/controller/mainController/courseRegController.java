@@ -10,6 +10,7 @@ public class courseRegController {
 
     @GetMapping("/courseReg")
     public  String coutseReg(){
+
         return "view/courseReg";
     }
 

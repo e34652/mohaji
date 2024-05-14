@@ -29,11 +29,11 @@ dependencies {
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 
 //	thymeleaf
-implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
-//jQuery
-implementation 'org.webjars:jquery:3.6.0'
+// jQuery
+	implementation 'org.webjars:jquery:3.6.0'
 
 //	mybatis
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
@@ -56,7 +56,7 @@ implementation 'org.webjars:jquery:3.6.0'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-//log
+// log
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
 	implementation 'org.slf4j:slf4j-api'
 	implementation 'ch.qos.logback:logback-classic'
