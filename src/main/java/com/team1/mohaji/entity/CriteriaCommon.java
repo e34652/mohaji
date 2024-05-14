@@ -9,15 +9,15 @@ import java.util.List;
 @Table(name = "criteria_common")
 public class CriteriaCommon {
 
-    @OneToMany(mappedBy = "criteria_common")
+    @OneToMany(mappedBy = "criteriaCommon") // CriteriaDetail 엔티티의 필드명으로 수정
     private List<CriteriaDetail> criteriaDetails;
 
     @Id
-    @Column(name = "ct_id", length = 30 )
-    private String ctId;
+    @Column(name = "cc_id", length = 30 )
+    private String ccId;
 
     @NotBlank
-    @Column(name = "ct_title", nullable = false, length = 60)
+    @Column(name = "cc_title", nullable = false, length = 60)
     private String ctTitle;
 
     // Getters and setters

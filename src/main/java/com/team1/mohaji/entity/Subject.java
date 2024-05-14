@@ -53,7 +53,7 @@ public class Subject {
         전공선택,
         교양필수,
         교양선택,
-        교영필수선택
+        교양필수선택
     }
     public enum subCredit {
         TWO,

@@ -12,7 +12,7 @@ public class MemberIp {
     private int mipId;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "member")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
 
     @Column(name="mip_ip", unique = true, nullable = false)

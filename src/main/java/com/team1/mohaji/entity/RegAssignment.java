@@ -35,7 +35,7 @@ public class RegAssignment {
     private Timestamp raSdate;
 
     @NotBlank
-    @Column(name = "ra_score", nullable = false, columnDefinition = "0")
+    @Column(name = "ra_score", nullable = false, columnDefinition = "int default 0")
     private Integer raScore;
 
     @Column(name = "ra_feedback", length = 4000)

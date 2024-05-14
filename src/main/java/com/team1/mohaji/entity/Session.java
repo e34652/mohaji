@@ -18,7 +18,7 @@ public class Session {
     private int sessionId;
 
     @ManyToOne
-    @JoinColumn(name = "sub_id")
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     private Subject subject;
 
     @OneToOne

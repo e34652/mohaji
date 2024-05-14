@@ -11,7 +11,7 @@ public class CriteriaDetail {
     private String cvId;
 
     @ManyToOne
-    @JoinColumn(name = "ct_id")
+    @JoinColumn(name = "cc_id") // 외래 키로 사용될 컬럼의 이름을 지정
     private CriteriaCommon criteriaCommon;
 
     @NotBlank
@@ -35,6 +35,4 @@ public class CriteriaDetail {
 
     @Column(name = "cv_desc", length = 300)
     private String cvDesc;
-
-    // Getters and setters
 }
