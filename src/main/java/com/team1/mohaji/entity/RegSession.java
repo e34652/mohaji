@@ -13,22 +13,27 @@ public class RegSession {
     @ManyToOne
     @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     private RegCourse regCourse;
 
     @ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name = "session_ID", referencedColumnName = "session_ID")
+=======
+    @JoinColumn(name = "session_Id", referencedColumnName = "session_Id")
+>>>>>>> main
     private Session session;
 
     @NotBlank
-    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1, columnDefinition = "0" )
+    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1 , columnDefinition = "int default 0")
     private BigDecimal rsProgress;
 
     @NotBlank
-    @Column(name = "rs_max", nullable = false, columnDefinition = "0")
+    @Column(name = "rs_max", nullable = false, columnDefinition = "int default 0")
     private int rsMax;
 
     @NotBlank
-    @Column(name = "rs_final", nullable = false, columnDefinition = "0")
+    @Column(name = "rs_final", nullable = false, columnDefinition = "int default 0")
     private int rsFinal;
 
     // Getters and setters

@@ -6,6 +6,8 @@ import org.hibernate.mapping.ToOne;
 
 import java.sql.Timestamp;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "reg_detail")
 public class RegDetail {

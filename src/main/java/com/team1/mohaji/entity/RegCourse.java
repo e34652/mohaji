@@ -10,10 +10,10 @@ import java.util.List;
 @Table(name = "reg_course")
 public class RegCourse {
 
-    @OneToMany(mappedBy = "reg_course")
+    @OneToMany(mappedBy = "regCourse")
     private List<RegSession> regSessions;
 
-    @OneToOne(mappedBy = "reg_course")
+    @OneToOne(mappedBy = "regCourse")
     private RegDetail regDetail;
 
     @Id
@@ -35,7 +35,7 @@ public class RegCourse {
     private RcStat rcStat;
 
     @NotBlank
-    @Column(name = "rc_progress" , precision = 4, scale = 1, columnDefinition = "0")
+    @Column(name = "rc_progress" , precision = 4, scale = 1, columnDefinition = "DECIMAL(4,1) DEFAULT 0")
     private BigDecimal rcProgress;
 
     @Column(name = "rc_asgn_score" )
@@ -44,7 +44,7 @@ public class RegCourse {
     @Column(name = "rc_att_score")
     private Integer rcAttScore;
 
-    @Column(name = "rc_grade" , nullable = false ,columnDefinition = "none" )
+    @Column(name = "rc_grade" , nullable = false ,columnDefinition = "VARCHAR(6) DEFAULT 'none'" )
     private String rcGrade;
 
     //

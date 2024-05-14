@@ -1,6 +1,7 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 @Table(name = "session")
 public class Session {
 
-    @OneToMany(mappedBy = "session")
+    @OneToMany(mappedBy = "session" )
     private List<RegSession> regSessions;
 
     @Id
@@ -17,16 +18,18 @@ public class Session {
     private int sessionId;
 
     @ManyToOne
-    @JoinColumn(name = "sub_id")
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     private Subject subject;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "video_id")
     private Video video;
 
-    @Column(name = "session_title", nullable = false)
+    @NotBlank
+    @Column(name = "session_title", nullable = false, length = 90)
     private String sessionTitle;
 
+    @NotBlank
     @Column(name = "session_snum", nullable = false)
     private int sessionSnum;
 

@@ -2,8 +2,8 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "asgn")
@@ -18,11 +18,11 @@ public class Assignment {
     @JoinColumn(name = "sub_id")
     private Subject subject;
 
-    @Column(name = "att_id", nullable = false)
-    private int attId;
+//    @JoinColumn(name = "attached_id", referencedColumnName = "attached_id")
+//    private Attached attached; 혜빈님쪽 entity 완성 후
 
-    @Column(name = "asgn_desc")
-    private Integer asgnDesc;
+    @Column(name = "asgn_desc", length = 300)
+    private String asgnDesc;
 
     @Column(name = "asgn_rdate", nullable = false)
     private LocalDateTime asgnRdate;
