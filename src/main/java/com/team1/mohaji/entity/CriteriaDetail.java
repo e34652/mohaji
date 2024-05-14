@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name = "criteria_detail")
 public class CriteriaDetail {
     @Id
-    @Column(name = "cv_id")
+    @Column(name = "cv_id", length = 30)
     private String cvId;
 
     @ManyToOne
