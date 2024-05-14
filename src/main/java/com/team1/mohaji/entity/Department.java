@@ -1,6 +1,7 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "department")
@@ -10,13 +11,14 @@ public class Department {
     @Column(name = "dept_id")
     private int deptId;
 
-    @Column(name = "dept_name", nullable = false)
+    @NotBlank
+    @Column(name = "dept_name", nullable = false, length = 60)
     private String deptName;
 
-    @Column(name = "dept_desc")
+    @Column(name = "dept_desc", length = 300)
     private String deptDesc;
 
-    @Column(name = "dept_credit", nullable = false)
+    @Column(name = "cc_id", nullable = false)
     private int deptCredit;
 
     // Getters and setters

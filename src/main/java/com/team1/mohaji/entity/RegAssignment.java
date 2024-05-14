@@ -2,6 +2,8 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "reg_asgn")
 public class RegAssignment {

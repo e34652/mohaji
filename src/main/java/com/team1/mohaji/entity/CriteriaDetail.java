@@ -1,6 +1,7 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "criteria_detail")
@@ -13,6 +14,7 @@ public class CriteriaDetail {
     @JoinColumn(name = "ct_id")
     private CriteriaCommon criteriaCommon;
 
+    @NotBlank
     @Column(name = "cv_title", nullable = false)
     private String cvTitle;
 
@@ -31,7 +33,7 @@ public class CriteriaDetail {
     @Column(name = "cv_value5")
     private Integer cvValue5;
 
-    @Column(name = "cv_desc")
+    @Column(name = "cv_desc", length = 300)
     private String cvDesc;
 
     // Getters and setters
