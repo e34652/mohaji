@@ -1,8 +1,11 @@
 package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,7 +28,7 @@ public class Subject {
 
     // Assuming Pro is another entity, not provided in SQL
     @ManyToOne
-    @JoinColumn(name = "prof_id", nullable = false)
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
     private Professor professor;
 
     @Column(name = "sub_name", nullable = false, length = 90)
@@ -44,9 +47,22 @@ public class Subject {
     private int subScount;
 
     @NotBlank
-    @Enumerated(EnumType.STRING)
+    @Min(0)  // 최소값 제약조건 추가
+    @Max(3)
     @Column(name = "sub_credit", nullable = false)
-    private subCredit subCredit;
+    private int subCredit;
+
+    @Column(name = "sub_rsdate", columnDefinition = "DATETIME")
+    private LocalDateTime subRsdate;
+
+    @Column(name = "sub_redate", columnDefinition = "DATETIME")
+    private LocalDateTime subRedate;
+
+    @Column(name = "sub_sdate", columnDefinition = "DATETIME")
+    private LocalDateTime subSdate;
+
+    @Column(name = "sub_edate", columnDefinition = "DATETIME")
+    private LocalDateTime subEdate;
 
     public enum subType {
         전공필수,
@@ -55,9 +71,4 @@ public class Subject {
         교양선택,
         교양필수선택
     }
-    public enum subCredit {
-        TWO,
-        THREE
-    }
-
 }

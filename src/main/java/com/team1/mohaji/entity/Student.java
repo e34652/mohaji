@@ -15,7 +15,7 @@ import java.util.List;
 public class Student extends BaseEntity {
 
     @OneToMany(mappedBy = "student")
-    private List<RegCourse> RegCourse;
+    private List<RegCourse> regCourses;
 
 
     @OneToOne(fetch = FetchType.EAGER)

@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "reg_course")
 public class RegCourse {
+    @EmbeddedId
+    private RegCourseId id;
 
     @OneToMany(mappedBy = "regCourse")
     private List<RegSession> regSessions;
@@ -16,14 +18,17 @@ public class RegCourse {
     @OneToOne(mappedBy = "regCourse")
     private RegDetail regDetail;
 
-    @Id
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
+    @OneToMany(mappedBy = "regCourse")
+    private List<RegAssignment> regAssignments;
+
+    @ManyToOne
+    @MapsId("member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Student student;
 
-    @Id
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "sub_id" , referencedColumnName = "sub_id")
+    @ManyToOne
+    @MapsId("sub_id")
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     private Subject subject;
 
     @Column(name = "cc_id", length = 30) // 공통기준 테이블 /select
