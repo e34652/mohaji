@@ -12,7 +12,7 @@ public class RegSession {
     @Id
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "student_id", referencedColumnName = "student_id"),
+            @JoinColumn(name = "member_id", referencedColumnName = "member_id"),
             @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     })
     private RegCourse regCourse;
@@ -23,7 +23,7 @@ public class RegSession {
     private Session session;
 
     @NotBlank
-    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1 , columnDefinition = "int default 0")
+    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1, columnDefinition = "int default 0")
     private BigDecimal rsProgress;
 
     @NotBlank

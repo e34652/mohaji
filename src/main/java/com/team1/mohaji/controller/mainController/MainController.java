@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-public class mainController {
+public class MainController {
 
     @GetMapping("/aa")
     public  String main1()
