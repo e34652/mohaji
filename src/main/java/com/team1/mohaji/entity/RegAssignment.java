@@ -23,8 +23,8 @@ public class RegAssignment {
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     private Student student;
 
-    @NotBlank
-    @Column(name = "attached_id", nullable = false) // attached 테이블에서 select
+
+    @Column(name = "attached_id") // attached 테이블에서 select
     private Integer attachedId;
 
     @Column(name = "ra_content", length = 4000)
