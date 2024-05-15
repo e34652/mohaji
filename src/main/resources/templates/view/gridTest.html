@@ -50,8 +50,14 @@
                     }, {
                         header: '권한',
                         name: 'role'
-                    }
-                    ]
+                    },  {
+                        header: '링크',
+                        name: 'url',
+                        formatter: function(item) {
+                            const url = item.value;
+                            return `<a href="www.youtube.com/watch?v=${url}" target="_blank">${url}</a>`;
+                        }
+                    }]
                 });
                 grid.resetData(result);
             }
