@@ -2,7 +2,6 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
