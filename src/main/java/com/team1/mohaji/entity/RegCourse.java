@@ -16,10 +16,14 @@ public class RegCourse {
     @OneToOne(mappedBy = "regCourse")
     private RegDetail regDetail;
 
+    @OneToMany(mappedBy = "regCourse")
+    private List<RegAssignment> regAssignments;
+
+
     @Id
     @ManyToOne(optional = true)
-    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
-    private Student student;
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    private Student member;
 
     @Id
     @ManyToOne(optional = true)

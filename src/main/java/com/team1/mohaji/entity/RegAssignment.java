@@ -19,9 +19,14 @@ public class RegAssignment {
     @JoinColumn(name = "asgn_id",  referencedColumnName = "asgn_id")
     private Assignment assignment;
 
-    @ManyToOne(optional = true) //비식별
-    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
-    private Student student;
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "sub_id", referencedColumnName = "sub_id"),
+            @JoinColumn(name = "member_id", referencedColumnName = "member_id")
+    })
+    private RegCourse regCourse;
+
+
 
 
     @Column(name = "attached_id") // attached 테이블에서 select

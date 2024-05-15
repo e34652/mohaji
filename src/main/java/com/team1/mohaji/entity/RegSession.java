@@ -11,16 +11,19 @@ public class RegSession {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
-    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
+    @JoinColumns({
+            @JoinColumn(name = "member_id", referencedColumnName = "member_id"),
+            @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
+    })
     private RegCourse regCourse;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "session_id", referencedColumnName = "session_id")
+    @JoinColumn(name = "session_Id", referencedColumnName = "session_Id")
     private Session session;
 
     @NotBlank
-    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1 , columnDefinition = "int default 0")
+    @Column(name = "rs_progress", nullable = false, precision = 4, scale = 1, columnDefinition = "int default 0")
     private BigDecimal rsProgress;
 
     @NotBlank

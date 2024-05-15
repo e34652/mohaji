@@ -19,7 +19,7 @@ public class RegDetail {
 
     @OneToOne
     @JoinColumns({
-            @JoinColumn(name = "student_id", referencedColumnName = "student_id"),
+            @JoinColumn(name = "member_id", referencedColumnName = "member_id"),
             @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     })
     private RegCourse regCourse;
