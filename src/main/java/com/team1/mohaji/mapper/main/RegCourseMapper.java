@@ -1,6 +1,6 @@
 package com.team1.mohaji.mapper.main;
 
-import com.team1.mohaji.dto.RegCourse;
+import com.team1.mohaji.dto.RegCourseDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,6 +10,6 @@ import java.util.List;
 public interface RegCourseMapper {
 
     @Select("select * from reg_course")
-    List<RegCourse> selectAllRegCourse();
+    List<RegCourseDto> selectAllRegCourse();
 
 }

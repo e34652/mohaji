@@ -1,10 +1,10 @@
 package com.team1.mohaji.service.main;
 
-import com.team1.mohaji.dto.RegCourse;
+import com.team1.mohaji.dto.RegCourseDto;
 
 import java.util.List;
 
 public interface RegCourseService {
 
-    public List<RegCourse> selectAllRegCourse();
+    public List<RegCourseDto> selectAllRegCourse();
 }

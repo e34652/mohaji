@@ -2,7 +2,7 @@ package com.team1.mohaji.service.main.imple;
 
 
 
-import com.team1.mohaji.dto.RegCourse;
+import com.team1.mohaji.dto.RegCourseDto;
 import com.team1.mohaji.mapper.main.RegCourseMapper;
 import com.team1.mohaji.service.main.RegCourseService;
 
@@ -18,7 +18,7 @@ public class RegCourseServiceImple implements RegCourseService {
     private RegCourseMapper regCourseMapper;
 
     @Override
-    public List<RegCourse> selectAllRegCourse() {
+    public List<RegCourseDto> selectAllRegCourse() {
         regCourseMapper.selectAllRegCourse();
         return regCourseMapper.selectAllRegCourse();
     }
