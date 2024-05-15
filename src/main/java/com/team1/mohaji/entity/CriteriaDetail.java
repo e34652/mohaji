@@ -19,19 +19,19 @@ public class CriteriaDetail {
     private String cvTitle;
 
     @Column(name = "cv_value1")
-    private Integer cvValue1;
+    private String cvValue1;
 
     @Column(name = "cv_value2")
-    private Integer cvValue2;
+    private String cvValue2;
 
     @Column(name = "cv_value3")
-    private Integer cvValue3;
+    private String cvValue3;
 
     @Column(name = "cv_value4")
-    private Integer cvValue4;
+    private String cvValue4;
 
     @Column(name = "cv_value5")
-    private Integer cvValue5;
+    private String cvValue5;
 
     @Column(name = "cv_desc", length = 300)
     private String cvDesc;

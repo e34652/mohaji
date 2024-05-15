@@ -8,6 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "reg_course")
 public class RegCourse {
+    @EmbeddedId
+    private RegCourseId id;
 
     @OneToMany(mappedBy = "regCourse")
     private List<RegSession> regSessions;
@@ -18,15 +20,14 @@ public class RegCourse {
     @OneToMany(mappedBy = "regCourse")
     private List<RegAssignment> regAssignments;
 
-
-    @Id
-    @ManyToOne(optional = true)
+    @ManyToOne
+    @MapsId("member_id")
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Student student;
 
-    @Id
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "sub_id" , referencedColumnName = "sub_id")
+    @ManyToOne
+    @MapsId("sub_id")
+    @JoinColumn(name = "sub_id", referencedColumnName = "sub_id")
     private Subject subject;
 
 

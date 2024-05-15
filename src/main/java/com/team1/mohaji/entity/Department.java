@@ -18,8 +18,8 @@ public class Department {
     @Column(name = "dept_desc", length = 300)
     private String deptDesc;
 
-    @Column(name = "cc_id", nullable = false, length = 30)
-    private String ccId;
+    @Column(name = "dept_credit", nullable = false)
+    private int deptCredit;
 
     // Getters and setters
 }

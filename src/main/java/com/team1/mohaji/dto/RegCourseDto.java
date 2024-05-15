@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class RegCourse {
+public class RegCourseDto {
 
     private int studentId;
     private int subId;
