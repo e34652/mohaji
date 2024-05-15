@@ -3,6 +3,7 @@ package com.team1.mohaji.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,12 @@ public class Session {
     @NotBlank
     @Column(name = "session_snum", nullable = false)
     private int sessionSnum;
+
+    @Column(name = "session_sdate", columnDefinition = "DATETIME")
+    private LocalDateTime sessionSdate;
+
+    @Column(name = "session_edate", columnDefinition = "DATETIME")
+    private LocalDateTime sessionEdate;
 
     // Getters and setters
 }

@@ -3,6 +3,7 @@ package com.team1.mohaji.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -47,6 +48,18 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     @Column(name = "sub_credit", nullable = false)
     private subCredit subCredit;
+
+    @Column(name = "sub_rsdate", columnDefinition = "DATETIME")
+    private LocalDateTime subRsdate;
+
+    @Column(name = "sub_redate", columnDefinition = "DATETIME")
+    private LocalDateTime subRedate;
+
+    @Column(name = "sub_sdate", columnDefinition = "DATETIME")
+    private LocalDateTime subSdate;
+
+    @Column(name = "sub_edate", columnDefinition = "DATETIME")
+    private LocalDateTime subEdate;
 
     public enum subType {
         전공필수,
