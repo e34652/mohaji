@@ -5,6 +5,7 @@ import com.team1.mohaji.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,9 @@ public class MemberDetails implements UserDetailsService {
     }
 
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        int member_id;
         String userName, password = null;
         List<GrantedAuthority> authorities = null;
 
@@ -35,10 +37,12 @@ public class MemberDetails implements UserDetailsService {
         } else{
             userName = memberList.get(0).getLoginId();
             password = memberList.get(0).getPassword();
+            member_id = memberList.get(0).getMemberId();
             authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
-        return new User(userName,password,authorities);
+        return new CustomUserDetails(member_id,userName,password,authorities);
+//        return new User(userName,password,authorities);
     }
 }
