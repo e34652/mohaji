@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>커뮤니티</title>
-    <link rel="stylesheet" href="css/common/common.css" />
-    <link rel="stylesheet" href="css/common/sectionCss.css" />
+    <link rel="stylesheet" href="/css/common/common.css" />
+    <link rel="stylesheet" href="/css/common/sectionCss.css" />
     <!-- 부트스트랩 CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- 분리된 CSS 파일 연결 -->
@@ -30,31 +30,29 @@
     <main style="height: 1000px;">
         <!-- 컨텐츠 삽입 -->
         <div class="miniNavi">
-            <h1>자유 게시판</h1>
+            <h1>게시판 목록</h1>
         </div>
-
-        <table class="table">
+        <table>
             <thead>
             <tr>
-                <th scope="col">글번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">조회수</th>
-                <th scope="col">작성일</th>
+                <th>게시판 목록</th>
             </tr>
             </thead>
             <tbody>
-            <tr t th:each="posts : ${posts}">
-                <td th:text="${posts.postId}"></td>
-                <td class="title">
-                    <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
-                <td th:text="${posts.memberId}"></td>
-                <td th:text="${posts.views}"></td>
-                <td th:text="${posts.createdAt}"></td>
+            <tr th:each="board : ${boardList}">
+                <td th:text="${board.boardName}"></td>
+                <td>
+                    <table>
+                        <tbody>
+                        <tr th:each="post : ${board.posts}">
+                            <td th:text="${post.title}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
             </tbody>
         </table>
-        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|">글작성</button>
 
     </main>
 

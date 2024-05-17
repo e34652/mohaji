@@ -30,31 +30,21 @@
     <main style="height: 1000px;">
         <!-- 컨텐츠 삽입 -->
         <div class="miniNavi">
-            <h1>자유 게시판</h1>
+            <h1>글쓰기</h1>
         </div>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">글번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">조회수</th>
-                <th scope="col">작성일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr t th:each="posts : ${posts}">
-                <td th:text="${posts.postId}"></td>
-                <td class="title">
-                    <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
-                <td th:text="${posts.memberId}"></td>
-                <td th:text="${posts.views}"></td>
-                <td th:text="${posts.createdAt}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|">글작성</button>
+        <form action="/newPost" method="post" enctype="multipart/form-data">
+            <label for="boardId">게시판 선택:</label>
+            <select id="boardId" name="boardId">
+                <option th:each="board : ${boardList}" th:value="${board.boardId}" th:text="${board.boardName}"></option>
+            </select>
+            <br><br>
+            <label for="title">제목:</label><br>
+            <input type="text" id="title" name="title" required><br><br>
+            <label for="content">내용:</label><br>
+            <textarea id="content" name="content" rows="4" cols="50" required></textarea><br><br>
+            <input type="file" id="files" name="files" multiple="multiple">
+            <button type="submit">작성 완료</button>
+        </form>
 
     </main>
 

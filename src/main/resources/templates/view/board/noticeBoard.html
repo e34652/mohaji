@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>커뮤니티</title>
+    <link rel="stylesheet" href="css/common/common.css" />
+    <link rel="stylesheet" href="css/common/sectionCss.css" />
+    <!-- 부트스트랩 CDN 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 분리된 CSS 파일 연결 -->
+    <link rel="stylesheet" th:href="@{/css/myPage/courseRegCss.css}">
+    <link rel="stylesheet" th:href="@{/css/myPage/sectionCss.css}">
+
+</head>
+<body>
+<header>
+    <!-- 상단 네비바 삽입 -->
+    <header th:replace="~{layout/header :: header}"></header>
+</header>
+
+<!-- aside와 main을 포함한 container1을 flexbox로 만들어 둘을 가로로 나란히 배치 -->
+<div class="container1">
+
+    <aside>
+        <!-- 사이드바 삽입 -->
+        <nav th:replace="~{layout/boardside :: boardside}"></nav>
+    </aside>
+
+    <main style="height: 1000px;">
+        <!-- 컨텐츠 삽입 -->
+        <div class="miniNavi">
+            <h1>학사 공지</h1>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">글번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">조회수</th>
+                <th scope="col">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr t th:each="posts : ${posts}">
+                <td th:text="${posts.postId}"></td>
+                <td class="title">
+                    <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
+                <td th:text="${posts.memberId}"></td>
+                <td th:text="${posts.views}"></td>
+                <td th:text="${posts.createdAt}"></td>
+            </tr>
+            </tbody>
+
+
+
+        </table>
+        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|">글작성</button>
+    </main>
+
+    <footer>
+        <!-- 푸터 삽입 -->
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+    </footer>
+</div>
+</body>
+</html>
