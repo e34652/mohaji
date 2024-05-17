@@ -1,156 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>강의 조회</title>
     <link rel="stylesheet" href="/css/common/common.css" />
     <link rel="stylesheet" href="/css/common/sectionCss.css" />
-      <!-- jQuery 로드 -->
-      <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery 로드 -->
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
     <!-- 부트스트랩 CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- 분리된 CSS 파일 연결 -->
     <link rel="stylesheet" th:href="@{/css/myPage/courseRegCss.css}">
     <link rel="stylesheet" th:href="@{/css/myPage/sectionCss.css}">
-      <style>
-          .table {
-              width: 100%; /* 테이블의 전체 너비를 100%로 설정 */
-              table-layout: fixed; /* 테이블의 너비를 고정으로 설정 */
-          }
+    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/grid/latest/tui-grid.min.css" />
+    <style>
+        .table {
+            width: 100%; /* 테이블의 전체 너비를 100%로 설정 */
+        }
 
-          .table th,
-          .table td {
-              word-wrap: break-word; /* 텍스트가 셀을 벗어나지 않도록 줄 바꿈 설정 */
-          }
-      </style>
-  </head>
-  <body>
-    <header>
-      <!-- 상단 네비바 삽입 -->
-      <header th:replace="~{layout/header :: header}"></header>
-    </header>
+        .table th, .table td {
+            word-wrap: break-word; /* 텍스트가 셀을 벗어나지 않도록 줄 바꿈 설정 */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <!-- 상단 네비바 삽입 -->
+    <header th:replace="~{layout/header :: header}"></header>
+</header>
 
-    <!-- aside와 main을 포함한 container1을 flexbox로 만들어 둘을 가로로 나란히 배치 -->
-    <div class="container1">
-
-
-      <main style="height: 1000px;">
+<!-- aside와 main을 포함한 container1을 flexbox로 만들어 둘을 가로로 나란히 배치 -->
+<div class="container1">
+    <main style="height: 1000px;">
         <!-- 컨텐츠 삽입 -->
-
-
-<!--        <div class="container">-->
-          <div class="miniNavi">
+        <div class="miniNavi">
             <h1>수강신청</h1>
-          </div>
-          <!-- 강의 조회 부분 -->
-          <h2>강의조회</h2>
-          <!-- 교양/전공 필수 버튼 영역 -->
-          <div class="toggle-area">
-              <form id="searchForm" th:action="@{/search}" method="POST" class="form-inline">
-                  <div class="form-group">
-                      <label for="category">필수 선택:</label>
-                      <select id="category" name="category" class="form-control mr-2">
-                          <option value="all" th:selected="${category == 'all'}">전체</option>
-                          <option value="전공필수" th:selected="${category == '전공필수'}">전공필수</option>
-                          <option value="전공선택" th:selected="${category == '전공선택'}">전공선택</option>
-                          <option value="교양필수" th:selected="${category == '교양필수'}">교양필수</option>
-                          <option value="교양선택" th:selected="${category == '교양선택'}">교양선택</option>
-                      </select>
-                      <label for="keyword" class="mr-2">키워드 검색:</label>
-                      <input type="text" class="form-control mr-2" id="keyword" name="keyword" th:value="${keyword}" placeholder="강의명으로 검색">
-                      <button type="submit" class="btn btn-primary">검색</button>
-                  </div>
-              </form>
-          </div>
-          <!-- 강의 목록 표시 -->
-          <table class="table table-striped table-bordered table-responsive">
-            <thead  class="thead-dark">
-            <tr style="width: 100%" >
-                <th class="col-auto" style="width: 100px;">구분</th>
-                <th class="col-auto" style="width: 100px;">학과</th>
-                <th class="col-auto" style="width: 100px;">과목</th>
-                <th class="col-auto" style="width: 100px;">교수</th>
-                <!--              <th scope="col">내용</th>-->
-                <th class="col-auto" style="width: 100px;">차시</th>
-                <th class="col-auto" style="width: 100px;">학점</th>
-                <th class="col-auto" style="width: 100px;">신청시작</th>
-                <th class="col-auto" style="width: 100px;">신청종료</th>
-                <th class="col-auto" style="width: 100px;">신청하기</th>
-            </tr>
-            </thead>
-              <tbody class="courseList">
-              <!-- 강의 목록 동적 표시 db 사용시 오픈 -->
-              <tr th:each="course : ${regCourseList}">
-                  <td class="col-auto" style="width: 100px; display: none;" th:text="${course.subId}" ></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.subType}" ></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.deptName}"></td>
-                  <td class="col-auto" style="width: 100px;"><a th:href="@{/courseDetailPage(subId=${course.subId})}" th:text="${course.subName}"></a></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.name}"></td>
-                  <td class="col-auto" style="width: 100px; display: none;" th:text="${course.subDesc}" ></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.subScount}"></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.subCredit}"></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.subRsdate}"></td>
-                  <td class="col-auto" style="width: 100px;" th:text="${course.subRedate}"></td>
-                  <td class="col-auto" style="width: 100px; display: none;" th:text="${course.subSdate}" ></td>
-                  <td class="col-auto" style="width: 100px; display: none;" th:text="${course.subEdate}" ></td>
-                  <td class="col-auto" style="width: 100px;" ><button class="btn btn-primary">신청하기</button></td>
+        </div>
+        <!-- 강의 조회 부분 -->
+        <h2>강의조회</h2>
+        <!-- 교양/전공 필수 버튼 영역 -->
+        <div class="toggle-area">
+            <form id="searchForm" th:action="@{/search}" method="POST" class="form-inline">
+                <div class="form-group">
+                    <label for="category">필수 선택:</label>
+                    <select id="category" name="category" class="form-control mr-2">
+                        <option value="all" th:selected="${category == 'all'}">전체</option>
+                        <option value="전공필수" th:selected="${category == '전공필수'}">전공필수</option>
+                        <option value="전공선택" th:selected="${category == '전공선택'}">전공선택</option>
+                        <option value="교양필수" th:selected="${category == '교양필수'}">교양필수</option>
+                        <option value="교양선택" th:selected="${category == '교양선택'}">교양선택</option>
+                    </select>
+                    <label for="keyword" class="mr-2">키워드 검색:</label>
+                    <input type="text" class="form-control mr-2" id="keyword" name="keyword" th:value="${keyword}" placeholder="강의명으로 검색">
+                    <button type="submit" class="btn btn-primary">검색</button>
+                </div>
+            </form>
+        </div>
+        <!-- 강의 목록 표시 -->
+        <div class="table-responsive">
+            <div id="grid"></div> <!-- 테이블 구조를 수정하여 div를 외부로 이동 -->
+        </div>
+    </main>
 
-              </tr>
-            <!-- 조건에따라 신청중인 과목이라면 수강중으로 바꾸거나 리트스에서 제외하기 -->
-            </tbody>
-          </table>
-<!--        </div>-->
-
-      </main>
-
-      <footer>
+    <footer>
         <!-- 푸터 삽입 -->
         <footer th:replace="~{layout/footer :: footer}"></footer>
-      </footer>
-    </div>
-    <script th:inline="javascript">
-        $(document).ready(function() {
-            $('#searchForm').submit(function(event) {
-                event.preventDefault(); // 폼 기본 제출 동작 방지
-                var formData = $(this).serialize(); // 폼 데이터 직렬화
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        // 성공적으로 응답을 받으면 강의 목록을 업데이트
-                        updateCourseList(response);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('에러 발생: ', error);
-                    }
-                });
-            });
+    </footer>
+</div>
+<script th:inline="javascript">
+    var grid;
+    var memberId = /*[[${memberId}]]*/ '[]';
+    /*<![CDATA[*/
+    document.addEventListener("DOMContentLoaded", function () {
+        // 그리드 객체를 초기화
+        var regCourseList = /*[[${regCourseList}]]*/ '[]';
+        grid = new tui.Grid({
+            el: document.getElementById("grid"),
+            scrollX: false,
+            scrollY: false,
+            columns: [
+                {
+                    header: "Id",
+                    name: "subId",
+                    align: 'center',
+                    hidden: true,
+                },
+                {
+                    header: "구분",
+                    name: "subType",
+                    align: 'center'
+                },
+                {
+                    header: "학과",
+                    name: "deptName",
+                    align: 'center',
+                    sortable: true,
+                },
+                {
+                    header: "과목",
+                    name: "subName",
+                    align: 'center',
+                    sortable: true,
+                },
 
-            // 강의 목록 업데이트 함수
-            function updateCourseList(data) {
-                var courseListHtml = '';
-                data.forEach(function(course) {
-                    courseListHtml += '<tr>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px; display: none;">' + course.subId + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subType + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.deptName + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;"><a href="/courseDetailPage(subId=' + course.subId + ')">' + course.subName + '</a></td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.name + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subDesc + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subScount + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subCredit + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subRsdate + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px;">' + course.subRedate + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px; display: none;">' + course.subSdate + '</td>';
-                    courseListHtml += '<td class="col-auto" style="width: 100px; display: none;">' + course.subEdate + '</td>';
-                    courseListHtml += '<td class="col-auto"><button class="btn btn-primary">신청하기</button></td>';
-                    courseListHtml += '</tr>';
-                });
-                $('.courseList').html(courseListHtml);
+                {
+                    header: "차시",
+                    name: "subScount",
+                    align: 'center'
+                },
+                {
+                    header: "학점",
+                    name: "subCredit",
+                    align: 'center'
+                },
+                {
+                    header: "신청시작일",
+                    name: "subRsdate",
+                    align: 'center'
+                },
+                {
+                    header: "신청마감일",
+                    name: "subRedate",
+                    align: 'center'
+                },
+                {
+                    header: "강의실",
+                    name: "lectureRoom",
+                    align: 'center',
+                    formatter: function (item) {
+                        const subId = item.row.subId;
+                        const subName = item.row.subName;
+                        const deptName = item.row.deptName;
+                        const lectureRoom = item.row.lectureRoom;
+                        const url = `/reg?memberId=${memberId}&subId=${subId}`;
+                        return `<a class="regSubmit" href="${url}" >수강신청</a>`;
+                    },
+                },
+            ],
+        });
+
+        grid.resetData(regCourseList); // 서버에서 전달된 데이터로 그리드 초기화
+    });
+
+    $('#searchForm').submit(function(event) {
+        event.preventDefault(); // 폼 기본 제출 동작 방지
+        var formData = $(this).serialize(); // 폼 데이터 직렬화
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                console.log(memberId);
+                // 성공적으로 응답을 받으면 강의 목록을 업데이트
+                grid.resetData(response); // 서버에서 전달된 데이터로 그리드 초기화
+            },
+            error: function(xhr, status, error) {
+                console.error('에러 발생: ', error);
             }
         });
-    </script>
-  </body>
+    });
+    /*]]>*/
+</script>
+<script>
+    document.getElementById('grid').addEventListener('click', function(event) {
+        if (event.target.classList.contains('regSubmit')) {
+            event.preventDefault();
+            const confirmResult = confirm('수강신청 하시겠습니까?');
+            if (confirmResult) {
+                window.location.href = event.target.href;
+            }
+        }
+    });
+</script>
+
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</body>
 </html>

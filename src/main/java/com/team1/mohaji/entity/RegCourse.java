@@ -54,9 +54,9 @@ public class RegCourse {
 
     //
     public enum RcStat {
-        Attending, //수강중
-        Completed, //이수
-        Cancelled //취소
+        수강중, //수강중
+        이수, //이수
+        취소 //취소
     }
 
 }

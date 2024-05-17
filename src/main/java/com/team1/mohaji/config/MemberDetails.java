@@ -24,7 +24,7 @@ public class MemberDetails implements UserDetailsService {
 
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        int memberId;
         String userName, password = null;
         List<GrantedAuthority> authorities = null;
 
@@ -33,12 +33,13 @@ public class MemberDetails implements UserDetailsService {
         if (memberList.size() == 0) {
             throw new UsernameNotFoundException("User details 확인 불가: " + username);
         } else{
+            memberId =memberList.get(0).getMemberId();
             userName = memberList.get(0).getLoginId();
             password = memberList.get(0).getPassword();
             authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
-        return new User(userName,password,authorities);
+        return new CustomUserDetails(memberId,userName,password,authorities);
     }
 }

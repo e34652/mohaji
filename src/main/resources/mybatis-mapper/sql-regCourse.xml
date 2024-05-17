@@ -17,26 +17,43 @@
         <result property="subRedate" column="sub_redate" />
         <result property="subSdate" column="sub_sdate" />
         <result property="subEdate" column="sub_edate" />
+        <result property="memberId" column="member_id" />
     </resultMap>
 
+    <resultMap id="regCourse" type="com.team1.mohaji.dto.RegCourseDto">
+        <id property="memberId" column="member_id" />
+        <result property="subId" column="sub_id" />
+        <result property="ccId" column="cc_id" />
+        <result property="rcStat" column="rc_stat" />
+        <result property="rcProgress" column="rc_progress" />
+        <result property="rcAsgnScore" column="rc_asgn_score" />
+        <result property="rcAttScore" column="rc_att_score" />
+        <result property="rcGrade" column="rc_grade" />
+    </resultMap>
 
-    <select id="selectAllSubject" resultMap="subject">
-    <![CDATA[
+<!--과목의 모든 리스트를 가져오는 쿼리문 (+ 학과, 교수이름, 내용까지)-->
+    <select id="selectAllSubject" parameterType="String" resultMap="subject">
+   <![CDATA[
         SELECT
             s.*,
             d.dept_name,
             m.name
         FROM
             subject s
-                JOIN
-            department d ON s.dept_id = d.dept_id
-                JOIN
-            professors p ON s.member_id = p.member_id
-                JOIN
-            members m ON p.member_id = m.member_id;
+                JOIN department d ON s.dept_id = d.dept_id
+                JOIN professors p ON s.member_id = p.member_id
+                JOIN members m ON p.member_id = m.member_id
+        WHERE
+            s.sub_id NOT IN (
+                SELECT rc.sub_id
+                FROM reg_course rc
+                WHERE rc.member_id = #{memberId}
+                  AND rc.rc_stat IN ('수강중', '이수')
+            )
         ]]>
 </select>
 
+    <!--과목의 모든 리스트에서 키워드,카테고리 모두로 검색하는 쿼리-->
     <select id="selectAllSearch" parameterType="String" resultMap="subject">
   <![CDATA[
         SELECT
@@ -53,10 +70,17 @@
             members m ON p.member_id = m.member_id
         WHERE
             s.sub_type = #{category}
-          AND s.sub_name LIKE CONCAT('%', #{keyword}, '%');
+          AND s.sub_name LIKE CONCAT('%', #{keyword}, '%')
+          AND s.sub_id NOT IN (
+            SELECT rc.sub_id
+            FROM reg_course rc
+            WHERE rc.member_id = #{memberId}
+              AND rc.rc_stat IN ('수강중', '이수')
+        );
         ]]>
 </select>
 
+    <!--과목의 모든 리스트에서 키워드로 검색하는 쿼리-->
     <select id="selectKeyword" parameterType="String" resultMap="subject">
     <![CDATA[
         SELECT
@@ -72,10 +96,16 @@
                 JOIN
             members m ON p.member_id = m.member_id
         WHERE
-            s.sub_name LIKE CONCAT('%', #{keyword}, '%');
+            s.sub_name LIKE CONCAT('%', #{keyword}, '%')
+          AND s.sub_id NOT IN (
+            SELECT rc.sub_id
+            FROM reg_course rc
+            WHERE rc.member_id = #{memberId}
+              AND rc.rc_stat IN ('수강중', '이수')
+        );
         ]]>
 </select>
-
+    <!--과목의 모든 리스트에서 카테고리로 검색하는 쿼리-->
     <select id="selectCategory" parameterType="String" resultMap="subject">
     <![CDATA[
         SELECT
@@ -92,8 +122,47 @@
             members m ON p.member_id = m.member_id
         WHERE
             s.sub_type = #{category}
+          AND s.sub_id NOT IN (
+            SELECT rc.sub_id
+            FROM reg_course rc
+            WHERE rc.member_id = #{memberId}
+              AND rc.rc_stat IN ('수강중', '이수')
+        )
         ]]>
 </select>
+
+    <!--과목의 모든 리스트에서 수강중인것을 제외한 리스트부르는 쿼리-->
+    <select id="selectSubjectByRegStat" parameterType="int" resultMap="subject">
+    <![CDATA[
+        SELECT s.*, d.dept_name
+        FROM subject s
+                 JOIN department d ON s.dept_id = d.dept_id
+        WHERE s.sub_id NOT IN (
+            SELECT rc.sub_id
+            FROM reg_course rc
+            WHERE rc.member_id = #{memberId}
+              AND rc.rc_stat IN ('수강중', '이수')
+        )
+        ]]>
+</select>
+    <!--수강한 과목의 stat(수강상태)를 불러오는 쿼리-->
+    <select id="selectRegCourseByRegStat" parameterType="int" resultType="String">
+    <![CDATA[
+        SELECT rc_stat
+        FROM reg_course
+        WHERE member_id = #{memberId}
+          AND sub_id = #{subId}
+        ]]>
+</select>
+    <!--수강 상태를 수강중으로 바꿔주는 쿼리-->
+    <update id="updateRegCourse" parameterType="int">
+   <![CDATA[
+        UPDATE reg_course
+        SET rc_stat = '수강중'
+        WHERE member_id = #{memberId}
+          AND sub_id = #{subId}
+        ]]>
+</update>
 
 
     <select id="selectCountSubject" resultType= "int">

@@ -18,28 +18,48 @@ public class RegCourseServiceImple implements RegCourseService {
     @Autowired
     private RegCourseMapper regCourseMapper;
 
+
     @Override
-    public List<SubjectDto> selectAllSubject() {
-//        log.info("imple 도착");
-        return regCourseMapper.selectAllSubject();
+    public List<SubjectDto> selectAllSubject(String memberId) {
+        return regCourseMapper.selectAllSubject(memberId);
     }
 
     @Override
-    public List<SubjectDto> selectCategory(String category) {
-        return regCourseMapper.selectCategory(category);
+    public List<SubjectDto> selectCategory(String category, String memberId) {
+        return regCourseMapper.selectCategory(category,memberId);
     }
 
     @Override
-    public List<SubjectDto> selectAllSearch(String category, String keyword) {
-        System.out.println("서비스로 왔다"+category+keyword);
-        return regCourseMapper.selectAllSearch(category,keyword);
-
+    public List<SubjectDto> selectAllSearch(String category, String keyword, String memberId) {
+        return regCourseMapper.selectAllSearch(category,keyword,memberId);
     }
 
     @Override
-    public List<SubjectDto> selectKeyword(String keyword) {
-        return regCourseMapper.selectKeyword(keyword);
+    public List<SubjectDto> selectKeyword(String keyword, String memberId) {
+        return regCourseMapper.selectKeyword(keyword,memberId);
     }
+
+
+    @Override
+    public List<SubjectDto> selectSubjectByRegStat(int memberId) {
+       return regCourseMapper.selectSubjectByRegStat(memberId);
+    }
+
+    @Override
+    public String selectRegCourseByRegStat(int memberId, int subId) {
+        return regCourseMapper.selectRegCourseByRegStat(memberId, subId);
+    }
+
+    @Override
+    public void insertReg(int memberId, int subId, String rcStat) {
+       regCourseMapper.insertReg(memberId,subId,rcStat);
+    }
+
+    @Override
+    public void updateRegCourse(int memberId, int subId) {
+        regCourseMapper.updateRegCourse(memberId, subId);
+    }
+
 
     @Override
     public int selectCount() {

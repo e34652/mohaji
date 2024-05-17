@@ -23,6 +23,7 @@ public class SubjectDto {
         private LocalDateTime subRedate;
         private LocalDateTime subSdate;
         private LocalDateTime subEdate;
+        private int memberId;
 
         // Getters and setters
 }
