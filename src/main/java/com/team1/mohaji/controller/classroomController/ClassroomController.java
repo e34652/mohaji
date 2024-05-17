@@ -1,4 +1,4 @@
-package com.team1.mohaji.controller.myPageController;
+package com.team1.mohaji.controller.classroomController;
 
 
 
@@ -10,22 +10,19 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 
 @Controller
-@RequestMapping("/myPage")
-public class courseListController {
+@RequestMapping("/classroom")
+public class ClassroomController {
 
     @Autowired
-
     private RegListServiceImple regListServiceImple;
 
-    @GetMapping("/regList")
+    @GetMapping("/home")
         public String myList (@AuthenticationPrincipal CustomUserDetails userDetails, Model model){
             if (userDetails != null) {
                 int memberId = userDetails.getMemberId();

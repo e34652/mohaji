@@ -58,10 +58,11 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 // log
+
+	implementation 'org.slf4j:slf4j-api'
+	implementation 'ch.qos.logback:logback-classic:1.4.7'
 //	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
-//	implementation 'org.slf4j:slf4j-api'
 //	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
-//	implementation 'ch.qos.logback:logback-classic:1.4.7'
 //	implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
 //	implementation 'org.apache.logging.log4j:log4j-api:2.23.1'
 }
@@ -69,3 +70,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+

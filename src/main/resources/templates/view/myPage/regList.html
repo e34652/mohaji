@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>강의 조회</title>
-    <link rel="stylesheet" type="text/css" href="/css/common/regListGrid.css"/>
+
     <link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common/sectionCss.css" />
     <link rel="stylesheet" type="text/css" href="/css/myPage/regList.css" />
-    <link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/grid/latest/tui-grid.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common/regListGrid.css"/>
     <!-- 부트스트랩 CDN 추가 -->
     <link
       rel="stylesheet"
@@ -17,6 +17,15 @@
     <!-- 분리된 CSS 파일 연결 -->
     <link rel="stylesheet" th:href="@{/css/myPage/courseRegCss.css}" />
     <link rel="stylesheet" th:href="@{/css/myPage/sectionCss.css}" />
+    <style>
+      .tui-grid-cell-selected,
+      .tui-grid-cell-selected:focus,
+      .tui-grid-cell.tui-grid-cell-current,
+      .tui-grid-cell.tui-grid-cell-current:focus {
+        background: transparent !important; /* 배경색 제거 */
+        box-shadow: none !important; /* 그림자 제거 */
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -110,12 +119,14 @@
                 align: 'center'
               },
               {
-                header: "링크",
-                name: "url",
+                header: "강의실",
+                name: "",
                 align: 'center',
                 formatter: function (item) {
-                  const url = item.value;
-                  return `<a href='/${url}' target='_blank'>${url}</a>`;
+                  const subId = item.row.subId
+                  const memberId = item.row.memberId; // 각 항목의 memberId를 가져옵니다.
+                  const url = `/classroom/home?memberId=${memberId}&subId=${subId}`;
+                  return `<button onclick="location.href='${url}'">이동</button>`;
                 },
               },
             ],
