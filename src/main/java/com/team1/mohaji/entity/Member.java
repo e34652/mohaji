@@ -24,6 +24,8 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberIp> memberIps;
 
+//    @OneToMany(mappedBy = "member")
+//    private List<RegCourse> RegCourse;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
