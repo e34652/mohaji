@@ -34,7 +34,9 @@
                 JOIN
             subject s ON rc.sub_id = s.sub_id
         WHERE
-            rc.member_id = #{memberId};
+            rc.member_id = #{memberId}
+        AND s.sub_sdate < NOW()
+        AND NOW() < s.sub_edate;
         ]]>
     </select>
 </mapper>
