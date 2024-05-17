@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team1.mohaji.mapper.myPage.RegListMapper">
+
+    <resultMap id="RegList" type="com.team1.mohaji.dto.myPage.RegListDto">
+        <result property="memberId" column="member_id" />
+        <result property="subId" column="sub_id" />
+        <result property="rcStat" column="rc_stat" />
+        <result property="rcProgress" column="rc_progress" />
+        <result property="subName" column="sub_name" />
+        <result property="subType" column="sub_type" />
+        <result property="subScount" column="sub_scount" />
+        <result property="subSdate" column="sub_sdate" />
+        <result property="subEdate" column="sub_edate" />
+    </resultMap>
+
+        <!-- 다른 필드들에 대한 매핑 추가 -->
+
+    <select id="selectRegList" parameterType="int" resultMap="RegList">
+    <![CDATA[
+        SELECT
+            rc.sub_id,
+            rc.member_id,
+            rc.rc_stat,
+            rc.rc_progress,
+            s.sub_name,
+            s.sub_type,
+            s.sub_scount,
+            s.sub_sdate,
+            s.sub_edate
+        FROM
+            reg_course rc
+                JOIN
+            subject s ON rc.sub_id = s.sub_id
+        WHERE
+            rc.member_id = #{memberId}
+        AND s.sub_sdate < NOW()
+        AND NOW() < s.sub_edate;
+        ]]>
+    </select>
+</mapper>

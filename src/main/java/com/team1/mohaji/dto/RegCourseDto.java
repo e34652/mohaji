@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @ToString
 public class RegCourseDto {
 
-    private int studentId;
+    private int memberId;
     private int subId;
     private String ccId;
     private String rcStat;
