@@ -1,11 +1,11 @@
-package com.team1.mohaji.entity;
+package com.team1.mohaji.entity.member;
 
+import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,10 +13,6 @@ import java.util.List;
         @UniqueConstraint(columnNames = "student_code")
 })
 public class Student extends BaseEntity {
-
-    @OneToMany(mappedBy = "student")
-    private List<RegCourse> regCourses;
-
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false, unique=true)

@@ -1,4 +1,4 @@
-package com.team1.mohaji.entity.Board;
+package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

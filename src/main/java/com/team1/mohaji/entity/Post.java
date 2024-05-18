@@ -1,9 +1,7 @@
-package com.team1.mohaji.entity.Board;
+package com.team1.mohaji.entity;
 
-import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
