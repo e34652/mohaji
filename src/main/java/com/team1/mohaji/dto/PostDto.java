@@ -1,16 +1,12 @@
 package com.team1.mohaji.dto;
 
-import com.team1.mohaji.entity.Attached;
-import com.team1.mohaji.entity.Board.Board;
+import com.team1.mohaji.entity.Board;
 import jakarta.persistence.Column;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter

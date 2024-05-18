@@ -1,6 +1,6 @@
 package com.team1.mohaji.service.imple;
 
-import com.team1.mohaji.entity.Board.Post;
+import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.LikeRepository;
 import com.team1.mohaji.repository.PostRepository;
 import com.team1.mohaji.util.util.FileUtils;

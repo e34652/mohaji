@@ -1,7 +1,7 @@
 package com.team1.mohaji.controller;
 
-import com.team1.mohaji.entity.Board.Board;
-import com.team1.mohaji.entity.Board.Post;
+import com.team1.mohaji.entity.Board;
+import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.service.imple.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

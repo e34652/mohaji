@@ -15,7 +15,6 @@ import java.util.Set;
 @Controller
 public class IPController {
 
-    //db 연결 전까지는 아래 전역변수에 저장
     private Set<String> ipAddressSet = new HashSet<>(); // 중복을 허용하지 않는 클라이언트 IP 주소를 저장할 Set
     private List<String> ipAddressList = new ArrayList<>(); // 등록된 IP 주소를 보관할 리스트
 

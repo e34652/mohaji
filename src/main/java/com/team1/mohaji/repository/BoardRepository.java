@@ -1,6 +1,6 @@
 package com.team1.mohaji.repository;
 
-import com.team1.mohaji.entity.Board.Board;
+import com.team1.mohaji.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
