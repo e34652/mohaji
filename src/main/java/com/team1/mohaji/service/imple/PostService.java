@@ -3,7 +3,7 @@ package com.team1.mohaji.service.imple;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.LikeRepository;
 import com.team1.mohaji.repository.PostRepository;
-import com.team1.mohaji.util.util.FileUtils;
+import com.team1.mohaji.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

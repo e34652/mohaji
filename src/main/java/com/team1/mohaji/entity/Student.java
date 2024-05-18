@@ -1,4 +1,4 @@
-package com.team1.mohaji.entity.member;
+package com.team1.mohaji.entity;
 
 import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;

@@ -1,4 +1,4 @@
-package com.team1.mohaji.util.util;
+package com.team1.mohaji.util;
 
 import com.team1.mohaji.dto.AttachedDto;
 import org.springframework.stereotype.Component;

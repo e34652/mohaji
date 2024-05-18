@@ -1,4 +1,4 @@
-package com.team1.mohaji.entity.member;
+package com.team1.mohaji.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.team1.mohaji.entity.BaseEntity;
