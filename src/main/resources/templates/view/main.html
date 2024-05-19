@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <meta charset="utf-8" />
@@ -334,16 +334,24 @@
                 <div class="xn-main-login-container-title-wrap">
                 <span class="xn-main-login-container-title">통합 로그인</span>
               </div>
-              <div class="xn-sso-login-btn-wrap">
-                <a
-                  class="btn btn-primary btn-login xn-sso-login-btn"
-                  type="button"
-                  href="/login"
-                >
-                  <span class="xn-sso-login-icon"></span>
-                  통합 로그인 >
-                </a>
-              </div>
+                 <div class="xn-sso-login-btn-wrap">
+                   <!-- 로그아웃 버튼: isLoggedIn이 null이 아니고 true인 경우 -->
+                   <a th:if="${role != null}"
+                      class="btn btn-primary btn-login xn-sso-login-btn"
+                      type="button"
+                      href="/logout">
+                     <span class="xn-sso-login-icon"></span>
+                     로그아웃 >
+                   </a>
+                   <!-- 로그인 버튼: isLoggedIn이 null이거나 false인 경우 -->
+                   <a th:unless="${role != null }"
+                      class="btn btn-primary btn-login xn-sso-login-btn"
+                      type="button"
+                      href="/login">
+                     <span class="xn-sso-login-icon"></span>
+                     통합 로그인 >
+                   </a>
+                 </div>
               <div class="xnm2_btnbox_wrap"></div> <!-- 통합 로그인 배경 -->
             </div>
 <!--          </div>-->

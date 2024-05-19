@@ -15,7 +15,7 @@ public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_ID")
+    @Column(name = "session_id")
     private int sessionId;
 
     @ManyToOne

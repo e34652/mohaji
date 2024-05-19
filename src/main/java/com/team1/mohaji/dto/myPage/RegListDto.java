@@ -1,5 +1,6 @@
 package com.team1.mohaji.dto.myPage;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,7 +19,10 @@ public class RegListDto {
         private String subName;
         private String subType;
         private int subScount;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDateTime subSdate;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDateTime subEdate;
 }
 

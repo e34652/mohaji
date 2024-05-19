@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +52,8 @@
                 {
                     header: "주차",
                     name: "sessionSnum",
-                    align: 'center'
+                    align: 'center',
+                    sortable: true,
                 },
                 {
                     header: "차시명",
@@ -77,12 +79,6 @@
                     align: 'center'
                 },
                 {
-                    header: "비디오 코드",
-                    name: "videoYcode",
-                    align: 'center',
-                    hidden: true,
-                },
-                {
                     header: "과목 코드",
                     name: "subId",
                     align: 'center',
@@ -95,21 +91,14 @@
                     hidden: true,
                 },
                 {
-                    header: "멤버 아이디",
-                    name: "memberId",
-                    align: 'center',
-                    hidden: true,
-                },
-                {
                     header: "학습하기",
                     name: "",
                     align: 'center',
                     formatter: function (item) {
                         const sessionId = item.row.sessionId;
-                        const memberId = item.row.memberId; // 각 항목의 memberId를 가져옵니다.
                         const subId = item.row.subId; // 각 항목의 memberId를 가져옵니다.
-                        const url = `sessionId=${sessionId}&subId=${subId}&memberId=${memberId}`;
-                        return `<a href=/classroom/viewer?${url}>학습하기</a>`;
+                        const url = `?sessionId=${sessionId}&subId=${subId}`;
+                        return `<a href=/classroom/viewer${url}>학습하기</a>`;
                     },
                 },
             ],
