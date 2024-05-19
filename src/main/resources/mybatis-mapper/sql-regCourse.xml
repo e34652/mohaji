@@ -31,7 +31,7 @@
         <result property="rcGrade" column="rc_grade" />
     </resultMap>
 
-<!--과목의 모든 리스트를 가져오는 쿼리문 (+ 학과, 교수이름, 내용까지)-->
+    <!--과목의 모든 리스트를 가져오는 쿼리문 (+ 학과, 교수이름, 내용까지)-->
     <select id="selectAllSubject" parameterType="String" resultMap="subject">
    <![CDATA[
         SELECT
@@ -50,8 +50,38 @@
                 WHERE rc.member_id = #{memberId}
                   AND rc.rc_stat IN ('수강중', '이수')
             )
+          AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
+
+    <!--subId로 한 과목의 정보만 불러오기-->
+    <select id="selectOneSubject" parameterType="int" resultMap="subject">
+   <![CDATA[
+        SELECT
+            s.*,
+            d.dept_name,
+            m.name
+        FROM
+            subject s
+                JOIN department d ON s.dept_id = d.dept_id
+                JOIN professors p ON s.member_id = p.member_id
+                JOIN members m ON p.member_id = m.member_id
+        WHERE
+            s.sub_id = #{subId}
+          AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
+        ]]>
+</select>
+
+    <select id="selectSessionTitle" parameterType="int" resultType="String">
+        <![CDATA[
+        SELECT
+            session_title
+        FROM
+            session
+        WHERE
+            sub_id = #{subId}
+        ]]>
+    </select>
 
     <!--과목의 모든 리스트에서 키워드,카테고리 모두로 검색하는 쿼리-->
     <select id="selectAllSearch" parameterType="String" resultMap="subject">
@@ -76,7 +106,8 @@
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
               AND rc.rc_stat IN ('수강중', '이수')
-        );
+        )
+          AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
 
@@ -102,7 +133,8 @@
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
               AND rc.rc_stat IN ('수강중', '이수')
-        );
+        )
+          AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
     <!--과목의 모든 리스트에서 카테고리로 검색하는 쿼리-->
@@ -127,7 +159,7 @@
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
               AND rc.rc_stat IN ('수강중', '이수')
-        )
+        ) AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
 
@@ -142,7 +174,7 @@
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
               AND rc.rc_stat IN ('수강중', '이수')
-        )
+        ) AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
     <!--수강한 과목의 stat(수강상태)를 불러오는 쿼리-->
@@ -163,6 +195,31 @@
           AND sub_id = #{subId}
         ]]>
 </update>
+
+    <!--수강신청-->
+    <insert id="insertReg">
+    <![CDATA[
+        INSERT INTO reg_course (member_id, sub_id, rc_stat)
+        VALUES (
+                   #{memberId},
+                   #{subId},
+                   #{rcStat}
+               )
+        ]]>
+</insert>
+
+
+
+    <!--수강중인 학점의 합을 불러오기-->
+    <select id="selectCreditSum" resultType="int">
+      <![CDATA[
+        SELECT SUM(s.sub_credit) AS total_credits
+        FROM reg_course rc
+                 JOIN subject s ON rc.sub_id = s.sub_id
+        WHERE rc.member_id = #{memberId}
+          AND rc.rc_stat != '취소'
+        ]]>
+</select>
 
 
     <select id="selectCountSubject" resultType= "int">

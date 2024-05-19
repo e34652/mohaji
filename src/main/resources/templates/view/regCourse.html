@@ -67,7 +67,35 @@
         <!-- 푸터 삽입 -->
         <footer th:replace="~{layout/footer :: footer}"></footer>
     </footer>
+    <!-- 모달 팝업 HTML 추가 -->
+    <div class="modal fade" id="courseDetailModal" tabindex="-1" role="dialog" aria-labelledby="courseDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseDetailModalLabel">강의 상세 정보</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>학과 | </strong> <span id="modal-department"></span></li>
+                        <li class="list-group-item"><strong>교수 | </strong> <span id="modal-professor"></span></li>
+                        <li class="list-group-item"><strong>과목명 | </strong> <span id="modal-subjectName"></span></li>
+                        <li class="list-group-item"><strong>과목유형 | </strong> <span id="modal-subjectType"></span></li>
+                        <li class="list-group-item"><strong>과목설명 | </strong> <span id="modal-description"></span></li>
+                        <li class="list-group-item"><strong>커리큘럼 | </strong>
+                            <ol id="modal-curriculum"></ol>
+                        </li>
+                        <li class="list-group-item"><strong>취득 가능 학점:</strong> <span id="modal-credit"></span>점</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 <script th:inline="javascript">
     var grid;
     var memberId = /*[[${memberId}]]*/ '[]';
@@ -102,6 +130,11 @@
                     name: "subName",
                     align: 'center',
                     sortable: true,
+                    formatter: function (item) {
+                        const subName=item.row.subName
+                        const subId = item.row.subId;
+                        return `<a id="${subId}" href="#" class="subName">${subName}</a>`
+                    },
                 },
 
                 {
@@ -130,9 +163,6 @@
                     align: 'center',
                     formatter: function (item) {
                         const subId = item.row.subId;
-                        const subName = item.row.subName;
-                        const deptName = item.row.deptName;
-                        const lectureRoom = item.row.lectureRoom;
                         const url = `/reg?memberId=${memberId}&subId=${subId}`;
                         return `<a class="regSubmit" href="${url}" >수강신청</a>`;
                     },
@@ -140,8 +170,29 @@
             ],
         });
 
-        grid.resetData(regCourseList); // 서버에서 전달된 데이터로 그리드 초기화
+
+
+
+        if(regCourseList == null || regCourseList.length === 0 ||regCourseList === '[]') {
+            // 수강신청 기간이 아닐 때 처리
+            $('#grid').hide(); // 그리드 숨기기
+            console.log("이프문으로 왔어")
+            alert('수강신청 기간이 아닙니다.');
+        } else {
+            grid.resetData(regCourseList); // 서버에서 전달된 데이터로 그리드 초기화
+            $('#grid').show(function() {
+                console.log("그리드초기화로왔어2")
+                const urlParams = new URLSearchParams(window.location.search);
+                const message = urlParams.get('message');
+                // message 값이 존재하면 alert 창으로 표시
+                if (message) {
+                    alert(message);
+                }
+            }); // 그리드 다시 보이기
+
+        }
     });
+
 
     $('#searchForm').submit(function(event) {
         event.preventDefault(); // 폼 기본 제출 동작 방지
@@ -154,7 +205,16 @@
                 console.log(response);
                 console.log(memberId);
                 // 성공적으로 응답을 받으면 강의 목록을 업데이트
-                grid.resetData(response); // 서버에서 전달된 데이터로 그리드 초기화
+                if(response == null||response.length === 0 ||response === '[]') {
+                    // 수강신청 기간이 아닐 때 처리
+                    $('#grid').hide(); // 그리드 숨기기
+                    console.log("이프문으로 왔어")
+                    alert('수강신청 기간이 아닙니다.');
+                } else {
+                    grid.resetData(response); // 서버에서 전달된 데이터로 그리드 초기화
+                    console.log("그리드초기화로왔어1")
+                    $('#grid').show(); // 그리드 다시 보이기
+                }
             },
             error: function(xhr, status, error) {
                 console.error('에러 발생: ', error);
@@ -164,6 +224,19 @@
     /*]]>*/
 </script>
 <script>
+    // 과목명을 클릭했을 때 팝업을 표시하는 이벤트 리스너 추가
+    document.getElementById('grid').addEventListener('click', function(event) {
+        const clickedElement = event.target;
+        // 클릭된 요소의 클래스 확인
+        if (clickedElement.classList.contains('subName')) {
+            event.preventDefault();
+            // 클릭된 과목명 id 속성을 가져와서 과목 ID를 추출
+            const subId1 = clickedElement.getAttribute('id');
+            fetchCourseDetail(subId1);
+        }
+    });
+
+
     document.getElementById('grid').addEventListener('click', function(event) {
         if (event.target.classList.contains('regSubmit')) {
             event.preventDefault();
@@ -173,6 +246,30 @@
             }
         }
     });
+
+    // 강의 상세 정보를 가져와서 모달에 표시하는 함수
+    function fetchCourseDetail(subId1) {
+        $.ajax({
+            url: '/courseDetail/' + subId1,
+            method: 'GET',
+            success: function(data) {
+                $('#modal-department').text(data.deptName);
+                $('#modal-professor').text(data.name);
+                $('#modal-subjectName').text(data.subName);
+                $('#modal-subjectType').text(data.subType);
+                $('#modal-description').text(data.subDesc);
+                $('#modal-credit').text(data.credit);
+                $('#modal-curriculum').empty();
+                data.sessionTitle.forEach(function(item) {
+                    $('#modal-curriculum').append('<li>' + item + '</li>');
+                });
+                $('#courseDetailModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('에러 발생: ', error);
+            }
+        });
+        }
 </script>
 
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>

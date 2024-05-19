@@ -1,6 +1,8 @@
 package com.team1.mohaji.controller.mainController;
 
 import com.team1.mohaji.config.CustomUserDetails;
+import com.team1.mohaji.dto.RegCourseDetailDto;
+import com.team1.mohaji.dto.RegCourseDto;
 import com.team1.mohaji.dto.SubjectDto;
 import com.team1.mohaji.model.model;
 import com.team1.mohaji.service.main.RegCourseService;
@@ -12,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +40,21 @@ public class RegCourseController {
     }
 
     @GetMapping("/reg")
-    public String reg(@RequestParam int memberId, @RequestParam int subId) {
-        String rcStat="수강중";
-        String stat =regCourseServiceImple.selectRegCourseByRegStat(memberId,subId);
-        if(stat != null &&stat.equals("취소") ){
+    public String reg(@RequestParam int memberId, @RequestParam int subId, RedirectAttributes redirectAttributes, Model model) {
+        String rcStat = "수강중";
+        String stat = regCourseServiceImple.selectRegCourseByRegStat(memberId, subId);
+        int creditSum = regCourseServiceImple.selectCreditSum(memberId);
+
+        if (creditSum > 21) {
+            redirectAttributes.addAttribute("message", "수강최대학점을 초과했습니다.");
+            return "redirect:/regCourse";
+        } else if (stat != null && stat.equals("취소")) {
             regCourseServiceImple.updateRegCourse(memberId, subId);
             return "redirect:/regCourse";
         }
-            regCourseServiceImple.insertReg(memberId, subId, rcStat);
-        // 필요한 로직을 처리한 후 리다이렉트
-        return "redirect://regCourse";
+
+        regCourseServiceImple.insertReg(memberId, subId, rcStat);
+        return "redirect:/regCourse";
     }
 
     @PostMapping("/search")
@@ -83,8 +91,11 @@ public class RegCourseController {
         return new ArrayList<>();
     }
 
-    @GetMapping("/courseDetail")
-    public String courseDetailPage(){
-        return "/view/modalPop/courseDetail";
+    @GetMapping("/courseDetail/{subId1}")
+    @ResponseBody
+    public RegCourseDetailDto getCourseDetail(@PathVariable("subId1") String subId1) {
+        RegCourseDetailDto courseDetail= regCourseServiceImple.regCourseDetail(Integer.parseInt(subId1));
+        return courseDetail;
     }
 }
+
