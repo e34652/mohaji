@@ -16,18 +16,13 @@ public class LoginController {
 
     @GetMapping("/main")
         public String getMypage(Model model, Authentication authentication){
-        model.addAttribute("username", authentication.getName());
-        model.addAttribute("role", authentication.getAuthorities().toString());
+        if(authentication != null) {
+            model.addAttribute("username", authentication.getName());
+            model.addAttribute("role", authentication.getAuthorities().toString());
+        }
         return "/view/main";
     }
 
-    @GetMapping("/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login";
-    }
+
 
 }
