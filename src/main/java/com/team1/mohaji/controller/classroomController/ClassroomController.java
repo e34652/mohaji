@@ -50,9 +50,8 @@ public class ClassroomController {
             model.addAttribute("viewer", viewerDto);
             System.out.println(viewerDto);
             return "/view/classroom/viewer";
-        } else {
-            return "redirect:/login";
         }
+        return"redirect:/login";
     }
     @ResponseBody
     @PostMapping("/renewRegSession")

@@ -30,13 +30,16 @@ public class RegCourseController {
     public  String regCourse(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails){
 //        log.info("컨트롤러 도착");
 //        model.addAttribute("regCourseList",regCourseServiceImple.selectAllSubject());
-        int memberId= customUserDetails.getMemberId();
-        model.addAttribute("regCourseList",regCourseServiceImple.selectSubjectByRegStat(memberId));
-        model.addAttribute("memberId", memberId);
-        System.out.println(regCourseServiceImple.selectSubjectByRegStat(memberId));
-
+        if(customUserDetails != null) {
+            int memberId = customUserDetails.getMemberId();
+            model.addAttribute("regCourseList", regCourseServiceImple.selectSubjectByRegStat(memberId));
+            model.addAttribute("memberId", memberId);
+            System.out.println(regCourseServiceImple.selectSubjectByRegStat(memberId));
+            return "view/regCourse";
+        }
+        return"redirect:/login";
 //        log.info("컨트롤러 서비스완료 ");
-        return "view/regCourse";
+
     }
 
     @GetMapping("/reg")
