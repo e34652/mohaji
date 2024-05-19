@@ -1,7 +1,6 @@
 package com.team1.mohaji.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;

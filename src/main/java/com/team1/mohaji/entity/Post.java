@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,13 +27,16 @@ public class Post extends BaseEntity {
 //    @ManyToOne
 //    @JoinColumn(name = "like_id")
 //    private Like like;
-    private int memberId;
+
+    private Integer memberId;
 //    @ManyToOne
 //    @JoinColumn(name = "member_id")
-//    @Column(name = "post_author_id")
 //    private Member member;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Attached> attachments;
 
     @Override
     public String toString() {
