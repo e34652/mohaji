@@ -1,5 +1,6 @@
 package com.team1.mohaji.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,10 +20,15 @@ public class SubjectDto {
         private String subDesc;
         private int subScount;
         private int subCredit;
-        private LocalDateTime subRsdate;
-        private LocalDateTime subRedate;
-        private LocalDateTime subSdate;
+
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDateTime subEdate;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        private LocalDateTime subRsdate;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        private LocalDateTime subRedate;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+        private LocalDateTime subSdate;
         private int memberId;
 
         // Getters and setters
