@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,7 +100,19 @@ public class PostService {
         postRepository.updateViews(postId);
     }
 
-    public void update(Post post) {
-        postRepository.save(post);
+    public void update(Post updatedPost) {
+        // 업데이트된 게시글의 ID를 사용하여 원본 게시글을 불러옴
+        Post originalPost = postRepository.findById(updatedPost.getPostId()).orElseThrow(() -> new IllegalArgumentException("Invalid post ID"));
+
+        if (updatedPost.getTitle() != null) {
+            originalPost.setTitle(updatedPost.getTitle());
+        }
+        if (updatedPost.getContent() != null) {
+            originalPost.setContent(updatedPost.getContent());
+        }
+        // 업데이트된 정보 설정
+        originalPost.setUpdatedAt(LocalDateTime.now());
+        // 업데이트된 정보를 저장
+        postRepository.save(originalPost);
     }
 }

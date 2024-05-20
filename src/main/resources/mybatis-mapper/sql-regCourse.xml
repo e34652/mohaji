@@ -212,8 +212,8 @@
 
     <!--수강중인 학점의 합을 불러오기-->
     <select id="selectCreditSum" resultType="int">
-      <![CDATA[
-        SELECT SUM(s.sub_credit) AS total_credits
+<![CDATA[
+        SELECT COALESCE(SUM(COALESCE(s.sub_credit, 0)), 0) AS total_credits
         FROM reg_course rc
                  JOIN subject s ON rc.sub_id = s.sub_id
         WHERE rc.member_id = #{memberId}

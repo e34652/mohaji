@@ -60,6 +60,7 @@ public class PostController {
         newPost.setTitle(title);
         newPost.setContent(content);
         newPost.setMemberId(memberId);
+        newPost.setViews(0);
         newPost.setBoard(board);
         LocalDateTime createdAt = LocalDateTime.now();
         newPost.setCreatedAt(createdAt);
@@ -85,18 +86,15 @@ public class PostController {
     }
 
     @PostMapping("/update")
-    public String update(Model model, Post post){
-        Post upPost = new Post();
-        upPost.getPostId();
-        postService.update(post);
-        model.addAttribute("post", post);
-        return "view/board/boardList";
+    public String update(Post updatedPost) {
+        postService.update(updatedPost);
+        return "redirect:/postDetail?postId=" + updatedPost.getPostId();
     }
 
     @PostMapping("/delete")
     public String delete(int postId){
         postService.deletePost(postId);
-        return "view/board/boardList";
+        return "redirect:/boardList";
     }
 
 }
