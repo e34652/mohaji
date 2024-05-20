@@ -4,11 +4,13 @@ import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
+@ToString
 @Table(name = "students", uniqueConstraints = {
         @UniqueConstraint(columnNames = "student_code")
 })

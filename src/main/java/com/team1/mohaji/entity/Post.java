@@ -27,10 +27,10 @@ public class Post extends BaseEntity {
 //    @ManyToOne
 //    @JoinColumn(name = "like_id")
 //    private Like like;
-
+    @Column(name = "member_id", nullable = false)
     private Integer memberId;
 //    @ManyToOne
-//    @JoinColumn(name = "member_id")
+//    @JoinColumn(name = "member_id", nullable = false)
 //    private Member member;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -38,19 +38,6 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Attached> attachments;
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "postId=" + postId +
-                ", lectureId=" + lectureId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", views=" + views +
-                ", attachedId=" + attachedId +
-                ", likeId=" + likeId +
-                ", memberId=" + memberId +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
+
+
 }

@@ -16,7 +16,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())//CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
                 .authorizeHttpRequests((requests) -> requests // HTTP 요청을 인증 및 권한 부여합니다.
-                        .requestMatchers("/css/**", "/img/**" ,"/js/**", "/file/**").permitAll() // "모든 외부링크 적용 허용"
+                        .requestMatchers("/css/**", "/img/**" ,"/js/**").permitAll() // "모든 외부링크 적용 허용"
                         .requestMatchers("/", "/main").permitAll() // "/"와 "/main" 경로에 대한 요청은 모두 허용합니다.
                         .requestMatchers("/register").permitAll() // "/register" 경로에 대한 요청은 모두 허용합니다.
                         .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.

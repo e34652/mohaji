@@ -23,10 +23,6 @@ public class BoardService {
         return boardList;
     }
 
-    public List<Post> findAllPostsByBoardId(int boardId) {
-        return postRepository.findByBoard_BoardId(boardId);
-    }
-
     public List<Post> getPostsByBoardId(int boardId) {
         return postRepository.findByBoard_BoardId(boardId);
     }

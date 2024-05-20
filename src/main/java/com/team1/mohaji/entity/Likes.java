@@ -2,11 +2,10 @@ package com.team1.mohaji.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.mapping.ToOne;
 
 @Entity
 @Data
-public class Like {
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "like_id")

@@ -4,12 +4,15 @@ import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
+import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.service.imple.BoardService;
 import com.team1.mohaji.service.imple.PostService;
 import jakarta.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +33,13 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private EntityManager entityManager;
+    private MemberRepository memberRepository;
 
     @GetMapping("/write")
     public String write(Model model){
         List<Board> boardList = boardService.selectAll();
         model.addAttribute("boardList", boardList);
-        return "/view/board/writeForm";
+        return "view/board/writeForm";
     }
 
     @PostMapping("/newPost")
@@ -62,7 +65,7 @@ public class PostController {
         newPost.setCreatedAt(createdAt);
 
         try {
-            postService.insertPost(newPost, files);
+            postService.insertPost(newPost, files, memberId);
         } catch (IOException e) {
             e.printStackTrace();
             // 예외 처리 로직 추가
@@ -86,13 +89,13 @@ public class PostController {
         upPost.getPostId();
         postService.update(post);
         model.addAttribute("post", post);
-        return "/view/board/boardList";
+        return "view/board/boardList";
     }
 
     @PostMapping("/delete")
     public String delete(int postId){
         postService.deletePost(postId);
-        return "/view/board/boardList";
+        return "view/board/boardList";
     }
 
 }

@@ -59,7 +59,7 @@ public class PostService {
     }
 
     @Transactional
-     public void insertPost(Post post, List<MultipartFile> files) throws IOException {
+     public void insertPost(Post post, List<MultipartFile> files, int memberId) throws IOException {
             List<Attached> attachments = new ArrayList<>();
             for (MultipartFile file : files) {
                 if (!file.isEmpty()) {
@@ -72,6 +72,7 @@ public class PostService {
                     attached.setSavedName(saveFileName);
                     attached.setStoragePath(targetLocation.toString());
                     attached.setPost(post);
+                    attached.setMemberId(memberId); // memberId 설정
                     attachments.add(attached);
                 }
             }

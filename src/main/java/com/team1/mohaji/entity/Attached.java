@@ -8,17 +8,17 @@ import lombok.Data;
 public class Attached extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int attachedId;
-    private int serialId;
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    private Integer attachedId;
+    @Column(name = "member_id", nullable = false)
+    private Integer memberId;
+//    @ManyToOne
+//    @JoinColumn(name = "member_id", nullable = false)
+//    private Member member;
     private String storagePath;
     private String originalName;
     private String savedName;
     private String attachedType;
     private Long attachedSize;
-    private int downloads;
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;

@@ -20,21 +20,21 @@ public class BoardController {
     public String boardList(Model model){
         List<Board> boardList = boardService.selectAll();
         model.addAttribute("boardList", boardList);
-        return "/view/board/boardList";
+        return "view/board/boardList";
     }
 
     @GetMapping("/assignment")
     public String assignmentList(Model model){
         List<Post> posts = boardService.getPostsByBoardId(2);
         model.addAttribute("posts", posts);
-        return "/view/board/assignmentBoard";
+        return "view/board/assignmentBoard";
     }
 
     @GetMapping("/notice")
     public String noticeList(Model model){
         List<Post> posts = boardService.getPostsByBoardId(1);
         model.addAttribute("posts", posts);
-        return "/view/board/noticeBoard";
+        return "view/board/noticeBoard";
     }
 
 
@@ -43,7 +43,7 @@ public class BoardController {
     public String questionList(Model model){
         List<Post> posts = boardService.getPostsByBoardId(3);
         model.addAttribute("posts", posts);
-        return "/view/board/questionBoard";
+        return "view/board/questionBoard";
     }
 
 
@@ -51,7 +51,7 @@ public class BoardController {
     public String resourceList(Model model){
         List<Post> posts = boardService.getPostsByBoardId(4);
         model.addAttribute("posts", posts);
-        return "/view/board/resourceBoard";
+        return "view/board/resourceBoard";
     }
 
 
