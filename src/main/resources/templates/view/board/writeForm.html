@@ -53,5 +53,15 @@
         <footer th:replace="~{layout/footer :: footer}"></footer>
     </footer>
 </div>
+<script>
+    document.getElementById('files').addEventListener('change', function(event) {
+        const files = event.target.files; // FileList 객체
+        for (let i = 0; i < files.length; i++) {
+            console.log('File Name:', files[i].name);
+            console.log('File Size:', files[i].size);
+            console.log('File Type:', files[i].type);
+        }
+    });
+</script>
 </body>
 </html>

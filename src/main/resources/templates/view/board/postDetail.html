@@ -42,7 +42,8 @@
     <div class="file_list">
         <th:block th:each="file : ${post.attachments}">
             <p>
-                <a th:href="@{/postDetail.html/downloadBoardFile.do(idx=${file.attachedId}, postId=${file.post})}"th:text="|${file.originalName} [${file.storagePath}]|"></a>
+                <<a th:href="@{/files/download/{idx}(idx=${file.attachedId})}"
+                    th:text="|${file.originalName} [${file.storagePath}]|"></a>
             </p>
         </th:block>
     </div>
