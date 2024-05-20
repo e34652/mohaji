@@ -31,8 +31,7 @@ public class MyPageController {
                 model.addAttribute("regList", regList);
                 System.out.println(regList);
                 return "/view/myPage/regList";
-            } else {
-                throw new NullPointerException("로그인 유저 정보가 없습니다");
             }
+            return"redirect:/login";
         }
     }

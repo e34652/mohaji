@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.team1.mohaji.mapper.Classroom.ClassroomHomeMapper">
+<mapper namespace="com.team1.mohaji.mapper.classroom.HomeMapper">
 
-    <resultMap id="ClassroomHome" type="com.team1.mohaji.dto.Classroom.ClassroomHomeDto">
+    <resultMap id="classroomHome" type="com.team1.mohaji.dto.classroom.HomeDto">
     <result property="sessionSnum" column="session_snum" />
+        <result property="sessionId" column="session_id" />
     <result property="sessionTitle" column="session_title" />
     <result property="sessionSdate" column="session_sdate" />
     <result property="sessionEdate" column="session_edate" />
@@ -15,14 +16,14 @@
 
         <!-- 다른 필드들에 대한 매핑 추가 -->
 
-    <select id="selectRegSessionList" parameterType="int" resultMap="ClassroomHome">
+    <select id="selectRegSessionList" parameterType="map" resultMap="classroomHome">
     <![CDATA[
         SELECT
             s.session_id,
             s.session_snum,
             s.session_title,
-            s.session_sdate,
-            s.session_edate,
+            DATE_FORMAT(s.session_sdate, '%Y-%m-%d') AS session_sdate,
+            DATE_FORMAT(s.session_edate, '%Y-%m-%d') AS session_edate,
             r.member_id,
             r.sub_id,
             COALESCE(r.rs_progress, 0.0) AS rs_progress,
@@ -44,8 +45,8 @@
             s.session_id,
             s.session_snum,
             s.session_title,
-            s.session_sdate,
-            s.session_edate,
+            DATE_FORMAT(s.session_sdate, '%Y-%m-%d') AS session_sdate,
+            DATE_FORMAT(s.session_edate, '%Y-%m-%d') AS session_edate,
             NULL AS member_id,
             s.sub_id AS sub_id,
             0.0 AS rs_progress,
