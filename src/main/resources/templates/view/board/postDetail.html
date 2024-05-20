@@ -39,14 +39,13 @@
         <input type="hidden" id="postId" name="postId" th:value="${post.postId }">
     </form>
 
-<!--    <div class="file_list">-->
-<!--        <th:block th:each="list : ${board.fileList}">-->
-<!--            <p>-->
-<!--                <a th:href="@{/board/downloadBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}" th:text="|${list.originalFileName} (${list.fileSize} kb) [${list.storedFilePath}]|"></a>-->
-<!--                <img th:src="${list.storedFilePath}" />-->
-<!--            </p>-->
-<!--        </th:block>-->
-<!--    </div>-->
+    <div class="file_list">
+        <th:block th:each="file : ${post.attachments}">
+            <p>
+                <a th:href="@{/postDetail.html/downloadBoardFile.do(idx=${file.attachedId}, postId=${file.post})}"th:text="|${file.originalName} [${file.storagePath}]|"></a>
+            </p>
+        </th:block>
+    </div>
 
     <a href="#this" id="list" class="btn">목록으로</a>
     <a href="#this" id="edit" class="btn">수정하기</a>

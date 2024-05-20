@@ -23,4 +23,17 @@ public class Attached extends BaseEntity{
     @JoinColumn(name = "post_id")
     private Post post;
 
+    @Override
+    public String toString() {
+        return "Attached{" +
+                "attachedId=" + attachedId +
+                ", memberId=" + memberId +
+                ", storagePath='" + storagePath + '\'' +
+                ", originalName='" + originalName + '\'' +
+                ", savedName='" + savedName + '\'' +
+                ", attachedType='" + attachedType + '\'' +
+                ", attachedSize=" + attachedSize +
+                ", post=" + post.getPostId() +
+                '}';
+    }
 }

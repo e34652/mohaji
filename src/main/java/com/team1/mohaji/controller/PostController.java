@@ -63,6 +63,7 @@ public class PostController {
         newPost.setBoard(board);
         LocalDateTime createdAt = LocalDateTime.now();
         newPost.setCreatedAt(createdAt);
+        model.addAttribute("files", files);
 
         try {
             postService.insertPost(newPost, files, memberId);

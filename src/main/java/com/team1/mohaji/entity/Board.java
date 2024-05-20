@@ -21,5 +21,14 @@ public class Board {
     @OneToMany(mappedBy = "board")
     private List<Post> posts;
 
+    @Override
+    public String toString() {
+        return "Board{" +
+                "boardId=" + boardId +
+                ", name='" + boardName + '\'' +
+                ", posts=" + posts +
+                '}';
+    }
+
 
 }

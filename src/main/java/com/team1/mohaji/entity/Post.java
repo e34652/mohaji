@@ -39,5 +39,16 @@ public class Post extends BaseEntity {
     private List<Attached> attachments;
 
 
-
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", memberId=" + memberId +
+                ", createdAt=" + createdAt +
+                ", boardId=" + board.getBoardId() +
+                ", attachments=" + attachments +
+                '}';
+    }
 }
