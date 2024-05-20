@@ -65,8 +65,8 @@
   let player;
   let playbackStatus = {
     state: 'unstarted', // 재생 상태 (unstarted, playing, paused, ended)
-    rsFinal: document.getElementById('rs_final').value,
-    rsMax: document.getElementById('rs_max').value
+    rsFinal: parseInt(document.getElementById('rs_final').value, 10),
+    rsMax: parseInt(document.getElementById('rs_max').value, 10)
   };
 
   let updateInterval;
@@ -94,18 +94,18 @@
   // 재생 정보를 업데이트하는 함수
   function updatePlaybackStatus() {
     if (player && player.getCurrentTime) {
-      const currentTime = Math.floor(player.getCurrentTime()); // 현재 재생 시간을 정수로 변환
-      playbackStatus.rsMax = document.getElementById('rs_max').value;
-      console.log("최대시간:", playbackStatus.rsMax, "현재시간:", currentTime);
+      playbackStatus.rsFinal = Math.floor(player.getCurrentTime()); // 현재 재생 시간을 정수로 변환
+      playbackStatus.rsMax = parseInt(document.getElementById('rs_max').value, 10);
+      console.log("최대시간:", playbackStatus.rsMax, "현재시간:", playbackStatus.rsFinal);
 
-      if (currentTime > playbackStatus.rsMax + 5) {
+      if (playbackStatus.rsFinal > playbackStatus.rsMax + 4) {
         console.log("비정상 조작 감지");
         player.seekTo(playbackStatus.rsMax);
+        playbackStatus.rsFinal = playbackStatus.rsMax;
       } else {
-        playbackStatus.rsFinal = currentTime;
-        if (currentTime > playbackStatus.rsMax) {
-          document.getElementById('rs_max').value = currentTime;
-          console.log("최대 시청 지점", document.getElementById('rs_max').value,"으로 갱신");
+        if (playbackStatus.rsFinal > playbackStatus.rsMax) {
+          document.getElementById('rs_max').value = playbackStatus.rsFinal;
+          console.log("최대 시청 지점", document.getElementById('rs_max').value, "으로 갱신");
         }
       }
     }
@@ -139,7 +139,7 @@
 
   // 재생 상태를 체크하고 서버로 전송하는 함수
   function checkAndSendPlaybackStatus() {
-    playbackStatus.rsMax = Math.max(playbackStatus.rsFinal, document.getElementById('rs_max').value);
+    playbackStatus.rsMax = Math.max(playbackStatus.rsFinal, parseInt(document.getElementById('rs_max').value, 10));
 
     document.getElementById('rs_final').value = playbackStatus.rsFinal;
     document.getElementById('rs_max').value = playbackStatus.rsMax;
@@ -157,8 +157,6 @@
       }),
       success: function(response) {
         console.log('DB 전송 성공', response);
-        $('#rs_final').val(playbackStatus.rsFinal);
-        $('#rs_max').val(playbackStatus.rsMax);
       },
       error: function(error) {
         console.error('DB 전송 실패', error);
@@ -179,6 +177,8 @@
   // 재생 상태 업데이트 및 서버 전송을 위한 인터벌 시작
   function startIntervals() {
     console.log("타이머 시작");
+    clearInterval(updateInterval);
+    clearInterval(sendInterval);
     updatePlaybackStatus(); // 즉시 호출
     checkAndSendPlaybackStatus(); // 즉시 호출
     updateInterval = setInterval(updatePlaybackStatus, 4000); // 4초마다 호출
@@ -187,7 +187,7 @@
 
   // 재생 상태 업데이트 및 서버 전송을 위한 인터벌 중지
   function stopIntervals() {
-    console.log("타이머 정지");
+    console.log("타이머 초기화");
     clearInterval(updateInterval);
     clearInterval(sendInterval);
   }
