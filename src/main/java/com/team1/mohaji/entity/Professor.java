@@ -1,5 +1,6 @@
 package com.team1.mohaji.entity;
 
+import com.team1.mohaji.entity.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
