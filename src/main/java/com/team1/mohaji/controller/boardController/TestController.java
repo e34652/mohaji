@@ -1,9 +1,8 @@
-package com.team1.mohaji.controller;
+package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.dto.Dto;
 
 import com.team1.mohaji.service.Service;
-import com.team1.mohaji.service.imple.ServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.team1.mohaji.service.imple;
+package com.team1.mohaji.service.board;
 
 import com.team1.mohaji.dto.Dto;
 import com.team1.mohaji.mapper.Mapper;

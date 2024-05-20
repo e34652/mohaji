@@ -1,8 +1,8 @@
-package com.team1.mohaji.controller;
+package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Post;
-import com.team1.mohaji.service.imple.BoardService;
+import com.team1.mohaji.service.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,6 @@ public class BoardController {
         model.addAttribute("boardList", boardList);
         return "view/board/boardList";
     }
-
     @GetMapping("/assignment")
     public String assignmentList(Model model){
         List<Post> posts = boardService.getPostsByBoardId(2);

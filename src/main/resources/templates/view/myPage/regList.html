@@ -50,11 +50,11 @@
           <div class="post_tit">수강중인 강의</div>
           <dl class="sub_my01" style="width:50%;float:left">
             <dt>수강중인학점</dt>
-            <dd><span>9</span>학점</dd>
+            <dd><span th:text= "${credit.progressing}"></span>학점</dd>
           </dl>
           <dl class="sub_my01" style="width:50%;float:left">
             <dt>이수학점</dt>
-            <dd><span>0</span>학점</dd>
+            <dd><span th:text="${credit.completion}"></span>학점</dd>
           </dl>
           <ul class="sub_my02">
             <li>

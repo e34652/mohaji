@@ -3,6 +3,7 @@ package com.team1.mohaji.controller.myPageController;
 
 
 import com.team1.mohaji.config.CustomUserDetails;
+import com.team1.mohaji.dto.myPage.CreditDto;
 import com.team1.mohaji.dto.myPage.RegListDto;
 import com.team1.mohaji.service.myPage.imple.RegListServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class MyPageController {
             if (userDetails != null) {
                 int memberId = userDetails.getMemberId();
                 List<RegListDto> regList = regListServiceImple.regListInProgress(memberId);
+                CreditDto creditDto = regListServiceImple.selectCredits(memberId);
                 model.addAttribute("regList", regList);
+                model.addAttribute("credit", creditDto);
                 System.out.println(regList);
                 return "/view/myPage/regList";
             }
