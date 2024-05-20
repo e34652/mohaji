@@ -13,6 +13,7 @@ login.html : 로그인페이지
 regList.html : 나의 수강내역(수강중)을 확인할 수 있는 페이지
 >>myQuestion.html : 나의 Q&A만 따로 보여주는 페이지
 
+regStudy.html: 학습현황
 regInfo.html : 나의 수강현황(수강중,완료)을 확인할 수 있는 페이지
 regResult.html : 나의 수강성적(수강중,완료)을 확인할 수 있는 페이지
 userInfo.html : 나의 정보를 확인,수정 할 수 있는 페이지

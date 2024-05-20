@@ -4,51 +4,24 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
-    />
-<!--    <meta-->
-<!--      name="csrf-token"-->
-<!--      content="WDGfpHvbFwikWZUztuWzTaOUmnBotbPcOs9lZWsl"-->
-<!--    />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"/>
 
-    <link
-    rel="stylesheet"
-    href="/css/common/index2.css"
-    media="all"
-  />
+    <link rel="stylesheet" href="/css/common/index2.css" media="all"/>
+    <link rel="stylesheet" href="/css/common/index1.css" media="all"/>
+    <link rel="stylesheet" href="/css/common/main.css" media="all"/>
 
-    <link
-      rel="stylesheet"
-      href="/css/common/index1.css"
-      media="all"
-    />
+    <link rel="stylesheet" href="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css"/>
 
-    <link
-      rel="stylesheet"
-      href="/css/common/main.css"
-      media="all"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://lms.ssu.ac.kr/lib/vector-icons/index.min.css"
-    />
+    <link rel="stylesheet" href="https://lms.ssu.ac.kr/lib/vector-icons/index.min.css"/>
 
     <script src="https://lms.ssu.ac.kr/js/coursecatalog-bootstrap.js"></script>
     <script src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
     <script src="https://lms.ssu.ac.kr/js/polyfill.js"></script>
 
-    <script>
-      var MIX_APP_URL = "https://lms.ssu.ac.kr";
-      var API_V1_ENDPOINT = "https://lms.ssu.ac.kr" + "/api/v1";
-    </script>
+<!--    <script>-->
+<!--      var MIX_APP_URL = "https://lms.ssu.ac.kr";-->
+<!--      var API_V1_ENDPOINT = "https://lms.ssu.ac.kr" + "/api/v1";-->
+<!--    </script>-->
 
     <title>모하지대학교 LMS</title>
   </head>
@@ -171,30 +144,17 @@
                 <div class="xn-header-menu-wrapper">
                     
                   <ul class="xn-header-menu" id="xn-header-menu">
-                    <li
-                      id="menu-item-a"
-                      class="menu-item"
-                    >
-                      <a href="/myPC">사이트소개</a>
+                    <li id="menu-item-a" class="menu-item">
+                      <a href="/info">사이트소개</a>
                     </li>
-                    <li
-                      id="menu-item-b"
-                      class="menu-item"
-                    >
-                      <a href="#">수강신청</a>
+                    <li id="menu-item-b" class="menu-item">
+                      <a href="/regCourse">수강신청</a>
                     </li>
-                    <li
-                      id="menu-item-c"
-                      class="menu-item"
-                    >
-                      <a href="#">지원센터</a>
-                      
+                    <li id="menu-item-c" class="menu-item">
+                      <a href="/boardList">지원센터</a>
                     </li>
-                    <li
-                      id="menu-item-d"
-                      class="menu-item"
-                    >
-                      <a href="/myPage/regInfo">마이페이지</a>
+                    <li id="menu-item-d" class="menu-item">
+                      <a href="/myPage/regList">마이페이지</a>
                     </li>
                   </ul>
 
@@ -213,7 +173,7 @@
                           class="menu-item"
                         >
                           <a
-                            href="미구현"
+                            href="/info"
                             >소개</a
                           >
                         </li>
@@ -237,20 +197,11 @@
                         onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
                         onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
                       >
-                        <li
-                          id="menu-item-c1"
-                          class="menu-item"
-                        >
-                          <a
-                            href="/boardList"
-                            >커뮤니티</a
-                          >
+                        <li id="menu-item-c1" class="menu-item">
+                          <a href="/boardList">커뮤니티</a>
                         </li>
-                        <li
-                          id="menu-item-c2"
-                          class="menu-item"
-                        >
-                          <a href="미구현" data-role="menu">공통기준</a>
+                        <li id="menu-item-c2" class="menu-item">
+                          <a href="#" data-role="menu">공통기준</a>
                         </li>
                       </ul>
                       <ul
@@ -258,35 +209,15 @@
                         onmouseenter="xnSubMenuHelper.onmouseenterSubMenuItemWrapper(this);"
                         onmouseleave="xnSubMenuHelper.onmouseleaveSubMenuItemWrapper(this);"
                       >
-                        <li
-                          id="menu-item-d6"
-                          class="menu-item"
-                        >
-                          <a
-                            href="/myPage/regList"
-                            >수강중인 강의</a
-                          >
+                        <li id="menu-item-d6" class="menu-item">
+                          <a href="/myPage/regList">수강중인 강의</a>
                         </li>
-                        <li
-                          id="menu-item"
-                          class="menu-item"
-                        >
-                          <a
-                            href="/regInfo"
-                            >수강 이력</a
-                          >
+                        <li id="menu-item-d2" class="menu-item">
+                          <a href="/myPage/regInfo">수강 이력</a>
                         </li>
-
                       <!--혜빈님 컨트롤러 요청명 따라 갈 것   -->
-                        <li
-                        id="menu-item-d3"
-                        class="menu-item"
-                      >
-                        <a
-                          href="/myPage/userInfo"
-                          data-role="menu"
-                          >내 정보</a
-                        >
+                        <li id="menu-item-d3" class="menu-item">
+                        <a href="/myPage/userInfo" data-role="menu">내 정보</a>
                       </li>
                       </ul>
                     </div>
