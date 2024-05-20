@@ -23,7 +23,7 @@ public class MainController {
     @GetMapping("/mybatis")
     public  String main2(Model model){
         model.addAttribute("testText",regCourseServiceImple.selectCount());
-    return "/view/myBatisTest";
+    return "/view/myPage/myPC2";
 }
 
     @Controller
