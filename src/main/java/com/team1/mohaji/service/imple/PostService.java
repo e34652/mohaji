@@ -67,10 +67,16 @@ public class PostService {
                     String originalFileName = file.getOriginalFilename();
                     String saveFileName = generateUniqueFileName(originalFileName);
                     Path targetLocation = this.fileStorageLocation.resolve(saveFileName);
+                    String fileType = file.getContentType();
+                    Long fileSize = file.getSize();
+
                     Files.copy(file.getInputStream(), targetLocation);
 
                     Attached attached = new Attached();
+                    attached.setOriginalName(originalFileName);
                     attached.setSavedName(saveFileName);
+                    attached.setAttachedType(fileType);
+                    attached.setAttachedSize(fileSize);
                     attached.setStoragePath(targetLocation.toString());
                     attached.setPost(post);
                     attached.setMemberId(memberId); // memberId 설정

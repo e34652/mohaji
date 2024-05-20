@@ -46,9 +46,9 @@ public class PostController {
     public String insertPost(@RequestParam("boardId") int boardId,
                              @RequestParam("title") String title,
                              @RequestParam("content") String content,
-                             Model model,
+                             @RequestParam("files") List<MultipartFile> files,
                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
-                             @RequestParam("files") List<MultipartFile> files) {
+                             Model model){
 
         int memberId = customUserDetails.getMemberId();
 
@@ -81,6 +81,7 @@ public class PostController {
         postService.incrementPostViews(postId);
         Post post = postService.getPostsByPostId(postId);
         log.info(String.valueOf(post));
+        log.info(post.getAttachments().toString());
         model.addAttribute("post", post);
         return "view/board/postDetail";
     }
