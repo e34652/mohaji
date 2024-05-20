@@ -25,14 +25,6 @@ public class IPController {
     @Autowired
     MyPCSericeImple myPCSericeImple;
 
-    @GetMapping("/myPC")
-    public String showRegistrationPage(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        List<MyPCDto> myPCList = myPCSericeImple.selectIP(customUserDetails.getMemberId());
-        model.addAttribute("myPCList", myPCList);
-        System.out.println("여기도착완료" + myPCList);
-        return "/view/myPage/myPC2";
-    }
-
     @PostMapping("/registerPC")
     public String registerPC(HttpServletRequest request, @AuthenticationPrincipal CustomUserDetails customUserDetails, RedirectAttributes redirectAttributes) {
         System.out.println("등록컨트롤러 도착");
@@ -47,20 +39,20 @@ public class IPController {
 
         if (myPCList.size() >= 3) {
             redirectAttributes.addFlashAttribute("message", "PC는 최대 3개까지 등록 가능합니다.");
-            return "redirect:/myPC";
+            return "redirect:/myPage/myPC";
         }
 
         for (MyPCDto myPCDto : myPCList) {
             System.out.println("포문시작" + myPCDto.getMipIp() + ipAddress);
             if (myPCDto.getMipIp().equals(ipAddress)) {
                 redirectAttributes.addFlashAttribute("message", "이미 등록된 PC입니다.");
-                return "redirect:/myPC";
+                return "redirect:/myPage/myPC";
             }
         }
 
         myPCSericeImple.insertIP(mipName, memberId, ipAddress);
         redirectAttributes.addFlashAttribute("message", "등록이 완료되었습니다.");
-        return "redirect:/myPC";
+        return "redirect:/myPage/myPC";
     }
 
     @PostMapping("/deletePC")
@@ -80,11 +72,11 @@ public class IPController {
                 if (list.size() > 0) {
                     myPCSericeImple.deleteIP(mipId);
                     redirectAttributes.addFlashAttribute("message", "삭제가 완료되었습니다.");
-                    return "redirect:/myPC";
+                    return "redirect:/myPage/myPC";
                 }
             }
         }
         redirectAttributes.addFlashAttribute("message", "등록된 PC에서 삭제해야 합니다.");
-        return "redirect:/myPC";
+        return "redirect:/myPage/myPC";
     }
 }
