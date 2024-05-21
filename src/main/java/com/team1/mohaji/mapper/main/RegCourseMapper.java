@@ -34,4 +34,10 @@ public interface RegCourseMapper {
 
     int selectCountSubject();
 
+    void deleteRegInfo(int memberId, int subId);
+
+    List<SubjectDto> selectRegInfoBF (int memberId);
+
+    List<SubjectDto> selectRegInfoAT (int memberId);
+
 }
