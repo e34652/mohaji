@@ -1,9 +1,12 @@
 package com.team1.mohaji.service.board;
 
 import com.team1.mohaji.config.FileStorageProperties;
+import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Attached;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.AttachedRepository;
+import com.team1.mohaji.repository.BoardRepository;
+import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -121,4 +124,6 @@ public class PostService {
         // 업데이트된 정보를 저장
         postRepository.save(originalPost);
     }
+
+
 }

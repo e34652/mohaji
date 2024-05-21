@@ -35,6 +35,7 @@ public class Post extends BaseEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Attached> attachments;
 

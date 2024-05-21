@@ -15,7 +15,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     Member findByMemberId(int memberId);
 
-    @Query("select m.name from Member m join Post p on m.memberId = p.memberId where m.memberId = :memberId")
-    List<String> findMemberNamesByMemberId(@Param("memberId") Integer memberId);
+    @Query("select m.name from Member m where m.memberId = :memberId")
+    String findMemberNameByMemberId(@Param("memberId") Integer memberId);
+
+
 
 }

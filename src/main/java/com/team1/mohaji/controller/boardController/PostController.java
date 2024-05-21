@@ -2,6 +2,7 @@ package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.entity.Board;
+import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.service.board.BoardService;
@@ -76,9 +77,9 @@ public class PostController {
     public String  postDetail(@RequestParam("postId") Integer postId, Model model){
         postService.incrementPostViews(postId);
         Post post = postService.getPostsByPostId(postId);
-        log.info(String.valueOf(post));
-        log.info(post.getAttachments().toString());
+        String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
         model.addAttribute("post", post);
+        model.addAttribute("memberName", memberName);
         return "view/board/postDetail";
     }
 
