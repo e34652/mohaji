@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,6 +17,10 @@
     <script src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
     <script src="https://lms.ssu.ac.kr/js/polyfill.js"></script>
 
+<!--    <script>-->
+<!--      var MIX_APP_URL = "https://lms.ssu.ac.kr";-->
+<!--      var API_V1_ENDPOINT = "https://lms.ssu.ac.kr" + "/api/v1";-->
+<!--    </script>-->
 
     <title>모하지대학교 LMS</title>
   </head>
@@ -105,7 +108,7 @@
           elem.className += " " + 'navbar-hidden';
         }
         </script>
-      <header id="header">
+    <header id="header">
       <nav
         class="navbar navbar-light navbar-static-top navbar-expand-md"
         role="navigation"
@@ -312,19 +315,13 @@
                       <div class="xnbw-category-tab ">영어</div>
                       <div class="xnbw-category-tab ">중국어</div>
                       <div class="xnbw-category-tab ">베트남어</div>
-                    </div>
-                    <a class="xnbw-more-tab" th:href="@{/notice}">
-                      <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
-                        +</button>
-                    </a>
+                    </div><button class="xnbw-more-tab" style="color: #000000">+</button>
                   </div></div><ul class="xnbw-items-container">
-                  <li class="xnbw-item-container" th:each="notice : ${notice}">
+                  <li class="xnbw-item-container" th:each="studentAnnouncement : ${stuBoard}">-->
                            <div class="xnbw-board-post-list">
                            <div class="xnbw-post-list-category"></div>
-                          <div class="xnbw-post-list-title xn-common-title" >
-                             <a th:href="@{/postDetail(postId=${notice.postId})}" th:text="${notice.title}"></a>
-                          </div>
-                         <div class="xnbw-post-list-created" th:text="${notice.getCreatedAt()}"></div>
+                          <div class="xnbw-post-list-title xn-common-title" th:text="${studentAnnouncement.title}"></div>
+                         <div class="xnbw-post-list-created" th:text="${studentAnnouncement.date}"></div>
                        </div>
                   </li>
                 </ul>
@@ -341,25 +338,16 @@
                       <div class="xnbw-title-wrap">
                         <div class="xnbw-title">과목</div>
                         <div class="xnbw-sub-title"></div>
-                      </div>
-                      <div class="xnbw-category-wrap">
-                        <div class="xnbw-category-tab-wrap">
-                          <div class="xnbw-all-tab selected">전체</div>
-                        </div>
-                        <a class="xnbw-more-tab" th:href="@{/assignment}">
-                          <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
-                            +</button>
-                        </a>
-                      </div>
-                    </div>
-                    <ul class="xnbw-items-container">
-                    <li class="xnbw-item-container" th:each="assignment: ${assignment}">
+                      </div><div class="xnbw-category-wrap">
+                      <div class="xnbw-category-tab-wrap">
+                        <div class="xnbw-all-tab selected">전체</div>
+                      </div><button class="xnbw-more-tab"  style="color: #000000">+</button>
+                    </div></div><ul class="xnbw-items-container">
+                    <li class="xnbw-item-container" th:each="professorAnnouncement : ${proBoard}">
                       <div class="xnbw-board-post-list">
                         <div class="xnbw-post-list-category"></div>
-                        <div class="xnbw-post-list-title xn-common-title" >
-                          <a th:href="@{/postDetail(postId=${assignment.postId})}" th:text="${assignment.title}"></a>
-                        </div>
-                        <div class="xnbw-post-list-created" th:text="${assignment.getCreatedAt()}"></div>
+                        <div class="xnbw-post-list-title xn-common-title" th:text="${professorAnnouncement.title}"></div>
+                        <div class="xnbw-post-list-created" th:text="${professorAnnouncement.date}"></div>
                       </div>
                     </li>
                   </ul>
@@ -370,8 +358,10 @@
         
         
 <!--                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>-->
-<!--                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>--></div>
-
+<!--                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>-->
+          </div>
+        
+            </main>
 
         <div id="xnm2_content">
             <!-- 로그인 버튼 밑에 공간 -->

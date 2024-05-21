@@ -20,6 +20,7 @@ public class SubjectDto {
         private String subDesc;
         private int subScount;
         private int subCredit;
+        private String rcStat;
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
         private LocalDateTime subEdate;

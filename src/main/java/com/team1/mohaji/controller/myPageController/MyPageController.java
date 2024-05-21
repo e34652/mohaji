@@ -6,8 +6,8 @@ import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.dto.myPage.CreditDto;
 import com.team1.mohaji.dto.myPage.MyPCDto;
 import com.team1.mohaji.dto.myPage.RegListDto;
-import com.team1.mohaji.service.main.imple.RegCourseServiceImple;
 import com.team1.mohaji.service.myPage.imple.MyPCSericeImple;
+import com.team1.mohaji.service.myPage.imple.RegInfoServiceImple;
 import com.team1.mohaji.service.myPage.imple.RegListServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +28,7 @@ public class MyPageController {
     @Autowired
     private MyPCSericeImple myPCSericeImple;
     @Autowired
-    RegCourseServiceImple regCourseServiceImple;
+    private RegInfoServiceImple regInfoServiceImple;
 
     @GetMapping("/regList")
         public String myList (@AuthenticationPrincipal CustomUserDetails userDetails, Model model){
@@ -39,7 +39,7 @@ public class MyPageController {
                 model.addAttribute("regList", regList);
                 model.addAttribute("credit", creditDto);
                 System.out.println(regList);
-                return "/view/myPage/regList";
+                return "view/myPage/regList";
             }
             return"redirect:/login";
         }
@@ -50,7 +50,7 @@ public class MyPageController {
         List<MyPCDto> myPCList = myPCSericeImple.selectIP(customUserDetails.getMemberId());
         model.addAttribute("myPCList", myPCList);
         System.out.println("여기도착완료" + myPCList);
-        return "/view/myPage/myPC2";
+        return "view/myPage/myPC2";
     }
 
     @RequestMapping("/regInfo")
@@ -58,12 +58,12 @@ public class MyPageController {
             if(customUserDetails != null) {
                 int memberId = customUserDetails.getMemberId();
                 //신청기간중인 것
-                model.addAttribute("regInfo", regCourseServiceImple.selectAllSubject(String.valueOf(memberId)));
-                //신청완료된것
-//                model.addAttribute("regInfo2", );
+                model.addAttribute("regInfo", regInfoServiceImple.selectRegInfoBF(memberId));
+                //신청기간 지난것
+                model.addAttribute("regInfo2",regInfoServiceImple.selectRegInfoAT(memberId) );
 
                 model.addAttribute("memberId", memberId);
-                return "/view/myPage/regInfo";
+                return "view/myPage/regInfo";
             }
             return"redirect:/login";
 //        log.info("컨트롤러 서비스완료 ");
@@ -72,23 +72,23 @@ public class MyPageController {
 
     @GetMapping("/regStudy")
     public String regStudy() {
-        return "/view/myPage/regStudy";
+        return "view/myPage/regStudy";
     }
 
     @GetMapping("/regResult")
     public String regResult() {
-        return "/view/myPage/regResult";
+        return "view/myPage/regResult";
     }
 
 //    내정보
     @GetMapping("/userInfo")
     public String userInfo() {
-        return "/view/myPage/userInfo";
+        return "view/myPage/userInfo";
     }
 
     @GetMapping("/userPsUpdate")
     public String userPsUpdate() {
-        return "/view/myPage/userPsUpdate";
+        return "view/myPage/userPsUpdate";
     }
 
     }
