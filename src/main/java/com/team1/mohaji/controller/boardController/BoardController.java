@@ -15,6 +15,11 @@ import java.util.List;
 
 @Controller
 public class BoardController {
+    @ModelAttribute
+    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println(customUserDetails.getName());
+        model.addAttribute("name", customUserDetails.getName());
+    }
 
     @Autowired
     private BoardService boardService;

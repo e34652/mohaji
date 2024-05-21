@@ -23,6 +23,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/myPage")
 public class MyPageController {
+    @ModelAttribute
+    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println(customUserDetails.getName());
+        model.addAttribute("name", customUserDetails.getName());
+    }
 
 
     @Autowired

@@ -19,6 +19,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/classroom")
 public class ClassroomController {
+    @ModelAttribute
+    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println(customUserDetails.getName());
+        model.addAttribute("name", customUserDetails.getName());
+    }
 
     @Autowired
     private HomeServiceImple homeServiceImple;
@@ -43,6 +48,8 @@ public class ClassroomController {
     public String viewerInfo(@AuthenticationPrincipal CustomUserDetails userDetails,
                              @RequestParam int subId,
                              @RequestParam int sessionId, Model model) {
+
+
         if (userDetails != null) {
             ViewerDto viewerDto = viewerServiceImple.selectViewerInfo(subId, userDetails.getMemberId(), sessionId);
             model.addAttribute("viewer", viewerDto);
