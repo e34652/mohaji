@@ -18,6 +18,7 @@
         <result property="subSdate" column="sub_sdate" />
         <result property="subEdate" column="sub_edate" />
         <result property="memberId" column="member_id" />
+        <result property="rcStat" column="rc_stat" />
     </resultMap>
 
     <resultMap id="regCourse" type="com.team1.mohaji.dto.RegCourseDto">
@@ -195,6 +196,48 @@
           AND sub_id = #{subId}
         ]]>
 </update>
+
+    <!--수강 상태를 취소로 바꿔주는 쿼리-->
+    <update id="deleteRegInfo" parameterType="int">
+   <![CDATA[
+        UPDATE reg_course
+        SET rc_stat = '취소'
+        WHERE member_id = #{memberId}
+          AND sub_id = #{subId}
+        ]]>
+</update>
+
+    <!--수강신청한 모든 리스트에서 수강중인것 부르는 쿼리-->
+        <select id="selectRegInfoBF" parameterType="int" resultMap="subject">
+<![CDATA[
+            SELECT s.*, d.dept_name
+            FROM subject s
+                     JOIN department d ON s.dept_id = d.dept_id
+            WHERE s.sub_id IN (
+                SELECT rc.sub_id
+                FROM reg_course rc
+                WHERE rc.member_id = 1
+                  AND rc.rc_stat NOT IN ('이수', '취소')
+            )
+              AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
+            ]]>
+</select>
+
+    <!--수강신청한 모든 리스트에서 수강신청 기간이 지난것을 제외한 리스트부르는 쿼리-->
+    <select id="selectRegInfoAT" parameterType="int" resultMap="subject">
+<![CDATA[
+        SELECT s.*, d.dept_name, rc.rc_stat
+        FROM subject s
+                 JOIN department d ON s.dept_id = d.dept_id
+                 LEFT JOIN reg_course rc ON s.sub_id = rc.sub_id AND rc.member_id = #{memberId}
+        WHERE s.sub_id IN (
+            SELECT rc.sub_id
+            FROM reg_course rc
+            WHERE rc.member_id = #{memberId}
+              AND rc.rc_stat IN ('이수', '취소')
+        )
+        ]]>
+</select>
 
     <!--수강신청-->
     <insert id="insertReg">

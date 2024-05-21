@@ -54,7 +54,7 @@
         </div>
 
         <div class="sub_contents">
-            <div class="post_tit">수강신청 마감</div>
+            <div class="post_tit">나의 수강이력</div>
 
             <div id="grid2"></div>
         </div>
@@ -127,7 +127,7 @@
                         align: 'center',
                         formatter: function (item) {
                             const subId = item.row.subId;
-                            const url = `/reg?memberId=${memberId}&subId=${subId}`;
+                            const url = `/RegCancel?memberId=${memberId}&subId=${subId}`;
                             return `<a class="regSubmit" href="${url}" >수강취소</a>`;
                         },
                     },
@@ -151,24 +151,24 @@
                 columns: [
                     {
                         header: "Id",
-                        name: "subId2",
+                        name: "subId",
                         align: 'center',
                         hidden: true,
                     },
                     {
                         header: "구분",
-                        name: "subType2",
+                        name: "subType",
                         align: 'center'
                     },
                     {
                         header: "학과",
-                        name: "deptName2",
+                        name: "deptName",
                         align: 'center',
                         sortable: true,
                     },
                     {
                         header: "과목",
-                        name: "subName2",
+                        name: "subName",
                         align: 'center',
                         sortable: true,
                         formatter: function (item) {
@@ -180,38 +180,102 @@
 
                     {
                         header: "차시",
-                        name: "subScount2",
+                        name: "subScount",
                         align: 'center'
                     },
                     {
                         header: "학점",
-                        name: "subCredit2",
+                        name: "subCredit",
                         align: 'center'
                     },
                     {
                         header: "신청시작일",
-                        name: "subRsdate2",
+                        name: "subRsdate",
                         align: 'center'
                     },
                     {
                         header: "신청마감일",
-                        name: "subRedate2",
+                        name: "subRedate",
                         align: 'center'
                     },
                     {
-                        header: "수강취소",
-                        name: "lectureRoom2",
+                        header: "수강상태",
+                        name: "rcStat",
                         align: 'center',
-                        formatter: function (item) {
-                            const subId2 = item.row.subId2;
-                            const url2 = `/reg?memberId=${memberId2}&subId=${subId2}`;
-                            return `<a class="regSubmit" href="${url2}" >수강취소</a>`;
-                        },
                     },
                 ],
             });
-            grid2.resetData(regList2);  // 서버에서 전달된 데이터로 그리드 초기화
+            grid2.resetData(regInfo2);  // 서버에서 전달된 데이터로 그리드 초기화
         });
+    </script>
+    <script>
+        // 과목명을 클릭했을 때 팝업을 표시하는 이벤트 리스너 추가
+        document.getElementById('grid').addEventListener('click', function(event) {
+            const clickedElement = event.target;
+            // 클릭된 요소의 클래스 확인
+            if (clickedElement.classList.contains('subName')) {
+                event.preventDefault();
+                // 클릭된 과목명 id 속성을 가져와서 과목 ID를 추출
+                const subId1 = clickedElement.getAttribute('id');
+                fetchCourseDetail(subId1);
+            }
+        });
+
+        // 과목명을 클릭했을 때 팝업을 표시하는 이벤트 리스너 추가
+        document.getElementById('grid2').addEventListener('click', function(event) {
+            const clickedElement = event.target;
+            // 클릭된 요소의 클래스 확인
+            if (clickedElement.classList.contains('subName')) {
+                event.preventDefault();
+                // 클릭된 과목명 id 속성을 가져와서 과목 ID를 추출
+                const subId1 = clickedElement.getAttribute('id');
+                fetchCourseDetail(subId1);
+            }
+        });
+
+
+        document.getElementById('grid').addEventListener('click', function(event) {
+            if (event.target.classList.contains('regSubmit')) {
+                event.preventDefault();
+                const confirmResult = confirm('수강취소 하시겠습니까?');
+                if (confirmResult) {
+                    window.location.href = event.target.href;
+                }
+            }
+        });
+        document.getElementById('grid2').addEventListener('click', function(event) {
+            if (event.target.classList.contains('regSubmit')) {
+                event.preventDefault();
+                const confirmResult = confirm('수강취소 하시겠습니까?');
+                if (confirmResult) {
+                    window.location.href = event.target.href;
+                }
+            }
+        });
+
+        // 강의 상세 정보를 가져와서 모달에 표시하는 함수
+        function fetchCourseDetail(subId1) {
+            $.ajax({
+                url: '/courseDetail/' + subId1,
+                method: 'GET',
+                success: function(data) {
+                    $('#modal-department').text(data.deptName);
+                    $('#modal-professor').text(data.name);
+                    $('#modal-subjectName').text(data.subName);
+                    $('#modal-subjectType').text(data.subType);
+                    $('#modal-description').text(data.subDesc);
+                    $('#modal-credit').text(data.credit);
+                    $('#modal-curriculum').empty();
+                    data.sessionTitle.forEach(function(item) {
+                        $('#modal-curriculum').append('<li>' + item + '</li>');
+                    });
+                    $('#courseDetailModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.error('에러 발생: ', error);
+                }
+            });
+        }
     </script>
     <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -219,6 +283,32 @@
         <!-- 푸터 삽입 -->
         <footer th:replace="~{layout/footer :: footer}"></footer>
     </footer>
+    <!-- 모달 팝업 HTML 추가 -->
+    <div class="modal fade" id="courseDetailModal" tabindex="-1" role="dialog" aria-labelledby="courseDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseDetailModalLabel">강의 상세 정보</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>학과 | </strong> <span id="modal-department"></span></li>
+                        <li class="list-group-item"><strong>교수 | </strong> <span id="modal-professor"></span></li>
+                        <li class="list-group-item"><strong>과목명 | </strong> <span id="modal-subjectName"></span></li>
+                        <li class="list-group-item"><strong>과목유형 | </strong> <span id="modal-subjectType"></span></li>
+                        <li class="list-group-item"><strong>과목설명 | </strong> <span id="modal-description"></span></li>
+                        <li class="list-group-item"><strong>커리큘럼 | </strong>
+                            <ol id="modal-curriculum"></ol>
+                        </li>
+                        <li class="list-group-item"><strong>취득 가능 학점:</strong> <span id="modal-credit"></span>점</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
