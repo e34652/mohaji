@@ -15,15 +15,15 @@ public class MainController {
 
     @RequestMapping("/info")
     public String info(){
-        return "/view/info";
+        return "view/info";
     }
 
     @Controller
     public static class HomeController {
 
-        @RequestMapping(value={"", "/", "main", "/main"})
+        @RequestMapping(value={"/"})
         public String displayHomePage() {
-            return "/view/main";
+            return "view/main";
         }
 
     }

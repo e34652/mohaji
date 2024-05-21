@@ -35,7 +35,7 @@ public class ClassroomController {
         if (userDetails != null) {
             List<HomeDto> home = homeServiceImple.sessionListInProgress(subId, memberId);
             model.addAttribute("home", home);
-            return "/view/classroom/classroomHome";
+            return "view/classroom/classroomHome";
         } else {
             return "redirect:/login";
         }
@@ -49,7 +49,7 @@ public class ClassroomController {
             ViewerDto viewerDto = viewerServiceImple.selectViewerInfo(subId, userDetails.getMemberId(), sessionId);
             model.addAttribute("viewer", viewerDto);
             System.out.println(viewerDto);
-            return "/view/classroom/viewer";
+            return "view/classroom/viewer";
         }
         return"redirect:/login";
     }
