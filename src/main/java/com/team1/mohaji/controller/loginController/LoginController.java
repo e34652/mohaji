@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 public class LoginController {
 
-    @GetMapping("/main")
-        public String getMypage(Model model, Authentication authentication){
-        if(authentication != null) {
+    @GetMapping("/mypage")
+    public String getMypage(Model model, Authentication authentication) {
+        if (authentication != null) {
             model.addAttribute("username", authentication.getName());
             model.addAttribute("role", authentication.getAuthorities().toString());
         }
-        return "/view/main";
+        return "/view/mypage";
     }
 
 

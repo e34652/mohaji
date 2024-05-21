@@ -41,7 +41,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr t th:each="posts : ${posts}">
+            <tr th:each="posts : ${posts}">
                 <td th:text="${posts.postId}"></td>
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
