@@ -34,6 +34,13 @@ public class PostService {
 
     private final Path fileStorageLocation;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private BoardService boardService;
+
+
 
     @Autowired
     public PostService(FileStorageProperties fileStorageProperties) {
@@ -125,5 +132,22 @@ public class PostService {
         postRepository.save(originalPost);
     }
 
+    public List<PostDto> memberName(int boardId){
+        List<Post> posts = boardService.getPostsByBoardId(boardId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts){
+            String name = memberRepository.findMemberNameByMemberId(post.getMemberId());
+            PostDto postDto = new PostDto();
+            postDto.setPostId(post.getPostId());
+            postDto.setTitle(post.getTitle());
+            postDto.setViews(post.getViews());
+            postDto.setCreatedAt(post.getCreatedAt());
+            postDto.setMemberId(post.getMemberId());
+            postDto.setContent(post.getContent());
+            postDto.setMemberName(name);
+            postDtos.add(postDto);
+        }
+        return postDtos;
+    }
 
 }

@@ -44,13 +44,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr t th:each="posts : ${posts}">
-                <td th:text="${posts.postId}"></td>
+            <tr t th:each="post : ${posts}">
+                <td th:text="${post.postId}"></td>
                 <td class="title">
-                    <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
-                <td th:text="${posts.memberId}"></td>
-                <td th:text="${posts.views}"></td>
-                <td th:text="${posts.createdAt}"></td>
+                    <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
+                <td th:text="${post.memberName}"></td>
+                <td th:text="${post.views}"></td>
+                <td th:text="${post.createdAt}"></td>
             </tr>
             </tbody>
         </table>

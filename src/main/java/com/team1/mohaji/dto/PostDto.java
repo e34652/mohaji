@@ -12,22 +12,17 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class PostDto {
-    private Board board;
+    private Integer boardId;
+    private Integer postId;
     private Integer lectureId;
     private String title;
     private String content;
     private Integer views;
-    @Column(nullable = true)
     private Integer attachedId;
     private Integer likeId;
-    //    @ManyToOne
-//    @JoinColumn(name = "like_id")
-//    private Like like;
-    private int memberId;
-    //    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    @Column(name = "post_author_id")
-//    private Member member;
+    private Integer memberId;
+    private String memberName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
 }
