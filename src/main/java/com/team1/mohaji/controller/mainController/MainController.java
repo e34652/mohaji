@@ -13,18 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class MainController {
 
-    @Autowired
-    RegCourseServiceImple regCourseServiceImple;
-
-    @GetMapping("/aa")
-    public  String main1()
-    {return "/view/main";}
-
-    @GetMapping("/mybatis")
-    public  String main2(Model model){
-        model.addAttribute("testText",regCourseServiceImple.selectCount());
-    return "/view/myPage/myPC2";
-}
+    @RequestMapping("/info")
+    public String info(){
+        return "/view/info";
+    }
 
     @Controller
     public static class HomeController {

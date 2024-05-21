@@ -1,4 +1,4 @@
-package com.team1.mohaji.controller;
+package com.team1.mohaji.controller.boardController;
 
 
 import com.team1.mohaji.config.FileStorageProperties;

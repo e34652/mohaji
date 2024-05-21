@@ -26,11 +26,11 @@
             </tr>
             <tr>
                 <th scope="row">제목</th>
-                <td colspan="3"><input type="text" id="title" name="title" th:value="${post.title }"/></td>
+                <td colspan="3"><input type="text" id="title" name="title" readonly th:value="${post.title }"/></td>
             </tr>
             <tr>
                 <td colspan="4" class="view_text">
-                    <textarea title="내용" id="contents" name="contents" th:text="${post.content }"></textarea>
+                    <textarea title="내용" id="contents" name="contents" readonly th:text="${post.content }"></textarea>
                 </td>
             </tr>
             </tbody>
@@ -56,9 +56,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#list").on("click", function(){
-            location.href = "boardList";
-        });
+        $("#list").on("click", function(){ history.back(); });
 
         $("#edit").on("click", function(){
             var frm = $("#frm")[0];

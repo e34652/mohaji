@@ -15,6 +15,12 @@
         <result property="subEdate" column="sub_edate" />
     </resultMap>
 
+    <resultMap id="credit" type="com.team1.mohaji.dto.myPage.CreditDto">
+        <result property="progressing" column="progressing" />
+        <result property="completion" column="completion" />
+
+    </resultMap>
+
         <!-- 다른 필드들에 대한 매핑 추가 -->
 
     <select id="selectRegList" parameterType="int" resultMap="regList">
@@ -46,5 +52,19 @@
           AND NOW() < s.sub_edate;
         ]]>
 </select>
+
+    <select id="selectCredits" parameterType="int" resultMap="credit">
+        <![CDATA[
+        SELECT
+            SUM(CASE WHEN rc.rc_stat = '수강중' THEN s.sub_credit ELSE 0 END) AS progressing,
+            SUM(CASE WHEN rc.rc_stat = '이수' THEN s.sub_credit ELSE 0 END) AS completion
+        FROM
+            reg_course rc
+                JOIN
+            subject s ON rc.sub_id = s.sub_id
+        WHERE
+            rc.member_id = #{memberId};
+        ]]>
+    </select>
 
 </mapper>

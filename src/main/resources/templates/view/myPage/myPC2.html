@@ -4,8 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PC 등록</title>
+    <!-- 부트스트랩 CSS 로드 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery 로드 -->
-    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- 부트스트랩 JS 로드 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common/sectionCss.css" />
     <link rel="stylesheet" type="text/css" href="/css/myPage/regList.css" />
@@ -44,44 +48,56 @@
         <div class="miniNavi">
             <h1>PC 등록</h1>
         </div>
-        <!-- PC 등록 버튼 -->
-        <div>
-            <span>
-                <p>같은 PC는 한 번만 등록할 수 있습니다.</p>
-                <p>등록된 PC가 아니면 다른 PC를 삭제할 수 없습니다.</p>
-                <p>PC는 3개 까지만 등록이 가능합니다.</p>
-            </span>
-            <form method="post" action="/registerPC" onsubmit="return confirmRegistration(this);">
-                <!-- PC 이름 입력 필드 -->
-                <input type="text" name="mipName" placeholder="PC 이름" required>
-                <!-- 등록 버튼 -->
-                <button type="submit">현재 PC 등록</button>
-            </form>
+        <!-- 부트스트랩 컨테이너로 전체를 감쌈 -->
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="card text-center"> <!-- text-center 클래스를 추가하여 가운데 정렬 -->
+                        <div class="card-header">
+                            <h1 class="card-title">PC 등록</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info">
+                                <p>같은 PC는 한 번만 등록할 수 있습니다.</p>
+                                <p>등록된 PC가 아니면 다른 PC를 삭제할 수 없습니다.</p>
+                                <p>PC는 3개 까지만 등록이 가능합니다.</p>
+                            </div>
+                            <form method="post" action="/registerPC" onsubmit="return confirmRegistration(this);">
+                                <div class="form-group">
+                                    <label for="mipName">PC 이름</label>
+                                    <input type="text" class="form-control" id="mipName" name="mipName" placeholder="PC 이름" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">현재 PC 등록</button>
+                            </form>
+                            <ul class="list-group mt-4">
+                                <th:block th:each="ip : ${myPCList}">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>PC 이름: <span th:text="${ip.mipName}"></span></span>
+                                        <form method="post" action="/deletePC" onsubmit="return confirm('정말로 이 PC를 삭제하시겠습니까?');" class="ml-auto">
+                                            <input type="hidden" name="mipId" th:value="${ip.mipId}" />
+                                            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                                        </form>
+                                    </li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- IP 목록 렌더링 -->
-        <th:block th:each="ip : ${myPCList}">
-            <li>
-                PC 이름: <span th:text="${ip.mipName}"></span>
-                <form method="post" action="/deletePC" onsubmit="return confirm('정말로 이 PC를 삭제하시겠습니까?');">
-                    <input type="hidden" name="mipId" th:value="${ip.mipId}" />
-                    <button type="submit">삭제</button>
-                </form>
-            </li>
-        </th:block>
-    </main>
     <footer>
         <!-- 푸터 삽입 -->
         <footer th:replace="~{layout/footer :: footer}"></footer>
     </footer>
 </div>
 
-<!--스크립트부분-->
+<!-- 성공 또는 오류 메시지를 표시하기 위한 스크립트 -->
 <script th:inline="javascript">
     /*<![CDATA[*/
     (function() {
         var message = /*[[${message != null}]]*/ false ? '/*[[${message}]]*/' : null;
         if (message) {
-            showAlert(message);
+            showAlert('[[${message}]]');
         }
     })();
     /*]]>*/
