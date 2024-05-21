@@ -20,7 +20,7 @@ public class LoginController {
             model.addAttribute("username", authentication.getName());
             model.addAttribute("role", authentication.getAuthorities().toString());
         }
-        return "/view/main";
+        return "view/main";
     }
 
 
