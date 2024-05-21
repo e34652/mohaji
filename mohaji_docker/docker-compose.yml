@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
     ports:
-      - "9876:9876"
+      - "9876:9412"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mohaji.cn4i60u0y7tm.ap-southeast-2.rds.amazonaws.com
       SPRING_DATASOURCE_USERNAME: admin
