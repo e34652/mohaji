@@ -22,13 +22,18 @@ import java.util.List;
 @Controller
 //@Slf4j
 public class RegCourseController {
+    @ModelAttribute
+    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println(customUserDetails.getName());
+        model.addAttribute("name", customUserDetails.getName());
+    }
 
     @Autowired
     RegCourseServiceImple regCourseServiceImple;
 
     @RequestMapping("/regCourse")
     public  String regCourse(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails){
-//        log.info("컨트롤러 도착");
+        System.out.println(customUserDetails.getName());
 //        model.addAttribute("regCourseList",regCourseServiceImple.selectAllSubject());
         if(customUserDetails != null) {
             int memberId = customUserDetails.getMemberId();

@@ -1,7 +1,5 @@
 package com.team1.mohaji.controller.classroomController;
 
-
-
 import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.dto.classroom.HomeDto;
 import com.team1.mohaji.dto.classroom.RegSessionDto;
