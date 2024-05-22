@@ -1,7 +1,5 @@
 package com.team1.mohaji.dto;
 
-import com.team1.mohaji.entity.Board;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,4 +23,6 @@ public class PostDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+
 }
+

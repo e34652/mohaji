@@ -70,34 +70,34 @@ public class PostService {
     }
 
     @Transactional
-     public void insertPost(Post post, List<MultipartFile> files, int memberId) throws IOException {
-            List<Attached> attachments = new ArrayList<>();
-            for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    String originalFileName = file.getOriginalFilename();
-                    String saveFileName = generateUniqueFileName(originalFileName);
-                    Path targetLocation = this.fileStorageLocation.resolve(saveFileName);
-                    String fileType = file.getContentType();
-                    Long fileSize = file.getSize();
+    public void insertPost(Post post, List<MultipartFile> files, int memberId) throws IOException {
+        List<Attached> attachments = new ArrayList<>();
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                String originalFileName = file.getOriginalFilename();
+                String saveFileName = generateUniqueFileName(originalFileName);
+                Path targetLocation = this.fileStorageLocation.resolve(saveFileName);
+                String fileType = file.getContentType();
+                Long fileSize = file.getSize();
 
-                    Files.copy(file.getInputStream(), targetLocation);
+                Files.copy(file.getInputStream(), targetLocation);
 
-                    Attached attached = new Attached();
-                    attached.setOriginalName(originalFileName);
-                    attached.setSavedName(saveFileName);
-                    attached.setAttachedType(fileType);
-                    attached.setAttachedSize(fileSize);
-                    attached.setStoragePath(targetLocation.toString());
-                    attached.setPost(post);
-                    attached.setMemberId(memberId); // memberId 설정
-                    attachments.add(attached);
-                }
+                Attached attached = new Attached();
+                attached.setOriginalName(originalFileName);
+                attached.setSavedName(saveFileName);
+                attached.setAttachedType(fileType);
+                attached.setAttachedSize(fileSize);
+                attached.setStoragePath(targetLocation.toString());
+                attached.setPost(post);
+                attached.setMemberId(memberId); // memberId 설정
+                attachments.add(attached);
             }
-            post.setAttachments(attachments);
-            postRepository.save(post);
-            attachedRepository.saveAll(attachments);
+        }
+        post.setAttachments(attachments);
+        postRepository.save(post);
+        attachedRepository.saveAll(attachments);
 
-     }
+    }
 
 
 
