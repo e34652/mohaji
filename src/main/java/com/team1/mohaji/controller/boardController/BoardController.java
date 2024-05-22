@@ -19,8 +19,6 @@ import java.util.List;
 public class BoardController {
 
     @Autowired
-    private BoardService boardService;
-    @Autowired
     private PostService postService;
 
     @ModelAttribute
@@ -32,9 +30,9 @@ public class BoardController {
 
     @GetMapping("/boardList")
     public String boardList(Model model){
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
-        return "view/board/boardList";
+        List<PostDto> postDTOs = postService.memberName(1);
+        model.addAttribute("posts", postDTOs);
+        return "view/board/noticeBoard";
     }
     @GetMapping("/assignment")
     public String assignmentList(Model model){

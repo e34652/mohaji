@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="css/common/sectionCss.css" />
     <!-- 부트스트랩 CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 분리된 CSS 파일 연결 -->
-    <link rel="stylesheet" th:href="@{/css/myPage/courseRegCss.css}">
-    <link rel="stylesheet" th:href="@{/css/myPage/sectionCss.css}">
+
 
 </head>
 <body>
@@ -36,25 +34,23 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">글번호</th>
-                <th scope="col">제목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">조회수</th>
-                <th scope="col">작성일</th>
+                <th scope="col" style="width: 10%;">글번호</th>
+                <th scope="col" style="width: 50%;">제목</th>
+                <th scope="col" style="width: 10%;">조회수</th>
+                <th scope="col" style="width: 30%;">작성일</th>
             </tr>
             </thead>
             <tbody>
-            <tr t th:each="post : ${posts}">
+            <tr th:each="post : ${posts}">
                 <td th:text="${post.postId}"></td>
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
-                <td th:text="${post.memberName}"></td>
                 <td th:text="${post.views}"></td>
                 <td th:text="${post.formattedCreatedAt}"></td>
             </tr>
             </tbody>
         </table>
-        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|">글작성</button>
+        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|" class="btn btn-primary">글작성</button>
     </main>
 
     <footer>
