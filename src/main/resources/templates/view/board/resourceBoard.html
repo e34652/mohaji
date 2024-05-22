@@ -34,21 +34,21 @@
         <table class="table">
             <thead>
             <tr>
-                <th scope="col" style="width: 10%;">글번호</th>
-                <th scope="col" style="width: 5%;">작성자</th>
-                <th scope="col" style="width: 40%;">제목</th>
-                <th scope="col" style="width: 10%;">조회수</th>
-                <th scope="col" style="width: 25%;">작성일</th>
+                <th scope="col">글번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">조회수</th>
+                <th scope="col">작성일</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="posts : ${posts}">
-                <td th:text="${posts.postId}"></td>
-                <td th:text="${posts.memberId}"></td>
+            <tr t th:each="post : ${posts}">
+                <td th:text="${post.postId}"></td>
                 <td class="title">
-                    <a th:href="@{/postDetail(postId=${posts.postId})}" th:text="${posts.title}"></a></td>
-                <td th:text="${posts.views}"></td>
-                <td th:text="${posts.createdAt}"></td>
+                    <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
+                <td th:text="${post.memberName}"></td>
+                <td th:text="${post.views}"></td>
+                <td th:text="${post.createdAt}"></td>
             </tr>
             </tbody>
         </table>

@@ -1,9 +1,12 @@
 package com.team1.mohaji.service.board;
 
 import com.team1.mohaji.config.FileStorageProperties;
+import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Attached;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.AttachedRepository;
+import com.team1.mohaji.repository.BoardRepository;
+import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,13 @@ public class PostService {
     private AttachedRepository attachedRepository;
 
     private final Path fileStorageLocation;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private BoardService boardService;
+
 
 
     @Autowired
@@ -60,34 +70,34 @@ public class PostService {
     }
 
     @Transactional
-     public void insertPost(Post post, List<MultipartFile> files, int memberId) throws IOException {
-            List<Attached> attachments = new ArrayList<>();
-            for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    String originalFileName = file.getOriginalFilename();
-                    String saveFileName = generateUniqueFileName(originalFileName);
-                    Path targetLocation = this.fileStorageLocation.resolve(saveFileName);
-                    String fileType = file.getContentType();
-                    Long fileSize = file.getSize();
+    public void insertPost(Post post, List<MultipartFile> files, int memberId) throws IOException {
+        List<Attached> attachments = new ArrayList<>();
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                String originalFileName = file.getOriginalFilename();
+                String saveFileName = generateUniqueFileName(originalFileName);
+                Path targetLocation = this.fileStorageLocation.resolve(saveFileName);
+                String fileType = file.getContentType();
+                Long fileSize = file.getSize();
 
-                    Files.copy(file.getInputStream(), targetLocation);
+                Files.copy(file.getInputStream(), targetLocation);
 
-                    Attached attached = new Attached();
-                    attached.setOriginalName(originalFileName);
-                    attached.setSavedName(saveFileName);
-                    attached.setAttachedType(fileType);
-                    attached.setAttachedSize(fileSize);
-                    attached.setStoragePath(targetLocation.toString());
-                    attached.setPost(post);
-                    attached.setMemberId(memberId); // memberId 설정
-                    attachments.add(attached);
-                }
+                Attached attached = new Attached();
+                attached.setOriginalName(originalFileName);
+                attached.setSavedName(saveFileName);
+                attached.setAttachedType(fileType);
+                attached.setAttachedSize(fileSize);
+                attached.setStoragePath(targetLocation.toString());
+                attached.setPost(post);
+                attached.setMemberId(memberId); // memberId 설정
+                attachments.add(attached);
             }
-            post.setAttachments(attachments);
-            postRepository.save(post);
-            attachedRepository.saveAll(attachments);
+        }
+        post.setAttachments(attachments);
+        postRepository.save(post);
+        attachedRepository.saveAll(attachments);
 
-     }
+    }
 
 
 
@@ -121,4 +131,23 @@ public class PostService {
         // 업데이트된 정보를 저장
         postRepository.save(originalPost);
     }
+
+    public List<PostDto> memberName(int boardId){
+        List<Post> posts = boardService.getPostsByBoardId(boardId);
+        List<PostDto> postDtos = new ArrayList<>();
+        for(Post post : posts){
+            String name = memberRepository.findMemberNameByMemberId(post.getMemberId());
+            PostDto postDto = new PostDto();
+            postDto.setPostId(post.getPostId());
+            postDto.setTitle(post.getTitle());
+            postDto.setViews(post.getViews());
+            postDto.setCreatedAt(post.getCreatedAt());
+            postDto.setMemberId(post.getMemberId());
+            postDto.setContent(post.getContent());
+            postDto.setMemberName(name);
+            postDtos.add(postDto);
+        }
+        return postDtos;
+    }
+
 }
