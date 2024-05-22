@@ -6,17 +6,19 @@ import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.dto.myPage.CreditDto;
 import com.team1.mohaji.dto.myPage.MyPCDto;
 import com.team1.mohaji.dto.myPage.RegListDto;
+import com.team1.mohaji.dto.myPage.regEmailDto;
+import com.team1.mohaji.model.model;
 import com.team1.mohaji.service.myPage.imple.MyPCSericeImple;
 import com.team1.mohaji.service.myPage.imple.RegInfoServiceImple;
 import com.team1.mohaji.service.myPage.imple.RegListServiceImple;
+import com.team1.mohaji.service.myPage.imple.UpEmailServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.PrivateKey;
 import java.util.List;
 
 
@@ -36,20 +38,22 @@ public class MyPageController {
     private MyPCSericeImple myPCSericeImple;
     @Autowired
     private RegInfoServiceImple regInfoServiceImple;
+    @Autowired
+    private UpEmailServiceImple upEmailServiceImple;
 
     @GetMapping("/regList")
-        public String myList (@AuthenticationPrincipal CustomUserDetails userDetails, Model model){
-            if (userDetails != null) {
-                int memberId = userDetails.getMemberId();
-                List<RegListDto> regList = regListServiceImple.regListInProgress(memberId);
-                CreditDto creditDto = regListServiceImple.selectCredits(memberId);
-                model.addAttribute("regList", regList);
-                model.addAttribute("credit", creditDto);
-                System.out.println(regList);
-                return "/view/myPage/regList";
-            }
-            return"redirect:/login";
+    public String myList(@AuthenticationPrincipal CustomUserDetails userDetails, Model model) {
+        if (userDetails != null) {
+            int memberId = userDetails.getMemberId();
+            List<RegListDto> regList = regListServiceImple.regListInProgress(memberId);
+            CreditDto creditDto = regListServiceImple.selectCredits(memberId);
+            model.addAttribute("regList", regList);
+            model.addAttribute("credit", creditDto);
+            System.out.println(regList);
+            return "/view/myPage/regList";
         }
+        return "redirect:/login";
+    }
 
 
     @GetMapping("/myPC")
@@ -62,20 +66,20 @@ public class MyPageController {
 
     @RequestMapping("/regInfo")
     public String regInfo(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-            if(customUserDetails != null) {
-                int memberId = customUserDetails.getMemberId();
-                //신청기간중인 것
-                model.addAttribute("regInfo", regInfoServiceImple.selectRegInfoBF(memberId));
-                //신청기간 지난것
-                model.addAttribute("regInfo2",regInfoServiceImple.selectRegInfoAT(memberId) );
+        if (customUserDetails != null) {
+            int memberId = customUserDetails.getMemberId();
+            //신청기간중인 것
+            model.addAttribute("regInfo", regInfoServiceImple.selectRegInfoBF(memberId));
+            //신청기간 지난것
+            model.addAttribute("regInfo2", regInfoServiceImple.selectRegInfoAT(memberId));
 
-                model.addAttribute("memberId", memberId);
-                return "/view/myPage/regInfo";
-            }
-            return"redirect:/login";
+            model.addAttribute("memberId", memberId);
+            return "/view/myPage/regInfo";
+        }
+        return "redirect:/login";
 //        log.info("컨트롤러 서비스완료 ");
 
-        }
+    }
 
     @GetMapping("/regStudy")
     public String regStudy() {
@@ -87,15 +91,37 @@ public class MyPageController {
         return "/view/myPage/regResult";
     }
 
-//    내정보
-    @GetMapping("/userInfo")
-    public String userInfo() {
+    //    내정보
+    @RequestMapping("/userInfo")
+    public String userInfo(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+
+
+        String name= customUserDetails.getName(); // 이름
+        String email= upEmailServiceImple.selectEmail(customUserDetails.getMemberId()); //이메일
+        String userNum ="20240522"+(customUserDetails.getMemberId()); // 일련번호(학번)
+        String userId = customUserDetails.getUsername(); // 로그인아이디
+
+        // 이메일을 @를 기준으로 분리
+        String[] emailParts = email.split("@");
+
+        // 앞부분과 뒷부분을 각각 변수에 저장
+        String bemail = emailParts[0];
+        String aemail = emailParts[1];
+
+        model.addAttribute("name",name);
+        model.addAttribute("bemail", bemail);
+        model.addAttribute("aemail",aemail);
+        model.addAttribute("userNum",userNum);
+        model.addAttribute("userId",userId);
+
         return "/view/myPage/userInfo";
     }
 
-    @GetMapping("/userPsUpdate")
-    public String userPsUpdate() {
-        return "/view/myPage/userPsUpdate";
+    @PostMapping("/ReEmail")
+    public String reEmail(regEmailDto regEmailDto, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String email= (regEmailDto.getBemail())+"@"+(regEmailDto.getAemail());
+        int memberId=customUserDetails.getMemberId();
+        upEmailServiceImple.updateEmail(memberId, email);
+        return "redirect:/myPage/userInfo";
     }
-
-    }
+}

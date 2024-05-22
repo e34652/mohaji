@@ -9,14 +9,16 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
+
+    private String email;
     private String name;
     private int memberId;  // 사용자 ID
-
     private String username;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String name, int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String email, String name, int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this.email = email;
         this.name = name;
         this.memberId = memberId;
         this.username = username;
@@ -24,6 +26,13 @@ public class CustomUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
     public String getName() {
         return name;
     }
@@ -66,4 +75,6 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

@@ -27,7 +27,7 @@ public class MemberDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         int member_id;
-        String userName, password, name = null;
+        String userName, password, name, email = null;
         List<GrantedAuthority> authorities = null;
 
 
@@ -39,11 +39,12 @@ public class MemberDetails implements UserDetailsService {
             name = memberList.get(0).getName();
             password = memberList.get(0).getPassword();
             member_id = memberList.get(0).getMemberId();
+            email = memberList.get(0).getEmail();
             authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
-        return new CustomUserDetails(name, member_id,userName,password,authorities);
+        return new CustomUserDetails(email, name, member_id,userName,password,authorities);
 //        return new User(userName,password,authorities);
     }
 }

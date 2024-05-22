@@ -45,48 +45,65 @@
         <div class="miniNavi">
             <h1>내 정보</h1>
         </div>
-        <div class="post_tit">PC등록</div>
-        <!-- 부트스트랩 컨테이너로 전체를 감쌈 -->
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-9">
-                    <div class="card text-center"> <!-- text-center 클래스를 추가하여 가운데 정렬 -->
-                        <div class="card-body">
-                            <div class="alert alert-info">
-                                <p>같은 PC는 한 번만 등록할 수 있습니다.</p>
-                                <p>등록된 PC가 아니면 다른 PC를 삭제할 수 없습니다.</p>
-                                <p>PC는 3개 까지만 등록이 가능합니다.</p>
-                            </div>
-                            <form method="post" action="/registerPC" onsubmit="return confirmRegistration(this);">
-                                <div class="form-group">
-                                    <label for="mipName">PC 이름</label>
-                                    <input type="text" class="form-control" id="mipName" name="mipName" placeholder="PC 이름" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">현재 PC 등록</button>
-                            </form>
-                            <ul class="list-group mt-4">
-                                <th:block th:each="ip : ${myPCList}">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span>PC 이름: <span th:text="${ip.mipName}"></span></span>
-                                        <form method="post" action="/deletePC" onsubmit="return confirm('정말로 이 PC를 삭제하시겠습니까?');" class="ml-auto">
-                                            <input type="hidden" name="mipId" th:value="${ip.mipId}" />
-                                            <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                                        </form>
-                                    </li>
-                                </th:block>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-</div>
 
-<footer>
-    <!-- 푸터 삽입 -->
-    <footer th:replace="~{layout/footer :: footer}"></footer>
-</footer>
+        <form id="form1" name="form1" method="post" action="/registerPC" onsubmit="return confirmRegistration(this);">
+            <div class="sub_contents">
+                <div class="post_tit">수강 컴퓨터 등록</div>
+                <!-- 과목 list s. -->
+                <div class="my_mac">
+                    <h1>수강 컴퓨터 등록 안내</h1>
+                    <p>학습은 지정한 컴퓨터로만 학습 할 수 있습니다.</p>
+                    <p>등록은 최대 3대까지 지정할 수 있습니다. 3대 등록 후에 다른 컴퓨터를 등록하고자 하는 경우에는 문의해주시기 바랍니다.</p>
+                </div>
+
+                <div class="sub_tit_my2">pc등록</div>
+
+                <!-- computer list s. -->
+                <table class="sub_tbl02">
+                    <colgroup>
+                        <col style="width:10%" />
+                        <col style="width:20%" />
+                        <col style="width:20%" />
+                        <col style="width:50%" />
+                    </colgroup>
+                    <tr>
+                        <th>장소</th>
+                        <td>
+                            <input type="text" name="i_name" id="mipName" class="mac_form"/>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">현재PC등록</button>
+                        </td>
+                    </tr>
+                </table><br/>
+            </div>
+        </form>
+
+        <div class="sub_tit_my2">pc등록 목록</div>
+        <table class="sub_tbl02">
+            <colgroup>
+                <col style="width:30%" />
+                <col style="width:60%" />
+                <col style="width:10%" />
+            </colgroup>
+            <th:block th:each="ip : ${myPCList}">
+                <form method="post" action="/deletePC" onsubmit="return confirm('정말로 이 PC를 삭제하시겠습니까?');" class="ml-auto">
+                    <tr>
+                        <th><span th:text="${ip.mipName}"></span></th>
+                        <td>8C-B0-E9-92-E3-9C</td>
+                        <input type="hidden" name="mipId" th:value="${ip.mipId}" />
+                        <td><button type="submit" class="btn btn-primary">삭제</button></td>
+                    </tr>
+                </form>
+            </th:block>
+        </table>
+    </main>
+
+    <footer>
+        <!-- 푸터 삽입 -->
+        <footer th:replace="~{layout/footer :: footer}"></footer>
+    </footer>
+</div>
 
 <!-- 성공 또는 오류 메시지를 표시하기 위한 스크립트 -->
 <script th:inline="javascript">
