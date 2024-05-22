@@ -1,14 +1,14 @@
 package com.team1.mohaji.controller.classroomController;
 
 import com.team1.mohaji.config.CustomUserDetails;
-import com.team1.mohaji.dto.classroom.HomeDto;
-import com.team1.mohaji.dto.classroom.RegSessionDto;
-import com.team1.mohaji.dto.classroom.ViewerDto;
+import com.team1.mohaji.dto.classroom.*;
 import com.team1.mohaji.dto.myPage.MyPCDto;
+import com.team1.mohaji.service.classroom.imple.AssignmentRoomServiceImple;
 import com.team1.mohaji.service.classroom.imple.HomeServiceImple;
 import com.team1.mohaji.service.classroom.imple.ViewerServiceImple;
 import com.team1.mohaji.service.myPage.imple.MyPCSericeImple;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +24,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/classroom")
 public class ClassroomController {
+    @Autowired
+    private AssignmentRoomServiceImple assignmentRoomServiceImple;
+
     @ModelAttribute
     public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         System.out.println(customUserDetails.getName());
@@ -41,8 +44,10 @@ public class ClassroomController {
     public String myList(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestParam int subId,
-            @RequestParam int memberId, Model model) {
+            @RequestParam int memberId, Model model,
+            HttpSession session) {
         if (userDetails != null) {
+            session.setAttribute("subId", subId);
             List<HomeDto> home = homeServiceImple.sessionListInProgress(subId, memberId);
             model.addAttribute("home", home);
             return "view/classroom/classroomHome";
@@ -50,7 +55,6 @@ public class ClassroomController {
             return "redirect:/login";
         }
     }
-
     @GetMapping("/viewer")
     public String viewerInfo(HttpServletRequest request,
                              @AuthenticationPrincipal CustomUserDetails userDetails,
@@ -87,6 +91,57 @@ public class ClassroomController {
         }
         return"redirect:/login";
     }
+
+    @GetMapping("/assignmentRoom")
+    public String asgnRoom(@AuthenticationPrincipal CustomUserDetails userDetails,
+                           Model model, HttpSession session) {
+        if (userDetails != null) {
+            int memberId = userDetails.getMemberId();
+            int subId = (int) session.getAttribute("subId");
+            List<AssignmentDto> asgnList = assignmentRoomServiceImple.selectAssignmentList(memberId);
+            String subName = assignmentRoomServiceImple.selectSubName(subId);
+            model.addAttribute("asgnList", asgnList);
+            model.addAttribute("subName",subName);
+            System.out.println(asgnList);
+            return "view/classroom/assignmentRoom";
+        }
+        return"redirect:/login";
+    }
+
+    @GetMapping("/assignmentDetail")
+    public String asgnDetail(@AuthenticationPrincipal CustomUserDetails userDetails,
+                             @RequestParam int asgnId, Model model,HttpSession session){
+        if (userDetails != null) {
+            if (assignmentRoomServiceImple.countRegAsgn(userDetails.getMemberId(), (Integer) session.getAttribute("subId"), asgnId) == 1){
+                RegAssignmentDto regAssignmentDto = assignmentRoomServiceImple.selectRegAsgn(userDetails.getMemberId(), (Integer) session.getAttribute("subId"), asgnId);
+                model.addAttribute("regAsgn", regAssignmentDto);
+                System.out.println(regAssignmentDto);
+            }
+            AssignmentDto asgn = assignmentRoomServiceImple.selectAssignment(asgnId);
+            model.addAttribute("asgn", asgn);
+            return "view/classroom/assignmentDetail";
+        }
+        return"redirect:/login";
+    }
+
+    @ResponseBody
+    @PostMapping("/submitAsgn")
+    public void submitAsgn(@AuthenticationPrincipal CustomUserDetails userDetails,
+                           HttpSession session, @ModelAttribute RegAssignmentDto regAssignmentDto) {
+        int memberId = userDetails.getMemberId();
+        int subId = (Integer)session.getAttribute("subId");
+        regAssignmentDto.setMemberId(memberId);
+        regAssignmentDto.setSubId(subId);
+        if (userDetails != null) {
+            if (assignmentRoomServiceImple.countRegAsgn(regAssignmentDto.getMemberId(), regAssignmentDto.getSubId(), regAssignmentDto.getAsgnId()) == 1){
+                assignmentRoomServiceImple.updateRegAsgn(regAssignmentDto);
+            }else{
+                assignmentRoomServiceImple.insertRegAsgn(regAssignmentDto);
+            }
+        }
+    }
+
+
     @ResponseBody
     @PostMapping("/renewRegSession")
     public void renewRegSession(@RequestBody RegSessionDto regSessionDto) {

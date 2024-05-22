@@ -1,7 +1,9 @@
 package com.team1.mohaji.controller.loginController;
 
+import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.service.board.BoardService;
+import com.team1.mohaji.service.board.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +22,14 @@ import java.util.List;
 public class LoginController {
 
     @Autowired
-    private BoardService boardService;
+    private PostService postService;
 
     @GetMapping(value={"/",  "/main"})
         public String getMypage(Model model, Authentication authentication){
 
-        List<Post> notice = boardService.getPostsByBoardId(1);
+        List<PostDto> notice = postService.memberName(1);;
         model.addAttribute("notice", notice);
-        List<Post> assignment = boardService.getPostsByBoardId(2);
+        List<PostDto> assignment = postService.memberName(2);
         model.addAttribute("assignment", assignment);
 
         if(authentication != null) {

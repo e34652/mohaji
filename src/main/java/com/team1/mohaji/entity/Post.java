@@ -24,17 +24,14 @@ public class Post extends BaseEntity {
     private String title;
     private String content;
     private Integer views;
+
     @Column(nullable = true)
     private Integer attachedId;
     private Integer likeId;
-//    @ManyToOne
-//    @JoinColumn(name = "like_id")
-//    private Like like;
+
     @Column(name = "member_id", nullable = false)
     private Integer memberId;
-//    @ManyToOne
-//    @JoinColumn(name = "member_id", nullable = false)
-//    private Member member;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;

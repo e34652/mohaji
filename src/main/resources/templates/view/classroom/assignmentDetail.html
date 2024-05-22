@@ -16,7 +16,7 @@
 
 <div class="container1">
   <aside>
-    <nav th:replace="~{layout/sidebar :: sidebar}"></nav>
+    <nav th:replace="~{layout/classroomSidebar :: classroomSidebar}"></nav>
   </aside>
 
   <main>
@@ -51,7 +51,8 @@
           <th>주의사항</th>
           <td>
             <div style="width:555px;word-wrap:break-word;">
-              <p>1. 과제 작성 시 참고한 자료가 있다면 출처를 명확히 기재해야 합니다. <br>
+              <p>
+                1. 과제 작성 시 참고한 자료가 있다면 출처를 명확히 기재해야 합니다. <br>
                 2. 과제 주제와 상관없는 내용, 또는 파일을 확인 할 수 없는 경우에는 점수 부여가 되지 않습니다. (0점 처리) <br>
                 3. 표절 또는 타인의 과제를 제출하는 등 부정행위로 적발 시 해당 학습자 모두 해당 과정의 성적은 0점(F학점)입니다. <br>
               </p>
@@ -70,7 +71,6 @@
             <col width="25%" />
             <col width="*%" />
           </colgroup>
-
           <tr>
             <th>제목</th>
             <td th:text="${asgn.asgnTitle}" class="study_form1"></td>
@@ -87,25 +87,32 @@
           <tr>
             <th>첨부파일</th>
             <td colspan="3">
-              <div style="float:left"><input type="file" id="i_filename" name="i_filename" value="" class="styled"/></div>
+              <div style="float:left">
+                <input type="file" id="i_filename" name="i_filename" value="" class="styled"/>
+              </div>
               <div class="marginT03"></div>
-              <div style="clear:both;color:red">* 새파일 등록시 기존 파일은 삭제됩니다.</div>
+              <div style="clear:both;color:red">
+                * 새파일 등록시 기존 파일은 삭제됩니다.
+              </div>
             </td>
           </tr>
         </table>
       </form>
 
       <div class="course_btn_warp margin_bot50">
-        <a href="javascript:'#';"><div class="course_cancle">목록으로</div></a>
+        <a href="javascript:'#';">
+          <div class="course_cancle">목록으로</div>
+        </a>
         <a href="javascript:void(0);">
           <div class="course_plan2 margin_left10" id="submit-button">제출</div>
         </a>
       </div>
     </div>
   </main>
-</div>
 
-<div th:replace="~{layout/footer :: footer}"></div>
+
+ <div th:replace="~{layout/footer :: footer}"></div>
+</div>
 <script>
   $(document).ready(function(){
     $('#submit-button').click(function(){
