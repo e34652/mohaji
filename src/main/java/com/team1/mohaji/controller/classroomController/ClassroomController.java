@@ -79,8 +79,13 @@ public class ClassroomController {
 
     @GetMapping("/assignmentDetail")
     public String asgnDetail(@AuthenticationPrincipal CustomUserDetails userDetails,
-                             @RequestParam int asgnId, Model model){
+                             @RequestParam int asgnId, Model model,HttpSession session){
         if (userDetails != null) {
+            if (assignmentRoomServiceImple.countRegAsgn(userDetails.getMemberId(), (Integer) session.getAttribute("subId"), asgnId) == 1){
+                RegAssignmentDto regAssignmentDto = assignmentRoomServiceImple.selectRegAsgn(userDetails.getMemberId(), (Integer) session.getAttribute("subId"), asgnId);
+                model.addAttribute("regAsgn", regAssignmentDto);
+                System.out.println(regAssignmentDto);
+            }
             AssignmentDto asgn = assignmentRoomServiceImple.selectAssignment(asgnId);
             model.addAttribute("asgn", asgn);
             return "view/classroom/assignmentDetail";
@@ -96,7 +101,6 @@ public class ClassroomController {
         int subId = (Integer)session.getAttribute("subId");
         regAssignmentDto.setMemberId(memberId);
         regAssignmentDto.setSubId(subId);
-        System.out.println(regAssignmentDto);
         if (userDetails != null) {
             if (assignmentRoomServiceImple.countRegAsgn(regAssignmentDto.getMemberId(), regAssignmentDto.getSubId(), regAssignmentDto.getAsgnId()) == 1){
                 assignmentRoomServiceImple.updateRegAsgn(regAssignmentDto);

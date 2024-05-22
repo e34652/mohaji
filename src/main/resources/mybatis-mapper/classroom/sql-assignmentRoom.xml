@@ -32,12 +32,17 @@
         WHERE asgn_id = #{asgnId} AND member_id = #{memberId} AND sub_id = #{subId};
     </select>
 
-    <update id = "updateRegAsgn" parameterType="int">
+    <update id = "updateRegAsgn" parameterType="com.team1.mohaji.dto.classroom.RegAssignmentDto">
 UPDATE reg_asgn SET ra_content = #{raContent}, ra_sdate = now() WHERE asgn_id = #{asgnId} AND member_id = #{memberId} AND sub_id = #{subId};
     </update>
 
+    <select id="selectRegAsgn" parameterType="int" resultMap="regAsgn">
+        SELECT *
+        FROM reg_asgn
+        WHERE asgn_id = #{asgnId} AND member_id = #{memberId} AND sub_id = #{subId};
+    </select>
 
-    <insert id = "insertRegAsgn" parameterType="com.team1.mohaji.dto.classroom.RegAssignmentDto">
+    <insert id = "insertRegAsgn" parameterType="map">
         INSERT INTO reg_asgn (asgn_id, member_id, sub_id, ra_content, ra_sdate)
         VALUES (#{asgnId}, #{memberId}, #{subId}, #{raContent}, now())
     </insert>

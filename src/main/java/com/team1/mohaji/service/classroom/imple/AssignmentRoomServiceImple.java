@@ -44,6 +44,16 @@ public class AssignmentRoomServiceImple implements AssignmentRoomService {
 
     @Override
     public void insertRegAsgn(RegAssignmentDto regAssignmentDto) {
-        assignmentRoomMapper.insertRegAsgn(regAssignmentDto);
+        assignmentRoomMapper.insertRegAsgn(
+                regAssignmentDto.getMemberId(),
+                regAssignmentDto.getSubId(),
+                regAssignmentDto.getAsgnId(),
+                regAssignmentDto.getRaContent());
+    }
+
+    @Override
+    public RegAssignmentDto selectRegAsgn(int memberId, int subId, int asgnId) {
+        RegAssignmentDto regAssignmentDto = assignmentRoomMapper.selectRegAsgn(memberId, subId, asgnId);
+        return regAssignmentDto;
     }
 }

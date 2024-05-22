@@ -11,7 +11,7 @@ public interface AssignmentRoomService {
     public List<AssignmentDto> selectAssignmentList(int memberId);
     public String selectSubName(int subId);
     public void insertRegAsgn(RegAssignmentDto regAssignmentDto);
-
+    public RegAssignmentDto selectRegAsgn(int memberId, int subId, int asgnId);
     public int countRegAsgn(int subId, int memberId, int asgnId);
 
     public void updateRegAsgn(RegAssignmentDto regAssignmentDto);

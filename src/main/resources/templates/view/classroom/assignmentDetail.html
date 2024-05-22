@@ -21,12 +21,10 @@
 
   <main>
     <div class="miniNavi">
-      <h1>Hello, World!</h1>
+      <h1>과제방</h1>
     </div>
 
     <div class="sub_contents">
-      <div class="post_tit">과제방</div>
-
       <div class="sub_tit_my3">과제정보</div>
       <table class="sub_tbl04">
         <colgroup>
@@ -79,7 +77,12 @@
           </tr>
           <tr>
             <th>내용</th>
-            <td><textarea name="raContent" id="raContent" class="study_form2" valid="{label:'내용', method:'required'}"></textarea></td>
+            <td th:if="${regAsgn != null}">
+              <textarea name="raContent" id="raContent1" class="study_form2" th:text="${regAsgn.raContent}"></textarea>
+            </td>
+            <td th:unless="${regAsgn != null}">
+              <textarea name="raContent" id="raContent" class="study_form2"></textarea>
+            </td>
           </tr>
           <tr>
             <th>첨부파일</th>
