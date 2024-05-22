@@ -6,23 +6,27 @@ import com.team1.mohaji.service.main.imple.RegCourseServiceImple;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
 public class MainController {
-    @ModelAttribute
-    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        System.out.println(customUserDetails.getName());
-        model.addAttribute("name", customUserDetails.getName());
+
+
+    @GetMapping("/login/login")
+    public String showLoginPage() {
+        return "view/loginPage/login"; // `login.html` 파일을 반환합니다.
     }
 
-    @RequestMapping("/info")
-    public String info(){
+    @GetMapping("/info")
+    public String info(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails){
+       model.addAttribute("name",customUserDetails.getName());
         return "/view/info";
     }
 
@@ -30,7 +34,7 @@ public class MainController {
     public static class HomeController {
 
         @RequestMapping(value={"", "/", "main", "/main"})
-        public String displayHomePage() {
+        public String displayHomePage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
             return "/view/main";
         }
 

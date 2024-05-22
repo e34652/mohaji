@@ -13,9 +13,6 @@
     <link rel="stylesheet" type="text/css" href="/css/common/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common/sectionCss.css" />
     <link rel="stylesheet" type="text/css" href="/css/myPage/regList.css" />
-    <!-- 분리된 CSS 파일 연결 -->
-    <link rel="stylesheet" th:href="@{/css/myPage/courseRegCss.css}" />
-    <link rel="stylesheet" th:href="@{/css/myPage/sectionCss.css}" />
     <script>
         function confirmRegistration(form) {
             if (confirm('현재 사용중인 PC를 등록하시겠습니까?')) {
@@ -46,8 +43,9 @@
     <main style="height: 1000px">
         <!-- 컨텐츠 삽입 -->
         <div class="miniNavi">
-            <h1>PC 등록</h1>
+            <h1>내 정보</h1>
         </div>
+        <div class="post_tit">PC등록</div>
         <!-- 부트스트랩 컨테이너로 전체를 감쌈 -->
         <div class="container mt-5">
             <div class="row justify-content-center">
