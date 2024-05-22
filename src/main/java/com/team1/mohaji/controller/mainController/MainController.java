@@ -30,13 +30,4 @@ public class MainController {
         return "/view/info";
     }
 
-//    @Controller
-//    public static class HomeController {
-//
-//        @RequestMapping(value={"", "/", "main", "/main"})
-//        public String displayHomePage(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-//            return "/view/main";
-//        }
-//
-//    }
 }
