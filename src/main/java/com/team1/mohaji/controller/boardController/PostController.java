@@ -4,6 +4,7 @@ import com.team1.mohaji.config.CustomUserDetails;
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
+import com.team1.mohaji.model.model;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.service.board.BoardService;
 import com.team1.mohaji.service.board.PostService;
@@ -39,6 +40,7 @@ public class PostController {
         return "view/board/writeForm";
     }
 
+
     @PostMapping("/newPost")
     public String insertPost(@RequestParam("boardId") int boardId,
                              @RequestParam("title") String title,
@@ -48,6 +50,13 @@ public class PostController {
                              Model model){
 
         int memberId = customUserDetails.getMemberId();
+        String userRole = customUserDetails.getRole();
+
+        // 권한 검증 로직
+        boolean hasPermission = checkPermission(boardId, userRole);
+        if (!hasPermission) {
+            return "/view/error"; // 권한이 없을 경우 /error 페이지로 포워드
+        }
 
         List<Board> boardList = boardService.selectAll();
         model.addAttribute("boardList", boardList);
@@ -71,6 +80,21 @@ public class PostController {
         }
 
         return "redirect:/boardList";
+    }
+
+    private boolean checkPermission(int boardId, String userRole) {
+        switch (boardId) {
+            case 1: // 관리자만
+                return "ADMIN".equals(userRole);
+            case 2: // 교수만
+                return "PROFESSOR".equals(userRole);
+            case 3: // 누구나
+                return true;
+            case 4: // 누구나
+                return true;
+            default:
+                return false;
+        }
     }
 
     @GetMapping("/postDetail")

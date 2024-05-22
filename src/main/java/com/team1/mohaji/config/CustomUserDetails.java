@@ -8,11 +8,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 
+@Getter
+@Setter
 public class CustomUserDetails implements UserDetails {
 
     private int memberId;  // 사용자 ID
     private String username;
     private String password;
+    private String role;
     private Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
