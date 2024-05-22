@@ -25,7 +25,7 @@
     <title>모하지대학교 LMS</title>
   </head>
   <body class="">
-  <div sec:authorize="isAnonymous()">
+  <div sec :authorize="isAnonymous()">
     <!-- header -->
     <script>
         window.xnSubMenuHelper = {
@@ -262,7 +262,7 @@
                <div class="xn-main-login-container"> <!-- 우측 파란배경 -->
               
                 <div class="xn-main-login-container-title-wrap">
-                <span class="xn-main-login-container-title">통합 로그인</span>
+                <span class="xn-main-login-container-title"></span>
               </div>
                  <div class="xn-sso-login-btn-wrap">
                    <!-- 로그아웃 버튼: isLoggedIn이 null이 아니고 true인 경우 -->
@@ -308,27 +308,34 @@
                     <div class="xnbw-title-wrap">
                       <div class="xnbw-title">학사</div>
                       <div class="xnbw-sub-title"></div>
-                    </div><div class="xnbw-category-wrap">
+                    </div>
+                    <div class="xnbw-category-wrap">
                     <div class="xnbw-category-tab-wrap">
                       <div class="xnbw-all-tab selected">전체</div>
-                      <div class="xnbw-category-tab ">한국어</div>
-                      <div class="xnbw-category-tab ">영어</div>
-                      <div class="xnbw-category-tab ">중국어</div>
-                      <div class="xnbw-category-tab ">베트남어</div>
-                    </div><button class="xnbw-more-tab" style="color: #000000">+</button>
-                  </div></div><ul class="xnbw-items-container">
-                  <li class="xnbw-item-container" th:each="studentAnnouncement : ${stuBoard}">-->
-                           <div class="xnbw-board-post-list">
-                           <div class="xnbw-post-list-category"></div>
-                          <div class="xnbw-post-list-title xn-common-title" th:text="${studentAnnouncement.title}"></div>
-                         <div class="xnbw-post-list-created" th:text="${studentAnnouncement.date}"></div>
-                       </div>
+                    </div>
+                      <a class="xnbw-more-tab" th:href="@{/notice}">
+                        <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
+                          +</button>
+                      </a>
+                    </div>
+                  </div>
+                  <ul class="xnbw-items-container">
+                  <li class="xnbw-item-container" th:each="notice : ${notice}">
+                    <div class="xnbw-board-post-list">
+                      <div class="xnbw-post-list-category"></div>
+
+                      <div class="xnbw-post-list-title xn-common-title" >
+                        <a th:href="@{/postDetail(postId=${notice.postId})}" th:text="${notice.title}"></a>
+
+                      </div>
+                      <div class="xnbw-post-list-created" th:text="${notice.getCreatedAt()}"></div>
+                    </div>
                   </li>
                 </ul>
 
                 </div>
               </div>
-          </div>
+              </div>
 
               <!--  과목공지-->
               <div id="widget-63eafc78e0e2b377f867b922" class="widget xnp-widget-menual">
@@ -338,31 +345,44 @@
                       <div class="xnbw-title-wrap">
                         <div class="xnbw-title">과목</div>
                         <div class="xnbw-sub-title"></div>
-                      </div><div class="xnbw-category-wrap">
-                      <div class="xnbw-category-tab-wrap">
-                        <div class="xnbw-all-tab selected">전체</div>
-                      </div><button class="xnbw-more-tab"  style="color: #000000">+</button>
-                    </div></div><ul class="xnbw-items-container">
-                    <li class="xnbw-item-container" th:each="professorAnnouncement : ${proBoard}">
+                      </div>
+                      <div class="xnbw-category-wrap">
+                        <div class="xnbw-category-tab-wrap">
+                          <div class="xnbw-all-tab selected">전체</div>
+                        </div>
+                        <a class="xnbw-more-tab" th:href="@{/assignment}">
+                          <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
+                            +</button>
+                        </a>
+                      </div>
+                    </div>
+                    <ul class="xnbw-items-container">
+                      <li class="xnbw-item-container" th:each="assignment: ${assignment}">
                       <div class="xnbw-board-post-list">
                         <div class="xnbw-post-list-category"></div>
-                        <div class="xnbw-post-list-title xn-common-title" th:text="${professorAnnouncement.title}"></div>
-                        <div class="xnbw-post-list-created" th:text="${professorAnnouncement.date}"></div>
+
+                        <div class="xnbw-post-list-title xn-common-title" >
+                          <a th:href="@{/postDetail(postId=${assignment.postId})}" th:text="${assignment.title}"></a>
+                        </div>
+
+                        <div class="xnbw-post-list-created" th:text="${assignment.getCreatedAt()}"></div>
                       </div>
                     </li>
-                  </ul>
+                    </ul>
+
                   </div>
                 </div>
               </div>
+
         </div>
-        
+
         
 <!--                                    <script src="https://lms.ssu.ac.kr/js/front/widget.app.js?version=5.24.0"></script>-->
 <!--                <script src="https://lms.ssu.ac.kr/js/front/popup/popup.app.js?version=5.24.0"></script>-->
           </div>
         
-            </main>
 
+    <main>
         <div id="xnm2_content">
             <!-- 로그인 버튼 밑에 공간 -->
             <div class="xnp-manual-wrap">
@@ -378,9 +398,9 @@
     <footer id="footer" style="background-color: #333333 ">
       <div class="xn-main-catalog-footer-upper" >
         <span></span>
-       
+
         </div>
-      </div>
+
       <div class="xn-main-catalog-footer-border"></div>
       <div class="xn-main-catalog-footer-info" style="background-color: #333333 ">
         <a href="/main">
@@ -407,10 +427,11 @@
                 
               </div>
             </div>
-          </div>
+
       </span>
       </div>
     </footer>
-  </div>
+    </div>
   </body>
+
 </html>

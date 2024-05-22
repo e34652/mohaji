@@ -13,8 +13,13 @@
       <script
         src="https://lms.ssu.ac.kr/js/coursecatalog-bootstrap.js"
       ></script>
-
+<style>
+      .no-inherit {
+        list-style: none;
+      }
+</style>
       <title>header navbar</title>
+
     </head>
     <body>
       <!-- header -->
@@ -162,6 +167,9 @@
                         <a href="/myPage/regList">마이페이지</a>
                       </li>
                     </ul>
+
+
+
                   </div>
                   <div class="xn-sub-menu-outer-wrapper">
                     <div class="xn-sub-menu-outer-containar">
@@ -208,20 +216,22 @@
                           <li id="menu-item-d2" class="menu-item">
                             <a href="/myPage/regInfo">수강 이력</a>
                           </li>
-                          </li>
                           <!--혜빈님 컨트롤러 요청명 따라 갈 것   -->
                           <li id="menu-item-d3" class="menu-item">
-                            <a href="/myPage/userInfo" data-role="menu"
-                              >내 정보</a
-                            >
+                            <a href="/myPage/userInfo" data-role="menu">내 정보</a>
                           </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+
+                </div>
             </div>
+          </div>
+          <div style="margin-right: 10%; margin-left: 0;">
+            <span class="no-inherit" th:text="${name} + '님 로그인'"></span>&nbsp;&nbsp;
+            <a class="no-inherit" href="/logout">로그아웃</a>
           </div>
         </nav>
       </header>

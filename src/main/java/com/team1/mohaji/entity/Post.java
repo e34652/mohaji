@@ -1,9 +1,12 @@
 package com.team1.mohaji.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -32,8 +35,21 @@ public class Post extends BaseEntity {
 //    @ManyToOne
 //    @JoinColumn(name = "member_id", nullable = false)
 //    private Member member;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime updatedAt;
+
+
+    public String getFormattedCreatedAt() {
+        return createdAt.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+    public String getFormattedUpdatedAt() {
+        return updatedAt.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Attached> attachments;
