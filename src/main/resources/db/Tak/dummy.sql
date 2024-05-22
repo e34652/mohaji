@@ -50,8 +50,9 @@ insert into session values
 (0, 9, '기타 제어문', 2, 9, '2024-06-10 00:00:00', '2024-06-16 23:59:59'),
 (0, 10, '제어문 중첩', 2, 10, '2024-06-17 00:00:00', '2024-06-23 23:59:59');
 
-insert into asgn values(0,'2024-06-05 23:59:59', 'Hello Python 출력하기','2024-04-12 00:00:00', 2);
-
+insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-05-05', 'Hello Python을 출력 세가지 방법으로 작성해보세요',2,'2024-04-08','Hello Python 출력하기');
+insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-05-06', '구구단을 출력하는 코드를 세가지 방법으로 작성해보세요',2,'2024-06-02','구구단 출력하기');
+insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-06-03', '생년월일을 입력받아 나이를 계산하는 코드를 작성해보세요',2,'2024-06-30','나이 계산기');
 
 
 

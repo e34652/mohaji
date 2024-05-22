@@ -35,8 +35,7 @@ public class RegAssignment {
     @Column(name = "ra_content", length = 4000)
     private String raContent;
 
-    @NotBlank
-    @Column(name = "ra_sdate", nullable = false)
+    @Column(name = "ra_sdate")
     private Timestamp raSdate;
 
     @NotBlank
@@ -45,6 +44,8 @@ public class RegAssignment {
 
     @Column(name = "ra_feedback", length = 4000)
     private String raFeedback;
+
+
 
     // Getters and setters
 }
