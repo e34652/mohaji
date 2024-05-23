@@ -64,8 +64,9 @@ public class BoardController {
     public String search(@RequestParam("board") int boardId,
                          @RequestParam("query") String query,
                          Model model) {
-        List<PostDto> postDTOs = null;
-        String  boardName = null;
+        List<PostDto> postDTOs = postService.searchAndConvertPosts(query, boardId);
+
+        String boardName = null;
         switch (boardId) {
             case 2:
                 boardName = "assignment";
@@ -80,7 +81,7 @@ public class BoardController {
                 boardName = "resource";
                 break;
         }
-        postDTOs = postService.searchPostsByTitle(query, boardId);
+
         model.addAttribute("posts", postDTOs);
         return "view/board/" + boardName + "Board";
     }

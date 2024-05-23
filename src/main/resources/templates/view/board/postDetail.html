@@ -22,7 +22,13 @@
                 <th scope="row">작성자</th>
                 <td th:text="${memberName}"></td>
                 <th scope="row">작성일</th>
-                <td th:text="${post.createdAt }"></td>
+                <td th:text="${post.createdAt}"></td>
+            </tr>
+            <tr>
+                <th scope="row">수정자</th>
+                <td th:text="${memberName}"></td>
+                <th scope="row">수정일</th>
+                <td th:text="${post.updatedAt}"></td>
             </tr>
             <tr>
                 <th scope="row">제목</th>

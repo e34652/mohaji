@@ -21,19 +21,5 @@ import java.util.List;
 @Slf4j
 public class LoginController {
 
-    @GetMapping("/mypage")
-    public String getMypage(Model model, Authentication authentication){
-        if(authentication != null) {
-            model.addAttribute("username", authentication.getName());
-            model.addAttribute("role", authentication.getAuthorities().toString());
-
-        }
-        return "view/mypage";
-    }
-
-    @GetMapping("/login/login")
-    public String login(Model model, Authentication authentication){
-        return "view/loginPage/login";
-    }
 
 }

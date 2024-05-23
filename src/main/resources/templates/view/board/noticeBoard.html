@@ -53,7 +53,7 @@
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
                 <td th:text="${post.views}"></td>
-<!--                <td th:text="${post.formattedCreatedAt}"></td>-->
+                <td th:text="${post.createdAt}"></td>
             </tr>
             </tbody>
         </table>
