@@ -21,5 +21,26 @@ import java.util.List;
 @Slf4j
 public class LoginController {
 
+    @Autowired
+    private BoardService boardService;
+
+    @GetMapping(value={"/",  "/main"})
+    public String getMypage(Model model, Authentication authentication){
+        int limit = 5;
+        List<Post> notice = boardService.getPostsPage(1, limit);
+        model.addAttribute("notice", notice);
+        List<Post> assignment = boardService.getPostsPage(2, limit);
+        model.addAttribute("assignment", assignment);
+
+        if(authentication != null) {
+            model.addAttribute("username", authentication.getName());
+            model.addAttribute("role", authentication.getAuthorities().toString());
+
+            //혜빈님 코드 추가에 또 추가했어욧~~
+        }
+        return "view/main";
+    }
+
+
 
 }
