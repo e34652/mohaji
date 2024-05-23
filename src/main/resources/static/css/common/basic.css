@@ -469,7 +469,7 @@ font-family: 'Noto Sans KR', sans-serif;
 @media screen and (max-width: 1100px) {.sub_right {width:77.27%;}}
 
 
-.sub_contents {float:left;width:850px;line-height:1.6;}
+.sub_contents {float:left;width:90%;line-height:1.6;}
 .sub_contents::after {display:block; clear:both; content:'';padding:0px 0px;}
 
 .post_tit {width:100%;clear:both;border-bottom:1px solid #dcdcdc;padding:0px 0px 10px 10px;font-size:2.0rem;font-weight:700;margin-bottom:40px;}

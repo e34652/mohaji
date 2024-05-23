@@ -12,7 +12,6 @@ public class HomeServiceImple implements HomeService {
     @Autowired
     HomeMapper homeMapper;
 
-
     @Override
     public List<HomeDto> sessionListInProgress(int subId, int memberId) {
         List<HomeDto> rsList = homeMapper.selectRegSessionList(subId, memberId);

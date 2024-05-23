@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/common/index2.css" media="all"/>
     <link rel="stylesheet" href="/css/common/index1.css" media="all"/>
     <link rel="stylesheet" href="/css/common/main.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="/css/common/basic.css" />
 
     <link rel="stylesheet" href="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.min.css"/>
 
@@ -17,15 +18,10 @@
     <script src="https://lms.ssu.ac.kr/lib/bootstrap/4.2.1/bootstrap.bundle.min.js"></script>
     <script src="https://lms.ssu.ac.kr/js/polyfill.js"></script>
 
-<!--    <script>-->
-<!--      var MIX_APP_URL = "https://lms.ssu.ac.kr";-->
-<!--      var API_V1_ENDPOINT = "https://lms.ssu.ac.kr" + "/api/v1";-->
-<!--    </script>-->
-
     <title>모하지대학교 LMS</title>
   </head>
   <body class="">
-  <div sec :authorize="isAnonymous()">
+  <div>
     <!-- header -->
     <script>
         window.xnSubMenuHelper = {
@@ -262,7 +258,7 @@
                <div class="xn-main-login-container"> <!-- 우측 파란배경 -->
               
                 <div class="xn-main-login-container-title-wrap">
-                <span class="xn-main-login-container-title">통합 로그인</span>
+                <span class="xn-main-login-container-title"></span>
               </div>
                  <div class="xn-sso-login-btn-wrap">
                    <!-- 로그아웃 버튼: isLoggedIn이 null이 아니고 true인 경우 -->
@@ -312,25 +308,23 @@
                     <div class="xnbw-category-wrap">
                     <div class="xnbw-category-tab-wrap">
                       <div class="xnbw-all-tab selected">전체</div>
-                      <div class="xnbw-category-tab ">한국어</div>
-                      <div class="xnbw-category-tab ">영어</div>
-                      <div class="xnbw-category-tab ">중국어</div>
-                      <div class="xnbw-category-tab ">베트남어</div>
                     </div>
                       <a class="xnbw-more-tab" th:href="@{/notice}">
-                        <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
+                        <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 5px 7px;">
                           +</button>
                       </a>
                     </div>
                   </div>
                   <ul class="xnbw-items-container">
                   <li class="xnbw-item-container" th:each="notice : ${notice}">
-                    <div class="xnbw-board-post-list">
-                      <div class="xnbw-post-list-category"></div>
+                    <div class="xnbw-board-post-list" >
+                      <div class="xnbw-post-list-category" ></div>
+
                       <div class="xnbw-post-list-title xn-common-title" >
                         <a th:href="@{/postDetail(postId=${notice.postId})}" th:text="${notice.title}"></a>
+                        <div class="xnbw-post-list-created" th:text="${notice.formattedCreatedAt}"></div>
                       </div>
-                      <div class="xnbw-post-list-created" th:text="${notice.getCreatedAt()}"></div>
+
                     </div>
                   </li>
                 </ul>
@@ -353,25 +347,30 @@
                           <div class="xnbw-all-tab selected">전체</div>
                         </div>
                         <a class="xnbw-more-tab" th:href="@{/assignment}">
-                          <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 10px 20px;">
+                          <button style="color: #000000; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 5px; padding: 5px 7px;">
                             +</button>
                         </a>
                       </div>
                     </div>
                     <ul class="xnbw-items-container">
-                      <li class="xnbw-item-container" th:each="assignment: ${assignment}">
-                      <div class="xnbw-board-post-list">
+                      <li class="xnbw-item-container" th:each="assignment : ${assignment}">
+                      <div class="xnbw-board-post-list" >
                         <div class="xnbw-post-list-category"></div>
-                        <div class="xnbw-post-list-title xn-common-title" >
+
+                        <div class="xnbw-post-list-title xn-common-title">
                           <a th:href="@{/postDetail(postId=${assignment.postId})}" th:text="${assignment.title}"></a>
+                          <div class="xnbw-post-list-created" th:text="${assignment.formattedCreatedAt}"></div>
                         </div>
-                        <div class="xnbw-post-list-created" th:text="${assignment.getCreatedAt()}"></div>
+
+
                       </div>
                     </li>
                     </ul>
+
                   </div>
                 </div>
               </div>
+
         </div>
 
         

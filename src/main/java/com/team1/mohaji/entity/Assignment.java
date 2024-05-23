@@ -23,11 +23,14 @@ public class Assignment {
     @Column(name = "asgn_desc", length = 300)
     private String asgnDesc;
 
-    @Column(name = "asgn_rdate", nullable = false)
-    private LocalDateTime asgnRdate;
+    @Column(name = "asgn_sdate", nullable = false)
+    private LocalDateTime asgnSdate;
 
     @Column(name = "asgn_ddate", nullable = false)
     private LocalDateTime asgnDdate;
 
-    // Getters and setters
+    @Column(name = "asgn_title", nullable = false, length = 60)
+    private String asgnTitle;
+
+
 }

@@ -21,9 +21,4 @@ public class RegInfoController {
     }
 
 
-    @GetMapping("/courseDetailPage")
-    public String courseDetailPage(){
-        return "view/modalPop/courseDetail";
-    }
-
 }

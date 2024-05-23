@@ -27,6 +27,10 @@ public class SecurityConfig {
                 .formLogin(loginConfigurer -> loginConfigurer // 폼 로그인을 구성합니다.
                         .defaultSuccessUrl("/main",true) // 로그인 성공 시 기본 URL("/main")로 리다이렉트합니다.
                         .failureUrl("/login?error=true") // 로그인 실패 시 "/login?error=true" URL로 리다이렉트합니다.
+                        .loginPage("/login/login") // 1번: 커스텀 로그인 페이지 설정
+                        .usernameParameter("username") // 2번: 사용자 이름 필드 이름 설정
+                        .passwordParameter("password") // 3번: 비밀번호 필드 이름 설정
+                        .loginProcessingUrl("/login/login-proc") // 4번: 로그인 처리 URL 설정
                         .permitAll()) // 로그인 페이지에 대한 접근을 모두 허용합니다.
                 .logout(logoutConfigurer -> logoutConfigurer  // 로그아웃을 구성합니다.
                         .logoutUrl("/logout") // 로그아웃 URL을 설정합니다.
