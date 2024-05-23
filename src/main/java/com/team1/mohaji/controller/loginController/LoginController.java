@@ -21,26 +21,19 @@ import java.util.List;
 @Slf4j
 public class LoginController {
 
-    @Autowired
-    private PostService postService;
-
-    @GetMapping(value={"/",  "/main"})
-        public String getMypage(Model model, Authentication authentication){
-
-        List<PostDto> notice = postService.memberName(1);;
-        model.addAttribute("notice", notice);
-        List<PostDto> assignment = postService.memberName(2);
-        model.addAttribute("assignment", assignment);
-
+    @GetMapping("/mypage")
+    public String getMypage(Model model, Authentication authentication){
         if(authentication != null) {
             model.addAttribute("username", authentication.getName());
             model.addAttribute("role", authentication.getAuthorities().toString());
 
-            //혜빈님 코드 추가
         }
-        return "view/main";
+        return "view/mypage";
     }
 
-
+    @GetMapping("/login/login")
+    public String login(Model model, Authentication authentication){
+        return "view/loginPage/login";
+    }
 
 }

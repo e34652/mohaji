@@ -61,28 +61,28 @@ public class BoardController {
 
     //게시판 검색기능 추가
     @GetMapping("/search")
-    public String search(@RequestParam("board") String board,
+    public String search(@RequestParam("board") int boardId,
                          @RequestParam("query") String query,
                          Model model) {
         List<PostDto> postDTOs = null;
-        int boardId = 0;
-        switch (board) {
-            case "assignment":
-                boardId = 2;
+        String  boardName = null;
+        switch (boardId) {
+            case 2:
+                boardName = "assignment";
                 break;
-            case "notice":
-                boardId = 1;
+            case 1:
+                boardName = "notice";
                 break;
-            case "question":
-                boardId = 3;
+            case 3:
+                boardName = "question";
                 break;
-            case "resource":
-                boardId = 4;
+            case 4:
+                boardName = "resource";
                 break;
         }
         postDTOs = postService.searchPostsByTitle(query, boardId);
         model.addAttribute("posts", postDTOs);
-        return "view/board/" + board + "Board";
+        return "view/board/" + boardName + "Board";
     }
 
 
