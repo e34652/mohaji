@@ -27,8 +27,7 @@ public class MemberDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         int member_id;
-        String userName, password = null;
-        //혜빈 role 권한 불러오기 추가
+        String userName, password, name, email = null;
         Enum role = null;
         List<GrantedAuthority> authorities = null;
 
@@ -38,14 +37,16 @@ public class MemberDetails implements UserDetailsService {
             throw new UsernameNotFoundException("User details 확인 불가: " + username);
         } else{
             userName = memberList.get(0).getLoginId();
+            name = memberList.get(0).getName();
             password = memberList.get(0).getPassword();
             member_id = memberList.get(0).getMemberId();
-            authorities = new ArrayList<>();
+            email = memberList.get(0).getEmail();
             role = memberList.get(0).getRole();
+            authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
-        return new CustomUserDetails(member_id,userName,password,authorities, role.name());
+        return new CustomUserDetails(email, name, member_id ,userName,password,role.name(),authorities);
 //        return new User(userName,password,authorities);
     }
 }
