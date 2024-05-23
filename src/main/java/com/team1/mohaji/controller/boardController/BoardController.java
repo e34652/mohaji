@@ -6,9 +6,11 @@ import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.service.board.BoardService;
 import com.team1.mohaji.service.board.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -55,6 +57,31 @@ public class BoardController {
         List<PostDto> postDTOs = postService.memberName(4);
         model.addAttribute("posts", postDTOs);
         return "view/board/resourceBoard";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("board") String board,
+                         @RequestParam("query") String query,
+                         Model model) {
+        List<PostDto> postDTOs = null;
+        int boardId = 0;
+        switch (board) {
+            case "assignment":
+                boardId = 2;
+                break;
+            case "notice":
+                boardId = 1;
+                break;
+            case "question":
+                boardId = 3;
+                break;
+            case "resource":
+                boardId = 4;
+                break;
+        }
+        postDTOs = postService.searchPostsByTitle(query, boardId);
+        model.addAttribute("posts", postDTOs);
+        return "view/board/" + board + "Board";
     }
 
 

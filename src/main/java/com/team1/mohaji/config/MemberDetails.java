@@ -28,6 +28,8 @@ public class MemberDetails implements UserDetailsService {
 
         int member_id;
         String userName, password = null;
+        //혜빈 role 권한 불러오기 추가
+        Enum role = null;
         List<GrantedAuthority> authorities = null;
 
 
@@ -39,10 +41,11 @@ public class MemberDetails implements UserDetailsService {
             password = memberList.get(0).getPassword();
             member_id = memberList.get(0).getMemberId();
             authorities = new ArrayList<>();
+            role = memberList.get(0).getRole();
             authorities.add(new SimpleGrantedAuthority(memberList.get(0).getRole().name()));
         }
 
-        return new CustomUserDetails(member_id,userName,password,authorities);
+        return new CustomUserDetails(member_id,userName,password,authorities, role.name());
 //        return new User(userName,password,authorities);
     }
 }

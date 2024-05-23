@@ -1,14 +1,15 @@
 package com.team1.mohaji.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.team1.mohaji.entity.Post;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostDto {
     private Integer boardId;
     private Integer postId;
@@ -23,6 +24,12 @@ public class PostDto {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    public PostDto(Post post) {
+        this.postId = post.getPostId(); // Assuming postId is getter method name
+        this.title = post.getTitle();
+        this.content = post.getContent();
+        this.memberId = post.getMemberId();
+    }
 
 }
 

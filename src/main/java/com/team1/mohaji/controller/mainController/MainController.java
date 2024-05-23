@@ -25,11 +25,13 @@ public class MainController {
         return "view/info";
     }
 
+    //혜빈 갯수 지정 추가
     @RequestMapping(value={"", "/", "main", "/main"})
     public String displayHomePage(Model model) {
-        List<Post> notice = boardService.getPostsByBoardId(1);
+        int limit = 5; // 가져올 게시물의 개수
+        List<Post> notice = boardService.getPostsPage(1, limit);
         model.addAttribute("notice", notice);
-        List<Post> assignment = boardService.getPostsByBoardId(2);
+        List<Post> assignment = boardService.getPostsPage(2, limit);
         model.addAttribute("assignment", assignment);
         return "/view/main";
     }

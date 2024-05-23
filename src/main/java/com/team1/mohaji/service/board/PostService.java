@@ -9,6 +9,9 @@ import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -149,5 +152,12 @@ public class PostService {
         }
         return postDtos;
     }
+
+
+    public List<PostDto> searchPostsByTitle(String title, int boardId) {
+        List<Post> posts = postRepository.findByTitleContainingAndBoardBoardId(title, boardId);
+        return posts.stream().map(post -> new PostDto(post)).toList();
+    }
+
 
 }

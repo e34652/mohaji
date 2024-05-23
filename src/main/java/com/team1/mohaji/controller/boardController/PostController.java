@@ -51,7 +51,8 @@ public class PostController {
 
         int memberId = customUserDetails.getMemberId();
         String userRole = customUserDetails.getRole();
-
+        System.out.println(memberId);
+        System.out.println(userRole);
         // 권한 검증 로직
         boolean hasPermission = checkPermission(boardId, userRole);
         if (!hasPermission) {

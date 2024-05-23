@@ -18,11 +18,13 @@ public class CustomUserDetails implements UserDetails {
     private String role;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    //혜빈 role 추가
+    public CustomUserDetails(int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities, String role) {
         this.memberId = memberId;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.role = role;
     }
 
     public int getMemberId() {
