@@ -59,6 +59,7 @@ public class BoardController {
         return "view/board/resourceBoard";
     }
 
+    //게시판 검색기능 추가
     @GetMapping("/search")
     public String search(@RequestParam("board") String board,
                          @RequestParam("query") String query,
