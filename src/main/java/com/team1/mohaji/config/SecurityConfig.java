@@ -7,7 +7,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 public class SecurityConfig {
@@ -16,12 +18,12 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrfConfig) -> csrfConfig.disable())//CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
-                .authorizeHttpRequests((requests) -> requests // HTTP 요청을 인증 및 권한 부여합니다.
+                .authorizeHttpRequests((authorize) -> authorize // HTTP 요청을 인증 및 권한 부여합니다.
                         .requestMatchers("/css/**", "/img/**" ,"/js/**").permitAll() // "모든 외부링크 적용 허용"
                         .requestMatchers("/", "/main").permitAll() // "/"와 "/main" 경로에 대한 요청은 모두 허용합니다.
                         .requestMatchers("/postDetail","/boardList","/assignment","/notice","/question","/resource" ).permitAll()
-//                        .requestMatchers("/regCourse").hasRole("STUDENT") // 수강신청 /regCourse는 학생만 허용
-//                        .requestMatchers("/register").hasRole(Role.ADMIN.name()) // "/register" 경로에 대한 요청은 모두 허용합니다.
+                        .requestMatchers("/regCourse").hasAuthority("STUDENT") // 수강신청 /regCourse는 학생만 허용
+                        .requestMatchers("/register").hasAuthority("ADMIN")// "/register" 경로에 대한 요청은 모두 허용합니다.
                         .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.
 //                        .anyRequest().permitAll())// 그 외의 모든 요청은 인증이 필요합니다.
                 .formLogin(loginConfigurer -> loginConfigurer // 폼 로그인을 구성합니다.
@@ -45,6 +47,8 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults()); // 기본 HTTP 기본 인증을 사용합니다.
         return http.build(); // HttpSecurity 객체를 SecurityFilterChain으로 빌드하여 반환합니다.
     }
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){
