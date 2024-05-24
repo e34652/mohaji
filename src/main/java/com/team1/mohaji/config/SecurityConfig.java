@@ -1,5 +1,6 @@
 package com.team1.mohaji.config;
 
+import com.team1.mohaji.entity.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,14 +15,13 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())//CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
+                .csrf((csrfConfig) -> csrfConfig.disable())//CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
                 .authorizeHttpRequests((requests) -> requests // HTTP 요청을 인증 및 권한 부여합니다.
                         .requestMatchers("/css/**", "/img/**" ,"/js/**").permitAll() // "모든 외부링크 적용 허용"
                         .requestMatchers("/", "/main").permitAll() // "/"와 "/main" 경로에 대한 요청은 모두 허용합니다.
                         .requestMatchers("/postDetail","/boardList","/assignment","/notice","/question","/resource" ).permitAll()
-                        //혜빈 코드 추가
-                        .requestMatchers("/regCourse").hasRole("STUDENT") // /regCourse는 학생만 허용
-                        .requestMatchers("/register").hasRole("ADMIN") // "/register" 경로에 대한 요청은 모두 허용합니다.
+//                        .requestMatchers("/regCourse").hasRole("STUDENT") // 수강신청 /regCourse는 학생만 허용
+//                        .requestMatchers("/register").hasRole(Role.ADMIN.name()) // "/register" 경로에 대한 요청은 모두 허용합니다.
                         .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.
 //                        .anyRequest().permitAll())// 그 외의 모든 요청은 인증이 필요합니다.
                 .formLogin(loginConfigurer -> loginConfigurer // 폼 로그인을 구성합니다.
@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .passwordParameter("password") // 3번: 비밀번호 필드 이름 설정
                         .loginProcessingUrl("/login/login-proc") // 4번: 로그인 처리 URL 설정
                         .permitAll()) // 로그인 페이지에 대한 접근을 모두 허용합니다.
+
                 .logout(logoutConfigurer -> logoutConfigurer  // 로그아웃을 구성합니다.
                         .logoutUrl("/logout") // 로그아웃 URL을 설정합니다.
                         .logoutSuccessHandler((request, response, authentication) -> {

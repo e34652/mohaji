@@ -55,7 +55,7 @@
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
                 <td th:text="${post.views}"></td>
-                <td th:text="${post.createdAt}"></td>
+                <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             </tbody>
         </table>
