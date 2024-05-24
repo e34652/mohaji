@@ -18,10 +18,12 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf((csrfConfig) -> csrfConfig.disable())//CSRF protection: DB변동이 발생하는 request는 무조건 차단시켜버리는 기능. DB작업하려고 해제.
+                //혜빈 05.24 22번 라인 코드 수정
                 .authorizeHttpRequests((authorize) -> authorize // HTTP 요청을 인증 및 권한 부여합니다.
                         .requestMatchers("/css/**", "/img/**" ,"/js/**").permitAll() // "모든 외부링크 적용 허용"
                         .requestMatchers("/", "/main").permitAll() // "/"와 "/main" 경로에 대한 요청은 모두 허용합니다.
                         .requestMatchers("/postDetail","/boardList","/assignment","/notice","/question","/resource" ).permitAll()
+                        //혜빈 05.24 26,27 라인 코드 수정
                         .requestMatchers("/regCourse").hasAuthority("STUDENT") // 수강신청 /regCourse는 학생만 허용
                         .requestMatchers("/register").hasAuthority("ADMIN")// "/register" 경로에 대한 요청은 모두 허용합니다.
                         .anyRequest().authenticated())// 그 외의 모든 요청은 인증이 필요합니다.
