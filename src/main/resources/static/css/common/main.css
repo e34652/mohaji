@@ -648,7 +648,7 @@ body.mypage #header .navbar-static-top .container {
   .xn-widget-container
   .xnbw-items-container
   .xnbw-item-container-wrap {
-  display: inline-block;
+
   vertical-align: middle;
 }
 
@@ -2102,7 +2102,6 @@ body.mypage #header .navbar-static-top .container {
   .xnbw-item-container
   .xnbw-post-list-title {
   display: block;
-  float: left;
   height: auto;
 }
 #content

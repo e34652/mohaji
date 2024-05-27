@@ -1,8 +1,10 @@
+/* 기존 코드와 동일 */
 ul:not(.xnpv-description ul, .k-editor ul) {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
 /* Header */
 #header {
   min-width: 0;
@@ -38,6 +40,7 @@ ul:not(.xnpv-description ul, .k-editor ul) {
   clear: both;
   content: "";
 }
+
 /* logo */
 #header .xn-main-catalog-header-logo {
   display: inline-block;
@@ -57,6 +60,7 @@ ul:not(.xnpv-description ul, .k-editor ul) {
   margin: auto auto auto 0;
   height: 70px;
 }
+
 /* wrap */
 #header .navbar-static-top .container .xn-main-menu-wrap {
   display: block;
@@ -71,11 +75,11 @@ ul:not(.xnpv-description ul, .k-editor ul) {
   content: "";
 }
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .desktop
-  .xn-header-menu-wrapper {
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.desktop
+.xn-header-menu-wrapper {
   float: none;
 }
 
@@ -122,6 +126,7 @@ ul:not(.xnpv-description ul, .k-editor ul) {
   line-height: 85px;
   color: #333;
 }
+
 /* subm */
 #header .xn-sub-menu-outer-wrapper {
   position: fixed;
@@ -133,30 +138,40 @@ ul:not(.xnpv-description ul, .k-editor ul) {
   display: block;
 }
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .xn-sub-menu-wrapper.pull-right {
-  position: absolute;
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.xn-sub-menu-wrapper.pull-right {
+  /*position: absolute;*/
+  position: fixed;
   top: 0;
-  right: 50%;
-  margin: 0 -625px 0 0;
+  left: 30%; /* 'right: 50%'를 'left: 0'으로 변경 */
+  margin: 0; /* 마진을 제거 */
   padding: 0 94px 0 0;
   width: 810px;
 }
+
+/* 화면 크기가 768px 이하일 때 적용될 스타일 */
+@media screen and (max-width: 768px) {
+  #header .xn-main-menu-wrap .xn-sub-menu-wrapper.pull-right {
+    left: 0;
+    width: 100%; /* 요소의 크기를 화면에 맞게 조절 */
+    padding: 0; /* 요소의 패딩을 제거하거나 조절 */
+  }
+
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .xn-sub-menu-wrapper.pull-right.mypage
-  .xn-sub-menu-item-wrapper {
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.xn-sub-menu-wrapper.pull-right.mypage
+.xn-sub-menu-item-wrapper {
   width: 20%;
 }
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .xn-sub-menu-wrapper.pull-right:after {
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.xn-sub-menu-wrapper.pull-right:after {
   display: block;
   clear: both;
   content: "";
@@ -164,7 +179,7 @@ ul:not(.xnpv-description ul, .k-editor ul) {
 #header .xn-sub-menu-item-wrapper {
   float: left;
   width: 25%;
-  padding: 20px 0;
+  padding: 5px 0;
 }
 #header .xn-sub-menu-item-wrapper li {
   width: 100%;
@@ -186,23 +201,24 @@ ul:not(.xnpv-description ul, .k-editor ul) {
 }
 
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .xn-sub-menu-outer-containar {
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.xn-sub-menu-outer-containar {
   width: 1250px;
   margin: 0 auto;
 }
 /* 파란색 세로길이조절 */
 #header
-  .navbar-static-top
-  .container
-  .xn-main-menu-wrap
-  .xn-sub-menu-outer-wrapper
-  .xn-sub-menu-item-bg {
+.navbar-static-top
+.container
+.xn-main-menu-wrap
+.xn-sub-menu-outer-wrapper
+.xn-sub-menu-item-bg {
   margin-top: 0px;
   height: 170px;
   display: inline-block;
   width: 325px;
   float: left;
+}
 }

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="sidebar">
   <head>
+
     <meta charset="UTF-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
     <meta name="language" content="ko" />
@@ -14,6 +15,9 @@
 
     <title>sidebar</title>
     <link type="text/css" rel="stylesheet" href="/css/common/sidebar.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common/board.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common/layer.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common/basic.css" />
   </head>
   <body>
     <div class="lnb">
@@ -53,14 +57,14 @@
 
             <ul>
               <li>
-                <a href="/myPage/userInfo"> 회원정보 수정 </a>
-              </li>
-              <li>
                 <a href="/myPage/myPC"> 내 PC 등록 </a>
               </li>
               <li>
-                <a href="/myPage/userPsUpdate"> 비밀번호 수정 </a>
+                <a href="/myPage/userInfo"> 회원정보 수정 </a>
               </li>
+<!--              <li>-->
+<!--                <a href="/myPage/userPsUpdate"> 비밀번호 수정 </a>-->
+<!--              </li>-->
             </ul>
           </li>
         </ul>

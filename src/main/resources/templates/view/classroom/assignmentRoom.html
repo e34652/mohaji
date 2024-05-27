@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="/css/common/common.css" />
   <link rel="stylesheet" href="/css/common/sectionCss.css" />
   <link rel="stylesheet" href="/css/common/basic.css" />
-  <link rel="stylesheet" href="/css/common/board.css.css" />
-  <link rel="stylesheet" href="/css/common/layer.css.css" />
+  <link rel="stylesheet" href="/css/common/board.css" />
+  <link rel="stylesheet" href="/css/common/layer.css" />
 </head>
 <body>
 <div th:replace="~{layout/header :: header}"></div>
@@ -24,7 +24,7 @@
   <main>
     <!-- 세컨드 타이틀 필요없을시 삭제 -->
     <div class="miniNavi">
-      <h1>Hello, World!</h1>
+      <h1>과제방</h1>
     </div>
     <!-- 학습문의 전화 e. -->
 
@@ -49,8 +49,9 @@
 
     </div>
   </main>
-</div>
 
+<div th:replace="~{layout/footer :: footer}"></div>
+</div>
 <script th:inline="javascript">
   document.addEventListener("DOMContentLoaded", function () {
     var asgnList = /*[[${asgnList}]]*/ '[]';
@@ -127,6 +128,6 @@
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<div th:replace="~{layout/footer :: footer}"></div>
+
 </body>
 </html>

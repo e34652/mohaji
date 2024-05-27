@@ -1,5 +1,6 @@
 package com.team1.mohaji.repository;
 
+import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,6 +24,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     public int deleteByPostId(Integer postId);
 
     List<Post> findByBoard_BoardId(int boardId);
+
+
 
 
 }
