@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
 
-    @GetMapping("/login/login")
+    @GetMapping("login/login")
     public String showLoginPage() {
         return "view/loginPage/login"; // `login.html` 파일을 반환합니다.
     }
@@ -27,7 +27,7 @@ public class MainController {
     @GetMapping("/info")
     public String info(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails){
        model.addAttribute("name",customUserDetails.getName());
-        return "/view/info";
+        return "view/info";
     }
 
 }
