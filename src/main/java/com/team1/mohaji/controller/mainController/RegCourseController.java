@@ -60,7 +60,6 @@ public class RegCourseController {
             regCourseServiceImple.updateRegCourse(memberId, subId);
             return "redirect:/regCourse";
         }
-
         regCourseServiceImple.insertReg(memberId, subId, rcStat);
         return "redirect:/regCourse";
     }

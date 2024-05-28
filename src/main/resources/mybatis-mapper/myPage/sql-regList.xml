@@ -48,8 +48,8 @@
         WHERE
             rc.member_id = #{memberId}
           AND rc.rc_stat = '수강중'  -- 이 조건을 추가하여 '수강중'인 데이터만 조회
-          AND s.sub_sdate < NOW()
-          AND NOW() < s.sub_edate;
+          AND s.sub_sdate <= NOW()
+          AND NOW() <= s.sub_edate;
         ]]>
 </select>
 
