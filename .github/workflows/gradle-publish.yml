@@ -57,18 +57,19 @@ jobs:
     - name: Copy files via SSH
       run: |
         echo "Copying files via SSH..."
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/*.jar ec2-user@54.180.249.224:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa Dockerfile ec2-user@54.180.249.224:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa docker-compose.yml ec2-user@54.180.249.224:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/*.jar ubuntu@54.180.249.224:/home/ubuntu/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa Dockerfile ubuntu@54.180.249.224:/home/ubuntu/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa docker-compose.yml ubuntu@54.180.249.224:/home/ubuntu/
         echo "Files copied."
 
     - name: Deploy Docker image
       run: |
         echo "Deploying Docker image..."
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@54.180.249.224 << 'EOF'
-          cd /home/ec2-user/
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.180.249.224 << 'EOF'
+          cd /home/ubuntu/
           docker-compose down
           docker-compose up -d --build
           echo "Docker image deployed."
         EOF
         echo "Deployment completed."
+
