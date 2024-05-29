@@ -111,7 +111,7 @@ public class PostService {
     }
 
     public Post getPostsByPostId(int postId) {
-        Post post = postRepository.findByPostId(postId);
+        Post post = postRepository.findByPostIdOrderByCreatedAtDesc(postId);
         return post;
     }
     @Transactional

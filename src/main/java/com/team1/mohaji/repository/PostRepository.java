@@ -16,7 +16,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findAll();
 
-    Post findByPostId(int postId);
+    Post findByPostIdOrderByCreatedAtDesc(int postId);
+
+
 
     @Modifying
     @Query("UPDATE Post SET views = views + 1 WHERE postId = :postId")
@@ -24,7 +26,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     public int deleteByPostId(Integer postId);
 
-    List<Post> findByBoard_BoardId(int boardId);
+    List<Post> findByBoard_BoardIdOrderByCreatedAtDesc(int boardId);
 
     @Query("SELECT p FROM Post p WHERE p.board.boardId = :boardId")
     Page<Post> findByBoardId(@Param("boardId") int boardId, Pageable pageable);
