@@ -42,17 +42,17 @@ jobs:
     - name: Set up SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
 
     - name: Copy files via SSH
       run: |
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} build/libs/*.jar ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} Dockerfile ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} docker-compose.yml ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} build/libs/*.jar ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} Dockerfile ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} docker-compose.yml ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
 
     - name: Deploy Docker image
       run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ec2-user@your-ec2-instance-public-ip << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} ec2-user@your-ec2-instance-public-ip << 'EOF'
           cd /home/ec2-user/
           docker-compose down
           docker-compose up -d --build
