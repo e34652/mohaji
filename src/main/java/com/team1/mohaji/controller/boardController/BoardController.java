@@ -66,25 +66,12 @@ public class BoardController {
                          Model model) {
         List<PostDto> postDTOs = postService.searchAndConvertPosts(query, boardId);
 
-        String boardName = null;
-        switch (boardId) {
-            case 2:
-                boardName = "assignment";
-                break;
-            case 1:
-                boardName = "notice";
-                break;
-            case 3:
-                boardName = "question";
-                break;
-            case 4:
-                boardName = "resource";
-                break;
-        }
+        String boardName = boardService.getBoardName(boardId);
 
         model.addAttribute("posts", postDTOs);
         return "view/board/" + boardName + "Board";
     }
+
 
 
 

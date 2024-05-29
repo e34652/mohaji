@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="css/common/sectionCss.css" />
     <!-- 부트스트랩 CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <script>
+        function submitWriteForm(boardId) {
+            const writeForm = document.getElementById('writeForm');
+            const boardIdInput = document.getElementById('boardId');
+            boardIdInput.value = boardId;
+            writeForm.submit();
+        }
+    </script>
 
 </head>
 <body>
@@ -57,7 +64,10 @@
             </tr>
             </tbody>
         </table>
-        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|" class="btn btn-primary">글작성</button>
+        <form id="writeForm" method="get" action="/write">
+            <input type="hidden" id="boardId" name="boardId">
+            <button type="button" id="write" title="글작성" onclick="submitWriteForm(1)" class="btn btn-primary">글작성</button>
+        </form>
     </main>
 
     <footer>

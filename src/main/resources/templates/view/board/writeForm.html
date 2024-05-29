@@ -33,10 +33,9 @@
             <h1>글쓰기</h1>
         </div>
         <form action="/newPost" method="post" enctype="multipart/form-data">
-            <label for="boardId">게시판 선택:</label>
-            <select id="boardId" name="boardId">
-                <option th:each="board : ${boardList}" th:value="${board.boardId}" th:text="${board.boardName}"></option>
-            </select>
+            <input type="hidden" id="boardId" name="boardId" th:value="${boardId}">
+            <label for="boardId">게시판 : </label>
+            <input type="text" id="boardName" name="boardName" th:value="${boardName}" readonly class="form-control">
             <br><br>
             <label for="title">제목:</label><br>
             <input type="text" id="title" name="title" required><br><br>

@@ -5,6 +5,7 @@ import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.model.model;
+import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.service.board.BoardService;
 import com.team1.mohaji.service.board.PostService;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -34,10 +36,18 @@ public class PostController {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     @GetMapping("/write")
-    public String write(Model model){
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
+    public String write(@RequestParam("boardId") int boardId,Model model){
+        Optional<Board> optionalBoard = boardRepository.findById(boardId);
+        if (optionalBoard.isPresent()) {
+            Board board = optionalBoard.get();
+            String boardName = board.getBoardName();
+            model.addAttribute("boardId", boardId);
+            model.addAttribute("boardName", boardName);
+        }
         return "view/board/writeForm";
     }
 
@@ -50,11 +60,10 @@ public class PostController {
                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
                              Model model){
 
+        String boardName = boardService.getBoardName(boardId);
         int memberId = customUserDetails.getMemberId();
         String userRole = customUserDetails.getRole();
-        System.out.println(memberId);
-        System.out.println(userRole);
-        // 권한 검증 로직
+
         boolean hasPermission = checkPermission(boardId, userRole);
         if (!hasPermission) {
             return "/view/error"; // 권한이 없을 경우 /error 페이지로 포워드
@@ -81,7 +90,8 @@ public class PostController {
             // 예외 처리 로직 추가
         }
 
-        return "redirect:/boardList";
+        return "redirect:/" +boardName;
+
     }
 
     private boolean checkPermission(int boardId, String userRole) {

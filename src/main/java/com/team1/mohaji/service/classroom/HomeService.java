@@ -1,4 +1,4 @@
-package com.team1.mohaji.service.classroom;
+package com.team1.mohaji.service.Classroom;
 
 import com.team1.mohaji.dto.classroom.HomeDto;
 import com.team1.mohaji.dto.classroom.RegSessionDto;
