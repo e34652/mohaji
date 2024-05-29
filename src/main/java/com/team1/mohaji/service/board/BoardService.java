@@ -27,7 +27,7 @@ public class BoardService {
     }
 
     public List<Post> getPostsByBoardId(int boardId) {
-        return postRepository.findByBoard_BoardIdOrderByCreatedAtDesc(boardId);
+        return postRepository.findByBoardIdOrderByCreatedAtDesc(boardId);
     }
     public List<Post> getPostsPage(int boardId, int limit) {
         Pageable pageable = PageRequest.of(0, limit, Sort.by("createdAt").descending());

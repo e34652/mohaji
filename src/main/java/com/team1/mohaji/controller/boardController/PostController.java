@@ -1,6 +1,7 @@
 package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.config.CustomUserDetails;
+import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
@@ -110,25 +111,25 @@ public class PostController {
     }
 
     @GetMapping("/postDetail")
-    public String  postDetail(@RequestParam("postId") Integer postId, Model model){
+    public String postDetail(@RequestParam("postId") Integer postId, Model model) {
         postService.incrementPostViews(postId);
-        Post post = postService.getPostsByPostId(postId);
-        String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
-        model.addAttribute("post", post);
-        model.addAttribute("memberName", memberName);
+        PostDto postDto = postService.getPostDetail(postId);
+        model.addAttribute("post", postDto);
         return "view/board/postDetail";
     }
 
     @PostMapping("/update")
-    public String update(Post updatedPost) {
-        postService.update(updatedPost);
+    public String update(@ModelAttribute Post updatedPost) {
+        postService.updatePost(updatedPost);
         return "redirect:/postDetail?postId=" + updatedPost.getPostId();
     }
 
     @PostMapping("/delete")
-    public String delete(int postId){
+    public String delete(@RequestParam("postId") int postId) {
+        PostDto postDto = postService.getPostDetail(postId);
+        String boardName = boardService.getBoardName(postDto.getBoardId());
         postService.deletePost(postId);
-        return "redirect:/boardList";
+        return "redirect:/board/" + boardName;
     }
 
 }

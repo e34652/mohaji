@@ -16,17 +16,13 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findAll();
 
-    Post findByPostIdOrderByCreatedAtDesc(int postId);
-
-
-
     @Modifying
     @Query("UPDATE Post SET views = views + 1 WHERE postId = :postId")
     void updateViews(@Param("postId") Integer postId);
 
     public int deleteByPostId(Integer postId);
 
-    List<Post> findByBoard_BoardIdOrderByCreatedAtDesc(int boardId);
+    List<Post> findByBoardIdOrderByCreatedAtDesc(int boardId);
 
     @Query("SELECT p FROM Post p WHERE p.board.boardId = :boardId")
     Page<Post> findByBoardId(@Param("boardId") int boardId, Pageable pageable);

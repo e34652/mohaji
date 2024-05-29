@@ -17,8 +17,10 @@ public class Post extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private int postId;
+    @Column(name = "board_id") // board_id 칼럼을 명시적으로 지정합니다.
+    private Integer boardId;
     @ManyToOne
-    @JoinColumn(name = "board_id")
+    @JoinColumn(name = "board_id", insertable = false, updatable = false)
     private Board board;
     private Integer lectureId;
     private String title;

@@ -56,11 +56,6 @@ public class PostService {
         }
     }
 
-    public List<Post> postList(int postId){
-        List<Post> postList = postRepository.findAll();
-        return postList;
-    }
-
     private String generateUniqueFileName(String originalFileName) {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String fileExtension = "";
@@ -102,37 +97,16 @@ public class PostService {
 
     }
 
-
-
     @Transactional
     public int deletePost(int postId){
         int result = postRepository.deleteByPostId(postId);
         return result;
     }
 
-    public Post getPostsByPostId(int postId) {
-        Post post = postRepository.findByPostIdOrderByCreatedAtDesc(postId);
-        return post;
-    }
+
     @Transactional
     public void incrementPostViews(Integer postId) {
         postRepository.updateViews(postId);
-    }
-
-    public void update(Post updatedPost) {
-        // 업데이트된 게시글의 ID를 사용하여 원본 게시글을 불러옴
-        Post originalPost = postRepository.findById(updatedPost.getPostId()).orElseThrow(() -> new IllegalArgumentException("Invalid post ID"));
-
-        if (updatedPost.getTitle() != null) {
-            originalPost.setTitle(updatedPost.getTitle());
-        }
-        if (updatedPost.getContent() != null) {
-            originalPost.setContent(updatedPost.getContent());
-        }
-        // 업데이트된 정보 설정
-        originalPost.setUpdatedAt(LocalDateTime.now());
-        // 업데이트된 정보를 저장
-        postRepository.save(originalPost);
     }
 
     // 게시글 제목으로 검색하고 PostDto 리스트로 반환하는 메서드
@@ -144,6 +118,8 @@ public class PostService {
     // Post 리스트를 PostDto 리스트로 변환하는 메서드
     public List<PostDto> convertPostsToDtos(List<Post> posts) {
         List<PostDto> postDtos = new ArrayList<>();
+        int sequenceNumber = posts.size();
+
         for (Post post : posts) {
             String name = memberRepository.findMemberNameByMemberId(post.getMemberId());
             PostDto postDto = new PostDto();
@@ -154,6 +130,9 @@ public class PostService {
             postDto.setMemberId(post.getMemberId());
             postDto.setContent(post.getContent());
             postDto.setMemberName(name);
+            postDto.setSequenceNumber(sequenceNumber--); // 순번 설정
+            postDto.setBoardId(post.getBoard().getBoardId());
+            postDto.setBoardName(post.getBoard().getBoardName());
             postDtos.add(postDto);
         }
         return postDtos;
@@ -169,6 +148,34 @@ public class PostService {
         List<Post> posts = boardService.getPostsByBoardId(boardId);
         return convertPostsToDtos(posts);
     }
+
+    public PostDto getPostDetail(int postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+        String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
+        PostDto postDto = new PostDto();
+        postDto.setPostId(post.getPostId());
+        postDto.setTitle(post.getTitle());
+        postDto.setViews(post.getViews());
+        postDto.setCreatedAt(post.getCreatedAt());
+        postDto.setMemberId(post.getMemberId());
+        postDto.setContent(post.getContent());
+        postDto.setMemberName(memberName);
+        postDto.setBoardId(post.getBoard().getBoardId()); // Add Board ID
+        postDto.setBoardName(post.getBoard().getBoardName()); // Add Board Name
+        return postDto;
+    }
+
+    public void updatePost(Post updatedPost) {
+        Post existingPost = postRepository.findById(updatedPost.getPostId())
+                .orElseThrow(() -> new RuntimeException("Post not found"));
+
+        existingPost.setTitle(updatedPost.getTitle());
+        existingPost.setContent(updatedPost.getContent());
+        existingPost.setUpdatedAt(LocalDateTime.now());
+
+        postRepository.save(existingPost);
+    }
+
 
 
 }

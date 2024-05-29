@@ -54,7 +54,7 @@
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
-                <td th:text="${post.postId}"></td>
+                <td th:text="${post.sequenceNumber}"></td>
                 <td th:text="${post.memberName}"></td>
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
