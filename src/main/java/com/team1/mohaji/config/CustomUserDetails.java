@@ -22,13 +22,15 @@ public class CustomUserDetails implements UserDetails {
     private String role;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String email, String name, int memberId, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(String email, String name, int memberId, String username,
+                             String password, String role, Collection<? extends GrantedAuthority> authorities) {
         this.email = email;
         this.name = name;
         this.memberId = memberId;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.role = role;
     }
 
     public void setEmail(String email) {
@@ -46,6 +48,8 @@ public class CustomUserDetails implements UserDetails {
         return memberId;
     }
 
+    public String getRole(){ return role; }
+
     @Override
     public String getUsername() {
         return username;
@@ -55,6 +59,7 @@ public class CustomUserDetails implements UserDetails {
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

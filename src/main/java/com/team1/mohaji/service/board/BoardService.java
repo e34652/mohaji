@@ -5,6 +5,9 @@ import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +28,10 @@ public class BoardService {
 
     public List<Post> getPostsByBoardId(int boardId) {
         return postRepository.findByBoard_BoardId(boardId);
+    }
+    public List<Post> getPostsPage(int boardId, int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.by("createdAt").descending());
+        return postRepository.findByBoardId(boardId, pageable).getContent();
     }
 
 }

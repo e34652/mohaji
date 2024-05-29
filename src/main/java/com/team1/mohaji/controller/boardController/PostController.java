@@ -23,11 +23,7 @@ import java.util.List;
 @Controller
 @Slf4j
 public class PostController {
-    @ModelAttribute
-    public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        System.out.println(customUserDetails.getName());
-        model.addAttribute("name", customUserDetails.getName());
-    }
+
 
     @Autowired
     private BoardService boardService;
@@ -56,7 +52,8 @@ public class PostController {
 
         int memberId = customUserDetails.getMemberId();
         String userRole = customUserDetails.getRole();
-
+        System.out.println(memberId);
+        System.out.println(userRole);
         // 권한 검증 로직
         boolean hasPermission = checkPermission(boardId, userRole);
         if (!hasPermission) {
