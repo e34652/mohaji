@@ -50,7 +50,7 @@ public class MyPageController {
             model.addAttribute("regList", regList);
             model.addAttribute("credit", creditDto);
             System.out.println(regList);
-            return "/view/myPage/regList";
+            return "view/myPage/regList";
         }
         return "redirect:/login";
     }
@@ -61,7 +61,7 @@ public class MyPageController {
         List<MyPCDto> myPCList = myPCSericeImple.selectIP(customUserDetails.getMemberId());
         model.addAttribute("myPCList", myPCList);
         System.out.println("여기도착완료" + myPCList);
-        return "/view/myPage/myPC2";
+        return "view/myPage/myPC2";
     }
 
     @RequestMapping("/regInfo")
@@ -74,7 +74,7 @@ public class MyPageController {
             model.addAttribute("regInfo2", regInfoServiceImple.selectRegInfoAT(memberId));
 
             model.addAttribute("memberId", memberId);
-            return "/view/myPage/regInfo";
+            return "view/myPage/regInfo";
         }
         return "redirect:/login";
 //        log.info("컨트롤러 서비스완료 ");
@@ -83,12 +83,12 @@ public class MyPageController {
 
     @GetMapping("/regStudy")
     public String regStudy() {
-        return "/view/myPage/regStudy";
+        return "view/myPage/regStudy";
     }
 
     @GetMapping("/regResult")
     public String regResult() {
-        return "/view/myPage/regResult";
+        return "view/myPage/regResult";
     }
 
     //    내정보
@@ -114,7 +114,7 @@ public class MyPageController {
         model.addAttribute("userNum",userNum);
         model.addAttribute("userId",userId);
 
-        return "/view/myPage/userInfo";
+        return "view/myPage/userInfo";
     }
 
     @PostMapping("/ReEmail")
