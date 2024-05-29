@@ -40,7 +40,7 @@ public class PostController {
     @Autowired
     private BoardRepository boardRepository;
 
-    @GetMapping("/write")
+    @PostMapping("/write")
     public String write(@RequestParam("boardId") int boardId,Model model){
         Optional<Board> optionalBoard = boardRepository.findById(boardId);
         if (optionalBoard.isPresent()) {
@@ -60,7 +60,7 @@ public class PostController {
                              @RequestParam("files") List<MultipartFile> files,
                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
                              Model model){
-
+        System.out.println(boardId);
         String boardName = boardService.getBoardName(boardId);
         int memberId = customUserDetails.getMemberId();
         String userRole = customUserDetails.getRole();
@@ -70,8 +70,7 @@ public class PostController {
             return "/view/error"; // 권한이 없을 경우 /error 페이지로 포워드
         }
 
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
+
         Post newPost = new Post();
         Board board = new Board();
         board.setBoardId(boardId);

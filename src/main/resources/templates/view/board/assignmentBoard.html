@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
         function submitWriteForm(boardId) {
-            const writeForm = document.getElementById('writeForm');
-            const boardIdInput = document.getElementById('boardId');
-            boardIdInput.value = boardId;
-            writeForm.submit();
+            document.getElementById('boardId').value = boardId;
+            document.getElementById('writeForm').submit();
         }
     </script>
 </head>
@@ -63,7 +61,7 @@
             </tr>
             </tbody>
         </table>
-        <form id="writeForm" method="get" action="/write">
+        <form id="writeForm" method="post" action="/write">
             <input type="hidden" id="boardId" name="boardId">
             <button type="button" id="write" title="글작성" onclick="submitWriteForm(2)" class="btn btn-primary">글작성</button>
         </form>

@@ -32,11 +32,11 @@
         <div class="miniNavi">
             <h1>글쓰기</h1>
         </div>
+
         <form action="/newPost" method="post" enctype="multipart/form-data">
             <input type="hidden" id="boardId" name="boardId" th:value="${boardId}">
             <label for="boardId">게시판 : </label>
             <input type="text" id="boardName" name="boardName" th:value="${boardName}" readonly class="form-control">
-            <br><br>
             <label for="title">제목:</label><br>
             <input type="text" id="title" name="title" required><br><br>
             <label for="content">내용:</label><br>

@@ -16,6 +16,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findAll();
 
+    Post findByPostId(int postId);
+
     @Modifying
     @Query("UPDATE Post SET views = views + 1 WHERE postId = :postId")
     void updateViews(@Param("postId") Integer postId);

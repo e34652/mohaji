@@ -150,7 +150,7 @@ public class PostService {
     }
 
     public PostDto getPostDetail(int postId) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postRepository.findByPostId(postId);
         String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
         PostDto postDto = new PostDto();
         postDto.setPostId(post.getPostId());
@@ -160,14 +160,13 @@ public class PostService {
         postDto.setMemberId(post.getMemberId());
         postDto.setContent(post.getContent());
         postDto.setMemberName(memberName);
-        postDto.setBoardId(post.getBoard().getBoardId()); // Add Board ID
-        postDto.setBoardName(post.getBoard().getBoardName()); // Add Board Name
+        postDto.setBoardId(post.getBoard().getBoardId());
+        postDto.setBoardName(post.getBoard().getBoardName());
         return postDto;
     }
 
     public void updatePost(Post updatedPost) {
-        Post existingPost = postRepository.findById(updatedPost.getPostId())
-                .orElseThrow(() -> new RuntimeException("Post not found"));
+        Post existingPost = postRepository.findByPostId(updatedPost.getPostId());
 
         existingPost.setTitle(updatedPost.getTitle());
         existingPost.setContent(updatedPost.getContent());
