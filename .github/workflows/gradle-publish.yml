@@ -46,9 +46,9 @@ jobs:
 
     - name: Copy files via SSH
       run: |
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} build/libs/*.jar ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} Dockerfile ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} docker-compose.yml ec2-user@your-ec2-instance-public-ip:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} build/libs/*.jar ec2-user@54.180.249.224:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} Dockerfile ec2-user@54.180.249.224:/home/ec2-user/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SSH_PRIVATE_KEY }} docker-compose.yml ec2-user@54.180.249.224:/home/ec2-user/
 
     - name: Deploy Docker image
       run: |
