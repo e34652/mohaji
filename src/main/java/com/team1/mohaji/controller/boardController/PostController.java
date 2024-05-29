@@ -129,7 +129,7 @@ public class PostController {
         PostDto postDto = postService.getPostDetail(postId);
         String boardName = boardService.getBoardName(postDto.getBoardId());
         postService.deletePost(postId);
-        return "redirect:/board/" + boardName;
+        return "redirect:/" + boardName;
     }
 
 }

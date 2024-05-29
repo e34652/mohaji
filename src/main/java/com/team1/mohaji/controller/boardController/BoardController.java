@@ -31,13 +31,7 @@ public class BoardController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/boardList")
-    public String boardList(Model model){
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
-        return "view/board/boardList";
-    }
-    @GetMapping("/assignment")
+    @GetMapping(value = {"/assignment", "/boardList"})
     public String assignmentList(Model model){
         List<PostDto> postDTOs = postService.memberName(2);
         model.addAttribute("posts", postDTOs);
