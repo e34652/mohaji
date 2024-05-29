@@ -79,7 +79,8 @@ jobs:
           if [ $(docker ps -q -f name=mysql) ]; then
             echo "MySQL container already exists. Skipping its creation."
             # 기존 MySQL 컨테이너가 있는 경우, 애플리케이션 컨테이너만 재배포
-            docker-compose rm -sf app
+            docker-compose stop app
+            docker-compose rm -f app
             docker-compose up -d --build app
           else
             echo "No existing MySQL container. Deploying all containers."
