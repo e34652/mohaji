@@ -41,25 +41,34 @@ jobs:
 
     - name: Set up SSH key
       run: |
+        echo "Setting up SSH key..."
         mkdir -p ~/.ssh
         echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        echo "SSH key setup completed."
 
     - name: Add known hosts
       run: |
+        echo "Adding known hosts..."
         touch ~/.ssh/known_hosts
         ssh-keyscan -H 54.180.249.224 >> ~/.ssh/known_hosts
+        echo "Known hosts added."
 
     - name: Copy files via SSH
       run: |
+        echo "Copying files via SSH..."
         scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/*.jar ec2-user@54.180.249.224:/home/ec2-user/
         scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa Dockerfile ec2-user@54.180.249.224:/home/ec2-user/
         scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa docker-compose.yml ec2-user@54.180.249.224:/home/ec2-user/
+        echo "Files copied."
 
     - name: Deploy Docker image
       run: |
+        echo "Deploying Docker image..."
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ec2-user@54.180.249.224 << 'EOF'
           cd /home/ec2-user/
           docker-compose down
           docker-compose up -d --build
+          echo "Docker image deployed."
         EOF
+        echo "Deployment completed."
