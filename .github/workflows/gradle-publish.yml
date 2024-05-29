@@ -75,6 +75,6 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.180.249.224 << 'EOF'
           cd /home/ubuntu/mohaji
           docker-compose down
-          docker image prune -a
+          yes | docker image prune -a
           docker-compose up -d
           echo "Docker image deployed."
