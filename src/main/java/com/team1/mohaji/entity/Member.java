@@ -71,10 +71,4 @@ public class Member extends BaseEntity {
     @Column(name="lock_out_enabled", columnDefinition = "boolean default false")
     private boolean lockOutEnabled;
 
-    public enum Role {
-      STUDENT,
-        PROFESSOR,
-        STAFF,
-        ADMIN
-    }
 }

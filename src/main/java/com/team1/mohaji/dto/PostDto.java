@@ -1,17 +1,15 @@
 package com.team1.mohaji.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.team1.mohaji.entity.Post;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostDto {
     private Integer boardId;
     private Integer postId;
@@ -23,22 +21,15 @@ public class PostDto {
     private Integer likeId;
     private Integer memberId;
     private String memberName;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime updatedAt;
 
-
-    public String getFormattedCreatedAt() {
-        return createdAt.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    public PostDto(Post post) {
+        this.postId = post.getPostId(); // Assuming postId is getter method name
+        this.title = post.getTitle();
+        this.content = post.getContent();
+        this.memberId = post.getMemberId();
     }
-    public String getFormattedUpdatedAt() {
-        return updatedAt.toLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
-
 
 }
 

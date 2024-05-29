@@ -9,6 +9,9 @@ import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.MemberRepository;
 import com.team1.mohaji.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -132,10 +135,16 @@ public class PostService {
         postRepository.save(originalPost);
     }
 
-    public List<PostDto> memberName(int boardId){
-        List<Post> posts = boardService.getPostsByBoardId(boardId);
+    // 게시글 제목으로 검색하고 PostDto 리스트로 반환하는 메서드
+    public List<PostDto> searchAndConvertPosts(String query, int boardId) {
+        List<Post> posts = searchPostsByTitle(query, boardId);
+        return convertPostsToDtos(posts);
+    }
+
+    // Post 리스트를 PostDto 리스트로 변환하는 메서드
+    public List<PostDto> convertPostsToDtos(List<Post> posts) {
         List<PostDto> postDtos = new ArrayList<>();
-        for(Post post : posts){
+        for (Post post : posts) {
             String name = memberRepository.findMemberNameByMemberId(post.getMemberId());
             PostDto postDto = new PostDto();
             postDto.setPostId(post.getPostId());
@@ -149,5 +158,17 @@ public class PostService {
         }
         return postDtos;
     }
+
+    // 게시글 제목으로 검색하는 메서드 (Post 리스트 반환)
+    public List<Post> searchPostsByTitle(String title, int boardId) {
+        return postRepository.findByTitleContainingAndBoardBoardId(title, boardId);
+    }
+
+    // 게시판 ID로 게시글을 가져오고 PostDto 리스트로 변환하는 메서드
+    public List<PostDto> memberName(int boardId) {
+        List<Post> posts = boardService.getPostsByBoardId(boardId);
+        return convertPostsToDtos(posts);
+    }
+
 
 }
