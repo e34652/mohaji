@@ -67,8 +67,6 @@ jobs:
       run: |
         echo "Copying files via SSH..."
         scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/mohaji-0.0.1-SNAPSHOT.jar ubuntu@54.180.249.224:/home/ubuntu/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa Dockerfile ubuntu@54.180.249.224:/home/ubuntu/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa docker-compose.yml ubuntu@54.180.249.224:/home/ubuntu/
         echo "Files copied."
 
     - name: Deploy Docker image
