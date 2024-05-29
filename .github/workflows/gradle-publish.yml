@@ -74,7 +74,19 @@ jobs:
         echo "Deploying Docker image..."
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.180.249.224 << 'EOF'
           cd /home/ubuntu/mohaji
-          docker-compose down
-          yes | docker image prune -a
-          docker-compose up -d
+          
+          # MySQL 컨테이너가 존재하는지 확인
+          if [ $(docker ps -q -f name=mysql) ]; then
+            echo "MySQL container already exists. Skipping its creation."
+            # 기존 MySQL 컨테이너가 있는 경우, 애플리케이션 컨테이너만 재배포
+            docker-compose rm -sf app
+            docker-compose up -d --build app
+          else
+            echo "No existing MySQL container. Deploying all containers."
+            # 기존 리소스를 정리하고 Docker Compose 실행
+            docker-compose down
+            docker-compose up -d --build
+          fi
+
           echo "Docker image deployed."
+        EOF
