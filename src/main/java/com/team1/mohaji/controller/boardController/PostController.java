@@ -113,12 +113,13 @@ public class PostController {
         postService.incrementPostViews(postId);
         PostDto postDto = postService.getPostDetail(postId);
         model.addAttribute("post", postDto);
+        String boardName = boardService.getBoardName(postDto.getBoardId());
+        model.addAttribute("boardName", boardName);
         return "view/board/postDetail";
     }
 
     @PostMapping("/updateForm")
     public String showUpdateForm(@RequestParam("postId") int postId, Model model) {
-        System.out.println("----------------"+postId);
         Post existingPost = postService.getPostById(postId);
         System.out.println(existingPost);
         model.addAttribute("existingPost", existingPost);

@@ -56,7 +56,7 @@
         </th:block>
     </div>
 
-    <a href="#this" id="list" class="btn">목록으로</a>
+    <a th:href="@{'/' + ${boardName}}" class="btn">목록으로</a>
     <a href="#this" id="edit" class="btn">수정하기</a>
     <a href="#this" id="delete" class="btn">삭제하기</a>
 
@@ -78,9 +78,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#list").on("click", function(){
-            history.back();
-        });
 
         // 수정하기 버튼 클릭 시
         $("#edit").on("click", function(){
