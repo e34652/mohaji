@@ -60,21 +60,21 @@ jobs:
       run: |
         echo "Adding known hosts..."
         touch ~/.ssh/known_hosts
-        ssh-keyscan -H 54.180.249.224 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 13.125.216.111 >> ~/.ssh/known_hosts
         echo "Known hosts added."
 
     - name: Copy files via SSH
       run: |
         echo "Copying files via SSH..."
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/mohaji-0.0.1-SNAPSHOT.jar ubuntu@54.180.249.224:/home/ubuntu/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa mohaji_docker/dockerfile ubuntu@54.180.249.224:/home/ubuntu/
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa mohaji_docker/docker-compose.yml ubuntu@54.180.249.224:/home/ubuntu/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build/libs/mohaji-0.0.1-SNAPSHOT.jar ubuntu@13.125.216.111:/home/ubuntu/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa mohaji_docker/dockerfile ubuntu@13.125.216.111:/home/ubuntu/
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa mohaji_docker/docker-compose.yml ubuntu@13.125.216.111:/home/ubuntu/
         echo "Files copied."
 
     - name: Deploy Docker image
       run: |
         echo "Deploying Docker image..."
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.180.249.224 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.125.216.111 << 'EOF'
           cd /home/ubuntu/
 
           # MySQL 컨테이너를 중지하고 제거
