@@ -24,12 +24,14 @@
                 <th scope="row">조회수</th>
                 <td th:text="${post.views}"></td>
             </tr>
-<!--            <tr>-->
-<!--                <th scope="row">수정자</th>-->
-<!--                <td th:text="${memberName}"></td>-->
-<!--                <th scope="row">수정일</th>-->
-<!--                <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}"></td>-->
-<!--            </tr>-->
+
+                <tr th:if="${post.updatedName != null and post.updatedName != ''}">
+                    <th scope="row">수정자</th>
+                    <td th:text="${post.updatedName}"></td>
+                    <th scope="row">수정일</th>
+                    <td th:text="${#temporals.format(post.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+
             <tr>
                 <th scope="row">제목</th>
                 <td colspan="3"><div id="title" name="title" readonly th:text="${post.title }"></div></td>
@@ -57,17 +59,36 @@
     <a href="#this" id="list" class="btn">목록으로</a>
     <a href="#this" id="edit" class="btn">수정하기</a>
     <a href="#this" id="delete" class="btn">삭제하기</a>
+
+    <!-- 수정 폼을 표시할 컨테이너 -->
+    <div id="form-container"></div>
+    <!-- 수정 폼 -->
+    <div id="edit-form" style="display: none;">
+        <form id="editForm">
+            <!-- 수정 폼의 내용 입력 필드들을 여기에 추가 -->
+            <input type="text" id="titleInput" name="titleInput" placeholder="제목">
+            <textarea id="contentInput" name="contentInput" placeholder="내용"></textarea>
+            <button type="button" id="saveEdit">저장</button>
+            <button type="button" id="cancelEdit">취소</button>
+        </form>
+    </div>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("#list").on("click", function(){ history.back(); });
-
-        $("#edit").on("click", function(){
-            var postId = $("#postId").val();
-            window.location.href = "/update?postId=" + postId;
+        $("#list").on("click", function(){
+            history.back();
         });
+
+        // 수정하기 버튼 클릭 시
+        $("#edit").on("click", function(){
+            var frm = $("#frm")[0];
+            frm.action = "/updateForm";
+            frm.submit();
+        });
+
 
         $("#delete").on("click", function(){
             var frm = $("#frm")[0];
@@ -76,11 +97,6 @@
         });
     });
 </script>
-<script th:inline="javascript">
-    var postContent = /*[[ ${post.content} ]]*/ '';
 
-    // 서버에서 받아온 값 postContent를 div에 추가합니다.
-    document.getElementById('contents').innerText = postContent;
-</script>
 </body>
 </html>

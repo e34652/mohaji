@@ -43,8 +43,6 @@ public class PostService {
     @Autowired
     private BoardService boardService;
 
-
-
     @Autowired
     public PostService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
@@ -102,7 +100,6 @@ public class PostService {
         int result = postRepository.deleteByPostId(postId);
         return result;
     }
-
 
     @Transactional
     public void incrementPostViews(Integer postId) {
@@ -162,19 +159,21 @@ public class PostService {
         postDto.setMemberName(memberName);
         postDto.setBoardId(post.getBoard().getBoardId());
         postDto.setBoardName(post.getBoard().getBoardName());
+        postDto.setUpdatedAt(post.getUpdatedAt());
+        postDto.setUpdatedName(postDto.getUpdatedName());
         return postDto;
     }
 
     public void updatePost(Post updatedPost) {
         Post existingPost = postRepository.findByPostId(updatedPost.getPostId());
-
         existingPost.setTitle(updatedPost.getTitle());
         existingPost.setContent(updatedPost.getContent());
         existingPost.setUpdatedAt(LocalDateTime.now());
-
         postRepository.save(existingPost);
     }
 
-
+    public Post getPostById(int postId){
+        return postRepository.findByPostId(postId);
+    }
 
 }

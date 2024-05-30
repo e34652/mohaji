@@ -1,6 +1,7 @@
 package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.config.CustomUserDetails;
+import com.team1.mohaji.config.MemberDetails;
 import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
@@ -8,11 +9,15 @@ import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.model.model;
 import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.MemberRepository;
+import com.team1.mohaji.service.MemberService;
 import com.team1.mohaji.service.board.BoardService;
 import com.team1.mohaji.service.board.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +40,10 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private BoardRepository boardRepository;
 
     @Autowired
-    private BoardRepository boardRepository;
+    private MemberService memberService;
 
     @PostMapping("/write")
     public String write(@RequestParam("boardId") int boardId,Model model){
@@ -51,7 +56,6 @@ public class PostController {
         }
         return "view/board/writeForm";
     }
-
 
     @PostMapping("/newPost")
     public String insertPost(@RequestParam("boardId") int boardId,
@@ -70,7 +74,6 @@ public class PostController {
             return "/view/error"; // 권한이 없을 경우 /error 페이지로 포워드
         }
 
-
         Post newPost = new Post();
         newPost.setTitle(title);
         newPost.setContent(content);
@@ -87,9 +90,7 @@ public class PostController {
             e.printStackTrace();
             // 예외 처리 로직 추가
         }
-
         return "redirect:/" +boardName;
-
     }
 
     private boolean checkPermission(int boardId, String userRole) {
@@ -115,10 +116,48 @@ public class PostController {
         return "view/board/postDetail";
     }
 
-    @PostMapping("/update")
-    public String update(@ModelAttribute Post updatedPost) {
-        postService.updatePost(updatedPost);
-        return "redirect:/postDetail?postId=" + updatedPost.getPostId();
+    @PostMapping("/updateForm")
+    public String showUpdateForm(@RequestParam("postId") int postId, Model model) {
+        System.out.println("----------------"+postId);
+        Post existingPost = postService.getPostById(postId);
+        System.out.println(existingPost);
+        model.addAttribute("existingPost", existingPost);
+        return "view/board/updateForm";
+    }
+
+    @PostMapping("/updatePost")
+    public String update(@ModelAttribute Post post) {
+        // 로그인한 사용자 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        // 로그인한 사용자 ID 가져오기
+        Integer loggedInUserId = memberService.findUserIdByUsername(currentUserName);
+
+        // 기존 포스트 가져오기
+        Post existingPost = postService.getPostById(post.getPostId());
+
+        // 작성자 ID와 비교
+        if (existingPost != null && existingPost.getMemberId().equals(loggedInUserId)) {
+            existingPost.setTitle(post.getTitle());
+            existingPost.setContent(post.getContent());
+            existingPost.setUpdatedAt(LocalDateTime.now());
+            postService.updatePost(existingPost);
+            return "redirect:/postDetail?postId=" + existingPost.getPostId();
+        } else {
+            // 권한이 없거나 포스트가 존재하지 않는 경우
+            System.err.println("Unauthorized update attempt by user ID: " + loggedInUserId);
+            return "view/error2"; // 적절한 에러 페이지로 리디렉트
+        }
     }
 
     @PostMapping("/delete")

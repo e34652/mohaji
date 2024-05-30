@@ -25,6 +25,7 @@ public class PostDto {
     private Integer likeId;
     private Integer memberId;
     private String memberName;
+    private String updatedName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<Attached> attachments;

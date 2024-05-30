@@ -3,6 +3,8 @@ package com.team1.mohaji.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -10,7 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Post extends BaseEntity {
 
     @Id
