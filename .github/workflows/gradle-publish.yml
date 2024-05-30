@@ -73,7 +73,7 @@ jobs:
       run: |
         echo "Deploying Docker image..."
         ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@54.180.249.224 << 'EOF'
-          cd /home/ubuntu/mohaji
+          cd /home/ubuntu/
 
           # MySQL 컨테이너를 중지하고 제거
           docker stop mysql || true
