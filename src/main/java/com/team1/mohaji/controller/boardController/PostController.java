@@ -72,13 +72,11 @@ public class PostController {
 
 
         Post newPost = new Post();
-        Board board = new Board();
-        board.setBoardId(boardId);
         newPost.setTitle(title);
         newPost.setContent(content);
         newPost.setMemberId(memberId);
         newPost.setViews(0);
-        newPost.setBoard(board);
+        newPost.setBoardId(boardId);
         LocalDateTime createdAt = LocalDateTime.now();
         newPost.setCreatedAt(createdAt);
         model.addAttribute("files", files);
