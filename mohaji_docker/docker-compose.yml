@@ -1,4 +1,3 @@
-version: '3'
 services:
   db:
     image: mysql:8.0.33
@@ -17,20 +16,16 @@ services:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     ports:
       - "8412:8412"
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/mohaji"
+      SPRING_DATASOURCE_URL: jdbc:mysql://mohaji.cn4i60u0y7tm.ap-southeast-2.rds.amazonaws.com/mohaji
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     volumes:
       - web_data:/app
-      - /home/ubuntu/mohaji.log:/app/logs/mohaji.log
-    # 디버깅을 위해 사용
-    # command: ["tail", "-f", "/dev/null"]
 volumes:
   db_data: {}
   web_data: {}

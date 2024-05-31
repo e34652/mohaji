@@ -16,4 +16,4 @@ RUN mkdir -p /app/logs && \
 EXPOSE 8412
 
 # 애플리케이션 실행
-ENTRYPOINT ["/bin/sh", "-c", "java -jar /app/mohaji-0.0.1-SNAPSHOT.jar > /app/logs/mohaji.log 2>&1"]
+ENTRYPOINT ["sh", "-c", "java -jar /app/mohaji-0.0.1-SNAPSHOT.jar > /app/logs/mohaji.log 2>&1"]
