@@ -7,8 +7,8 @@ WORKDIR /app
 # Gradle 빌드 결과물 복사
 COPY mohaji-0.0.1-SNAPSHOT.jar /app/mohaji-0.0.1-SNAPSHOT.jar
 
-# 로그 파일을 위한 디렉토리 생성 및 권한 설정
-RUN mkdir -p /app/logs && chmod -R 777 /app/logs
+# 로그 파일 생성 및 권한 설정
+RUN mkdir -p /app/logs && touch /app/logs/mohaji.log && chmod -R 777 /app/logs/mohaji.log
 
 # 포트 설정
 EXPOSE 8412
