@@ -48,15 +48,9 @@ jobs:
         name: build-artifacts
         path: build/libs/
 
-    - name: SSH 디렉토리 생성 및 권한 설정
-      run: |
-        mkdir -p ~/.ssh
-        sudo chmod 755 /home
-        sudo chmod 700 /home/ubuntu /home/ubuntu/.ssh
-        sudo chmod 600 /home/ubuntu/.ssh/authorized_keys
-
     - name: SSH 키 설정
       run: |
+        mkdir -p ~/.ssh
         echo "${{ secrets.MOHAJI_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
 
