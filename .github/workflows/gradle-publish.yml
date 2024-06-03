@@ -48,16 +48,24 @@ jobs:
         name: build-artifacts
         path: build/libs/
 
-    - name: SSH 키 설정
+    - name: SSH 디렉토리 생성 및 권한 설정
       run: |
         mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+
+    - name: SSH 키 설정
+      run: |
         echo "${{ secrets.MOHAJI_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
+        ls -la ~/.ssh
 
-    - name: known_hosts 추가
+    - name: known_hosts 추가 및 확인
       run: |
         touch ~/.ssh/known_hosts
-        ssh-keyscan -H 13.125.216.111 >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+        ssh-keyscan -H 13.125.216.111 | tee -a ~/.ssh/known_hosts
+        cat ~/.ssh/known_hosts
+        ls -la ~/.ssh
 
     - name: SSH를 통해 파일 복사
       run: |
