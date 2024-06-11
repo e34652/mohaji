@@ -31,12 +31,6 @@ public class BoardController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/boardList")
-    public String boardList(Model model){
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
-        return "view/board/boardList";
-    }
     @GetMapping("/assignment")
     public String assignmentList(Model model){
         List<PostDto> postDTOs = postService.memberName(2);
@@ -44,7 +38,7 @@ public class BoardController {
         return "view/board/assignmentBoard";
     }
 
-    @GetMapping("/notice")
+    @GetMapping(value = {"/notice", "/boardList"})
     public String noticeList(Model model){
         List<PostDto> postDTOs = postService.memberName(1);
         model.addAttribute("posts", postDTOs);
@@ -74,26 +68,11 @@ public class BoardController {
                          @RequestParam("query") String query,
                          Model model) {
         List<PostDto> postDTOs = postService.searchAndConvertPosts(query, boardId);
-
-        String boardName = null;
-        switch (boardId) {
-            case 2:
-                boardName = "assignment";
-                break;
-            case 1:
-                boardName = "notice";
-                break;
-            case 3:
-                boardName = "question";
-                break;
-            case 4:
-                boardName = "resource";
-                break;
-        }
-
+        String boardName = boardService.getBoardName(boardId);
         model.addAttribute("posts", postDTOs);
         return "view/board/" + boardName + "Board";
     }
+
 
 
 

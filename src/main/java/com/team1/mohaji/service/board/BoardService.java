@@ -27,11 +27,25 @@ public class BoardService {
     }
 
     public List<Post> getPostsByBoardId(int boardId) {
-        return postRepository.findByBoard_BoardId(boardId);
+        return postRepository.findByBoardIdOrderByCreatedAtDesc(boardId);
     }
     public List<Post> getPostsPage(int boardId, int limit) {
         Pageable pageable = PageRequest.of(0, limit, Sort.by("createdAt").descending());
         return postRepository.findByBoardId(boardId, pageable).getContent();
     }
 
+    public String getBoardName(int boardId) {
+        switch (boardId) {
+            case 2:
+                return "assignment";
+            case 1:
+                return "notice";
+            case 3:
+                return "question";
+            case 4:
+                return "resource";
+            default:
+                return null;
+        }
+    }
 }

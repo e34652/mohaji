@@ -27,9 +27,6 @@ public class LoginController {
 
     @GetMapping(value={"/",  "/main"})
     public String getMypage(Model model, Authentication authentication){
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        String role = customUserDetails.getRole();
-        System.out.println("-----role:" + role+"-----");
         int limit = 5;
         List<Post> notice = boardService.getPostsPage(1, limit);
         model.addAttribute("notice", notice);

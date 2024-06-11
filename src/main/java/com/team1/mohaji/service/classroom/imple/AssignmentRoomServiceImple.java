@@ -1,9 +1,9 @@
-package com.team1.mohaji.service.classroom.imple;
+package com.team1.mohaji.service.Classroom.imple;
 
 import com.team1.mohaji.dto.classroom.AssignmentDto;
 import com.team1.mohaji.dto.classroom.RegAssignmentDto;
 import com.team1.mohaji.mapper.classroom.AssignmentRoomMapper;
-import com.team1.mohaji.service.classroom.AssignmentRoomService;
+import com.team1.mohaji.service.Classroom.AssignmentRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
