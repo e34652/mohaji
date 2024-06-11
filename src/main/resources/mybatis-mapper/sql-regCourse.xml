@@ -216,10 +216,9 @@
             WHERE s.sub_id IN (
                 SELECT rc.sub_id
                 FROM reg_course rc
-                WHERE rc.member_id = 1
-                  AND rc.rc_stat NOT IN ('이수', '취소')
+                WHERE rc.member_id =  #{memberId}
+                  AND rc.rc_stat IN ('신청중')
             )
-              AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
             ]]>
 </select>
 
@@ -271,5 +270,18 @@
         FROM subject
         ]]>
 </select>
+
+    <!--신청중 상태를 수강중으로 바꿔주는 쿼리-->
+    <update id="updateRCStat" parameterType="int">
+   <![CDATA[
+        UPDATE reg_course rc
+            INNER JOIN subject s ON rc.sub_id = s.sub_id
+            SET rc.rc_stat = '수강중'
+        WHERE rc.member_id = #{memberId}
+          AND rc.rc_stat = '신청중'
+          AND DATE(s.sub_sdate) <= CURDATE();
+        ]]>
+</update>
+
 
 </mapper>

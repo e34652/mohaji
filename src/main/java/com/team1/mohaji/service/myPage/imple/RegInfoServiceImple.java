@@ -27,4 +27,9 @@ public class RegInfoServiceImple implements RegInfoService {
     public List<SubjectDto> selectRegInfoAT(int memberId) {
         return regCourseMapper.selectRegInfoAT(memberId);
     }
+
+    @Override
+    public void updateRCStat(int memberId) {
+        regCourseMapper.updateRCStat(memberId);
+    }
 }
