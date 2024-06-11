@@ -3,6 +3,8 @@ package com.team1.mohaji.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -10,15 +12,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private int postId;
+    @Column(name = "board_id") // board_id 칼럼을 명시적으로 지정합니다.
+    private Integer boardId;
     @ManyToOne
-    @JoinColumn(name = "board_id")
+    @JoinColumn(name = "board_id", insertable = false, updatable = false)
     private Board board;
     private Integer lectureId;
     private String title;

@@ -1,16 +1,23 @@
 package com.team1.mohaji.controller.boardController;
 
 import com.team1.mohaji.config.CustomUserDetails;
+import com.team1.mohaji.config.MemberDetails;
+import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Board;
 import com.team1.mohaji.entity.Member;
 import com.team1.mohaji.entity.Post;
 import com.team1.mohaji.model.model;
+import com.team1.mohaji.repository.BoardRepository;
 import com.team1.mohaji.repository.MemberRepository;
+import com.team1.mohaji.service.MemberService;
 import com.team1.mohaji.service.board.BoardService;
 import com.team1.mohaji.service.board.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -32,15 +40,22 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private MemberRepository memberRepository;
+    private BoardRepository boardRepository;
 
-    @GetMapping("/write")
-    public String write(Model model){
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
+    @Autowired
+    private MemberService memberService;
+
+    @PostMapping("/write")
+    public String write(@RequestParam("boardId") int boardId,Model model){
+        Optional<Board> optionalBoard = boardRepository.findById(boardId);
+        if (optionalBoard.isPresent()) {
+            Board board = optionalBoard.get();
+            String boardName = board.getBoardName();
+            model.addAttribute("boardId", boardId);
+            model.addAttribute("boardName", boardName);
+        }
         return "view/board/writeForm";
     }
-
 
     @PostMapping("/newPost")
     public String insertPost(@RequestParam("boardId") int boardId,
@@ -49,27 +64,22 @@ public class PostController {
                              @RequestParam("files") List<MultipartFile> files,
                              @AuthenticationPrincipal CustomUserDetails customUserDetails,
                              Model model){
-
+        System.out.println(boardId);
+        String boardName = boardService.getBoardName(boardId);
         int memberId = customUserDetails.getMemberId();
         String userRole = customUserDetails.getRole();
-        System.out.println(memberId);
-        System.out.println(userRole);
-        // 권한 검증 로직
+
         boolean hasPermission = checkPermission(boardId, userRole);
         if (!hasPermission) {
             return "/view/error"; // 권한이 없을 경우 /error 페이지로 포워드
         }
 
-        List<Board> boardList = boardService.selectAll();
-        model.addAttribute("boardList", boardList);
         Post newPost = new Post();
-        Board board = new Board();
-        board.setBoardId(boardId);
         newPost.setTitle(title);
         newPost.setContent(content);
         newPost.setMemberId(memberId);
         newPost.setViews(0);
-        newPost.setBoard(board);
+        newPost.setBoardId(boardId);
         LocalDateTime createdAt = LocalDateTime.now();
         newPost.setCreatedAt(createdAt);
         model.addAttribute("files", files);
@@ -80,8 +90,7 @@ public class PostController {
             e.printStackTrace();
             // 예외 처리 로직 추가
         }
-
-        return "redirect:/boardList";
+        return "redirect:/" +boardName;
     }
 
     private boolean checkPermission(int boardId, String userRole) {
@@ -100,25 +109,64 @@ public class PostController {
     }
 
     @GetMapping("/postDetail")
-    public String  postDetail(@RequestParam("postId") Integer postId, Model model){
+    public String postDetail(@RequestParam("postId") Integer postId, Model model) {
         postService.incrementPostViews(postId);
-        Post post = postService.getPostsByPostId(postId);
-        String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
-        model.addAttribute("post", post);
-        model.addAttribute("memberName", memberName);
+        PostDto postDto = postService.getPostDetail(postId);
+        model.addAttribute("post", postDto);
+        String boardName = boardService.getBoardName(postDto.getBoardId());
+        model.addAttribute("boardName", boardName);
         return "view/board/postDetail";
     }
 
-    @PostMapping("/update")
-    public String update(Post updatedPost) {
-        postService.update(updatedPost);
-        return "redirect:/postDetail?postId=" + updatedPost.getPostId();
+    @PostMapping("/updateForm")
+    public String showUpdateForm(@RequestParam("postId") int postId, Model model) {
+        Post existingPost = postService.getPostById(postId);
+        System.out.println(existingPost);
+        model.addAttribute("existingPost", existingPost);
+        return "view/board/updateForm";
+    }
+
+    @PostMapping("/updatePost")
+    public String update(@ModelAttribute Post post) {
+        // 로그인한 사용자 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        // 로그인한 사용자 ID 가져오기
+        Integer loggedInUserId = memberService.findUserIdByUsername(currentUserName);
+
+        // 기존 포스트 가져오기
+        Post existingPost = postService.getPostById(post.getPostId());
+
+        // 작성자 ID와 비교
+        if (existingPost != null && existingPost.getMemberId().equals(loggedInUserId)) {
+            existingPost.setTitle(post.getTitle());
+            existingPost.setContent(post.getContent());
+            existingPost.setUpdatedAt(LocalDateTime.now());
+            postService.updatePost(existingPost);
+            return "redirect:/postDetail?postId=" + existingPost.getPostId();
+        } else {
+            // 권한이 없거나 포스트가 존재하지 않는 경우
+            System.err.println("Unauthorized update attempt by user ID: " + loggedInUserId);
+            return "view/error2"; // 적절한 에러 페이지로 리디렉트
+        }
     }
 
     @PostMapping("/delete")
-    public String delete(int postId){
+    public String delete(@RequestParam("postId") int postId) {
+        PostDto postDto = postService.getPostDetail(postId);
+        String boardName = boardService.getBoardName(postDto.getBoardId());
         postService.deletePost(postId);
-        return "redirect:/boardList";
+        return "redirect:/" + boardName;
     }
 
 }

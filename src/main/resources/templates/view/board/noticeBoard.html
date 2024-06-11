@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +10,12 @@
     <link rel="stylesheet" href="css/common/sectionCss.css" />
     <!-- 부트스트랩 CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <script>
+        function submitWriteForm(boardId) {
+            document.getElementById('boardId').value = boardId;
+            document.getElementById('writeForm').submit();
+        }
+    </script>
 
 </head>
 <body>
@@ -49,7 +56,7 @@
             </thead>
             <tbody>
             <tr th:each="post : ${posts}">
-                <td th:text="${post.postId}"></td>
+                <td th:text="${post.sequenceNumber}"></td>
                 <td class="title">
                     <a th:href="@{/postDetail(postId=${post.postId})}" th:text="${post.title}"></a></td>
                 <td th:text="${post.views}"></td>
@@ -57,7 +64,11 @@
             </tr>
             </tbody>
         </table>
-        <button id="write" title="글작성" th:onclick="|window.location.href='/write'|" class="btn btn-primary">글작성</button>
+        <form id="writeForm" method="post" action="/write">
+            <input type="hidden" id="boardId" name="boardId">
+            <button type="button" id="write" title="글작성" onclick="submitWriteForm(1)" class="btn btn-primary">글작성</button>
+        </form>
+
     </main>
 
     <footer>

@@ -24,7 +24,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     public int deleteByPostId(Integer postId);
 
-    List<Post> findByBoard_BoardId(int boardId);
+    List<Post> findByBoardIdOrderByCreatedAtDesc(int boardId);
 
     @Query("SELECT p FROM Post p WHERE p.board.boardId = :boardId")
     Page<Post> findByBoardId(@Param("boardId") int boardId, Pageable pageable);
