@@ -25,8 +25,9 @@ services:
       SPRING_DATASOURCE_PASSWORD: admin123
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     volumes:
-      - web_data:/app
-      - /home/ubuntu:/app/logs
+      - web_data:/app/logs
+      - /home/ubuntu/logs/:/app/logs/
 volumes:
-  db_data: {}
-  web_data: {}
+  db_data:
+  web_data:
+    external: true
