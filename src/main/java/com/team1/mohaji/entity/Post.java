@@ -27,6 +27,8 @@ public class Post extends BaseEntity {
     private Board board;
     private Integer lectureId;
     private String title;
+
+    @Column(columnDefinition = "VARCHAR(4000)" )
     private String content;
     private Integer views;
 
