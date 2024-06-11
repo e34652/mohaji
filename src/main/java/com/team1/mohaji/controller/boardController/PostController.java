@@ -117,6 +117,7 @@ public class PostController {
     public String postDetail(@RequestParam("postId") Integer postId, Model model) {
         postService.incrementPostViews(postId);
         PostDto postDto = postService.getPostDetail(postId);
+        postDto.setContent(postDto.getContent().replace("\n", "<br>"));
         model.addAttribute("post", postDto);
         String boardName = boardService.getBoardName(postDto.getBoardId());
         model.addAttribute("boardName", boardName);

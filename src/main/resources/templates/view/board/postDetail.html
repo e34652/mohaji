@@ -6,9 +6,10 @@
         <title>게시글 상세 화면</title>
         <link rel="stylesheet" href="css/common/common.css" />
         <link rel="stylesheet" href="css/common/sectionCss.css" />
-        <link rel="stylesheet" th:href="@{/css/boardDetail.css}"/>
+
         <!-- 부트스트랩 CDN 추가 -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" th:href="@{/css/boardDetail.css}"/>
         <!-- 분리된 CSS 파일 연결 -->
     </head>
     <body>
@@ -79,9 +80,9 @@
                 </th:block>
             </div>
 
-            <a th:href="@{'/' + ${boardName}}" class="btn">목록으로</a>
-            <a href="#this" id="edit" class="btn">수정하기</a>
-            <a href="#this" id="delete" class="btn">삭제하기</a>
+            <a th:href="@{'/' + ${boardName}}" class="btn btn-primary">목록으로</a>
+            <a href="#this" id="edit" class="btn btn-primary">수정하기</a>
+            <a href="#this" id="delete" class="btn btn-primary">삭제하기</a>
 
             <!-- 수정 폼을 표시할 컨테이너 -->
             <div id="form-container"></div>
