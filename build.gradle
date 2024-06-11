@@ -58,8 +58,8 @@ dependencies {
 
 // log
 
-	implementation 'org.slf4j:slf4j-api'
-	implementation 'ch.qos.logback:logback-classic:1.4.7'
+//	implementation 'org.slf4j:slf4j-api'
+//	implementation 'ch.qos.logback:logback-classic:1.4.7'
 
 
 	implementation 'commons-fileupload:commons-fileupload:1.4'

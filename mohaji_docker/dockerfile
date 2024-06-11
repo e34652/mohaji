@@ -1,4 +1,4 @@
-# Dockerfile
+# Dockerfile1
 
 # 베이스 이미지 설정
 FROM openjdk:17-jdk-slim
@@ -7,10 +7,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Gradle 빌드 결과물 복사
-COPY *.jar app.jar
+COPY mohaji-0.0.1-SNAPSHOT.jar /app/mohaji-0.0.1-SNAPSHOT.jar
 
 # 포트 설정
 EXPOSE 8412
 
 # 애플리케이션 실행
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/mohaji-0.0.1-SNAPSHOT.jar"]
