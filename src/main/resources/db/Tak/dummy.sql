@@ -59,7 +59,7 @@ insert into session values
 insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-05-05', 'Hello Python을 출력 세가지 방법으로 작성해보세요',2,'2024-04-08','Hello Python 출력하기');
 insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-05-06', '구구단을 출력하는 코드를 세가지 방법으로 작성해보세요',2,'2024-06-02','구구단 출력하기');
 insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-06-03', '생년월일을 입력받아 나이를 계산하는 코드를 작성해보세요',2,'2024-06-30','나이 계산기');
-
+insert into asgn (asgn_ddate, asgn_desc, sub_id, asgn_sdate, asgn_title) values('2024-07-08', '영화 제목 10개를 리스트에 추가하고 출력해보세요',4,'2024-07-01','리스트 활용');
 
 
 

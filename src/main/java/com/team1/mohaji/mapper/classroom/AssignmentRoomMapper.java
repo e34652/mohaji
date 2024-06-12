@@ -19,7 +19,8 @@ public interface AssignmentRoomMapper {
     public void insertRegAsgn(@Param("memberId") int memberId,
                               @Param("subId") int subId,
                               @Param("asgnId") int asgnId,
-                              @Param("raContent") String raContent);
+                              @Param("raContent") String raContent,
+                              @Param("attachedId")Integer attachedId);
 
     public void updateRegAsgn(RegAssignmentDto regAssignmentDto);
 

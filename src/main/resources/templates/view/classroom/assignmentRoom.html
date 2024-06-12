@@ -43,7 +43,7 @@
           * 과제는 문제은행 방식으로 랜덤 부여됩니다. 페이지를 여러 개 띄워놓을 경우, 과제 문항이 변경될 수 있사오니 주의하시길 바랍니다.
         </dl>
       </div>
-
+      <br><br>
       <div id="grid"></div>
 
     </div>
@@ -67,11 +67,17 @@
           sortable: true,
           formatter: function (item) {
             const asgnTitle = item.row.asgnTitle;
-            const subId = item.row.subId;
-            const memberId = item.row.memberId; // 각 항목의 memberId를 가져옵니다.
+            const asgnSdate = new Date(item.row.asgnSdate);
             const asgnId = item.row.asgnId;
-            const url = `/classroom/assignmentDetail?&asgnId=${asgnId}&asgnTitle=${asgnTitle}`;
-            return `<a href=${url}>${asgnTitle}</a>`;
+            const currentDate = new Date();
+
+            // 제출 시작일이 현재 시각 이후인지 확인
+            if (currentDate <= asgnSdate) {
+              return asgnTitle;
+            } else {
+              const url = `/classroom/assignmentDetail?&asgnId=${asgnId}&asgnTitle=${asgnTitle}`;
+              return `<a href=${url}>${asgnTitle}</a>`;
+            }
           },
         },
         {
@@ -122,6 +128,7 @@
       ],
     });
     grid.resetData(asgnList); // 서버에서 전달된 데이터로 그리드 초기화
+    document.querySelector('.tui-grid-lside-area').style.display = 'none';
   });
 </script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>

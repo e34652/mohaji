@@ -33,7 +33,7 @@
     </select>
 
     <update id = "updateRegAsgn" parameterType="com.team1.mohaji.dto.classroom.RegAssignmentDto">
-UPDATE reg_asgn SET ra_content = #{raContent}, ra_sdate = now() WHERE asgn_id = #{asgnId} AND member_id = #{memberId} AND sub_id = #{subId};
+UPDATE reg_asgn SET ra_content = #{raContent}, ra_sdate = now(), attached_id =#{attachedId} WHERE asgn_id = #{asgnId} AND member_id = #{memberId} AND sub_id = #{subId};
     </update>
 
     <select id="selectRegAsgn" parameterType="int" resultMap="regAsgn">
@@ -43,8 +43,8 @@ UPDATE reg_asgn SET ra_content = #{raContent}, ra_sdate = now() WHERE asgn_id = 
     </select>
 
     <insert id = "insertRegAsgn" parameterType="map">
-        INSERT INTO reg_asgn (asgn_id, member_id, sub_id, ra_content, ra_sdate)
-        VALUES (#{asgnId}, #{memberId}, #{subId}, #{raContent}, now())
+        INSERT INTO reg_asgn (asgn_id, member_id, sub_id, ra_content, ra_sdate, attached_id)
+        VALUES (#{asgnId}, #{memberId}, #{subId}, #{raContent}, now(), #{attachedId})
     </insert>
         <!-- 다른 필드들에 대한 매핑 추가 -->
     <select id="selectAssignment" parameterType="int" resultMap="assignment">
@@ -63,17 +63,18 @@ UPDATE reg_asgn SET ra_content = #{raContent}, ra_sdate = now() WHERE asgn_id = 
             ra.ra_sdate,
             ra.ra_score,
             CASE
+                WHEN a.asgn_sdate <= NOW() AND ra.ra_sdate is null THEN '미제출'
                 WHEN a.asgn_ddate <= NOW() AND ra.ra_score != 0 THEN '평가완료'
                 WHEN a.asgn_ddate <= NOW() AND ra.ra_sdate is not null AND ra.ra_score = 0 THEN '평가중'
                 WHEN a.asgn_sdate <= NOW() AND ra.ra_sdate is not null THEN '제출완료'
-                WHEN a.asgn_sdate <= NOW() AND ra.ra_sdate is null THEN '미제출'
+
                 ELSE ''
                 END AS status
         FROM
             asgn a
                 LEFT JOIN reg_asgn ra
                           ON a.asgn_id = ra.asgn_id AND ra.member_id = #{memberId}
-        ORDER BY a.asgn_id;
+        ORDER BY a.asgn_sdate;
         ]]>
     </select>
 

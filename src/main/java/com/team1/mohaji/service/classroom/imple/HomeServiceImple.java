@@ -1,7 +1,7 @@
-package com.team1.mohaji.service.Classroom.imple;
+package com.team1.mohaji.service.classroom.imple;
 import com.team1.mohaji.dto.classroom.HomeDto;
 import com.team1.mohaji.mapper.classroom.HomeMapper;
-import com.team1.mohaji.service.Classroom.HomeService;
+import com.team1.mohaji.service.classroom.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
