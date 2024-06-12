@@ -1,6 +1,7 @@
 package com.team1.mohaji.service.board;
 
 import com.team1.mohaji.config.FileStorageProperties;
+import com.team1.mohaji.dto.AttachedDto;
 import com.team1.mohaji.dto.PostDto;
 import com.team1.mohaji.entity.Attached;
 import com.team1.mohaji.entity.Post;
@@ -87,6 +88,7 @@ public class PostService {
                 attached.setPost(post);
                 attached.setMemberId(memberId); // memberId 설정
                 attachments.add(attached);
+
             }
         }
         post.setAttachments(attachments);
@@ -147,7 +149,9 @@ public class PostService {
     }
 
     public PostDto getPostDetail(int postId) {
+
         Post post = postRepository.findByPostId(postId);
+        List<Attached> fileList = attachedRepository.findByPost(post);
         String memberName = memberRepository.findMemberNameByMemberId(post.getMemberId());
         PostDto postDto = new PostDto();
         postDto.setPostId(post.getPostId());
@@ -161,6 +165,7 @@ public class PostService {
         postDto.setBoardName(post.getBoard().getBoardName());
         postDto.setUpdatedAt(post.getUpdatedAt());
         postDto.setUpdatedName(postDto.getUpdatedName());
+        postDto.setAttachments(fileList);
         return postDto;
     }
 
