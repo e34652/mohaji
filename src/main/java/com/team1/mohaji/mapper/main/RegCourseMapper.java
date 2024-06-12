@@ -40,4 +40,9 @@ public interface RegCourseMapper {
 
     List<SubjectDto> selectRegInfoAT (int memberId);
 
+    void updateRCStat (int memberId);
+
+
+
+
 }

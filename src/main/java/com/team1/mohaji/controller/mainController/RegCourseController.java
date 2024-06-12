@@ -49,7 +49,7 @@ public class RegCourseController {
 
     @GetMapping("/reg")
     public String reg(@RequestParam int memberId, @RequestParam int subId, RedirectAttributes redirectAttributes, Model model) {
-        String rcStat = "수강중";
+        String rcStat = "신청중";
         String stat = regCourseServiceImple.selectRegCourseByRegStat(memberId, subId);
         int creditSum = regCourseServiceImple.selectCreditSum(memberId);
 

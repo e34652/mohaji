@@ -11,4 +11,8 @@ public interface RegInfoService {
     List<SubjectDto> selectRegInfoBF (int memberId);
 
     List<SubjectDto> selectRegInfoAT (int memberId);
+
+    void updateRCStat(int memberId);
+
+
 }
