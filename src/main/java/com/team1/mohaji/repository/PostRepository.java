@@ -31,4 +31,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findByTitleContainingAndBoardBoardId(String title, int boardId);
 
+
 }
