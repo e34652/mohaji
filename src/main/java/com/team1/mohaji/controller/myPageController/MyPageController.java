@@ -52,7 +52,7 @@ public class MyPageController {
             System.out.println(regList);
             return "view/myPage/regList";
         }
-        return "redirect:/login";
+        return "redirect:/login/login";
     }
 
 

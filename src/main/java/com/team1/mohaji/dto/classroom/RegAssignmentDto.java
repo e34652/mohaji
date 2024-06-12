@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 public class RegAssignmentDto {
     private int raId;
-    private int attachedId;
+    private Integer attachedId;
     private String raContent;
     private String raFeedback;
     private int raScore;

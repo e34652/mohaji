@@ -62,10 +62,11 @@
       </table>
 
       <div class="sub_tit_my2">과제제출</div>
-
       <form id="form1" name="form1" method="post" enctype="multipart/form-data">
         <input type="hidden" id="asgnId" name="asgnId" th:value="${asgn.asgnId}"/>
-
+        <div th:if="${regAsgn != null}">
+          <input type="hidden" id="attachedId" name="attachedId" th:if="${regAsgn.attachedId != null}" th:value="${regAsgn.attachedId}"/>
+        </div>
         <table class="sub_tbl04">
           <colgroup>
             <col width="25%" />
@@ -88,19 +89,27 @@
             <th>첨부파일</th>
             <td colspan="3">
               <div style="float:left">
-                <input type="file" id="i_filename" name="i_filename" value="" class="styled"/>
+                <input type="file" id="attached_file" name="file" class="styled"/>
               </div>
               <div class="marginT03"></div>
               <div style="clear:both;color:red">
                 * 새파일 등록시 기존 파일은 삭제됩니다.
               </div>
+              <th:block th:if="${attachment != null}">
+              <div class="file_list">
+                  <p>
+                    <a th:href="@{/files/download/{idx}(idx=${attachment.attachedId})}"
+                       th:text="|${attachment.originalName} [${attachment.storagePath}]|"></a>
+                  </p>
+              </div>
+                </th:block>
             </td>
           </tr>
         </table>
       </form>
 
       <div class="course_btn_warp margin_bot50">
-        <a href="javascript:'#';">
+        <a href="javascript:history.back();">
           <div class="course_cancle">목록으로</div>
         </a>
         <a href="javascript:void(0);">
@@ -124,8 +133,10 @@
         contentType: false,
         data: formData,
         success: function(response) {
-          alert('제출 완료');
-          history.back();
+          alert(response); // 서버의 응답 메시지를 alert로 표시
+          if (response === "과제가 성공적으로 제출되었습니다") {
+            history.back();
+          }
         },
         error: function(xhr, status, error) {
           console.error('Error:', error);
@@ -134,6 +145,7 @@
       });
     });
   });
+
 </script>
 </body>
 </html>
