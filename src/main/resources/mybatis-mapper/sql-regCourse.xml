@@ -191,7 +191,7 @@
     <update id="updateRegCourse" parameterType="int">
    <![CDATA[
         UPDATE reg_course
-        SET rc_stat = '수강중'
+        SET rc_stat = '신청중'
         WHERE member_id = #{memberId}
           AND sub_id = #{subId}
         ]]>
