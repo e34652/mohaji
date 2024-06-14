@@ -241,7 +241,7 @@
     <!--수강신청-->
     <insert id="insertReg">
     <![CDATA[
-        INSERT INTO reg_course (member_id123123, sub_id, rc_stat)
+        INSERT INTO reg_course (member_id, sub_id, rc_stat)
         VALUES (
                    #{memberId},
                    #{subId},
