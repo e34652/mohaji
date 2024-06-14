@@ -8,6 +8,7 @@ import com.team1.mohaji.model.model;
 import com.team1.mohaji.service.main.RegCourseService;
 
 import com.team1.mohaji.service.main.imple.RegCourseServiceImple;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-//@Slf4j
+@Slf4j
 public class RegCourseController {
     @ModelAttribute
     public void addAttributes(Model model, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -61,6 +62,7 @@ public class RegCourseController {
             return "redirect:/regCourse";
         }
         regCourseServiceImple.insertReg(memberId, subId, rcStat);
+        log.info("수강신청 완료");
         return "redirect:/regCourse";
     }
 
