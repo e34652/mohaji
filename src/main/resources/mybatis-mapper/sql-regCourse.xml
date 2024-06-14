@@ -49,7 +49,7 @@
                 SELECT rc.sub_id
                 FROM reg_course rc
                 WHERE rc.member_id = #{memberId}
-                  AND rc.rc_stat IN ('수강중', '이수')
+                  AND rc.rc_stat IN ('수강중', '이수','신청중')
             )
           AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
@@ -106,7 +106,7 @@
             SELECT rc.sub_id
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
-              AND rc.rc_stat IN ('수강중', '이수')
+              AND rc.rc_stat IN ('수강중', '이수','신청중')
         )
           AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
@@ -133,7 +133,7 @@
             SELECT rc.sub_id
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
-              AND rc.rc_stat IN ('수강중', '이수')
+              AND rc.rc_stat IN ('수강중', '이수','신청중')
         )
           AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
@@ -159,7 +159,7 @@
             SELECT rc.sub_id
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
-              AND rc.rc_stat IN ('수강중', '이수')
+              AND rc.rc_stat IN ('수강중', '이수','신청중')
         ) AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
@@ -174,7 +174,7 @@
             SELECT rc.sub_id
             FROM reg_course rc
             WHERE rc.member_id = #{memberId}
-              AND rc.rc_stat IN ('수강중', '이수')
+              AND rc.rc_stat IN ('수강중', '이수','신청중')
         ) AND CURDATE() BETWEEN s.sub_rsdate AND s.sub_redate;
         ]]>
 </select>
