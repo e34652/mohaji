@@ -91,7 +91,7 @@
                 <form method="post" action="/deletePC" onsubmit="return confirm('정말로 이 PC를 삭제하시겠습니까?');" class="ml-auto">
                     <tr>
                         <th><span th:text="${ip.mipName}"></span></th>
-                        <td>8C-B0-E9-92-E3-9C</td>
+                        <td><span class="ip-address" th:text="${ip.mipIp}"></span></td>
                         <input type="hidden" name="mipId" th:value="${ip.mipId}" />
                         <td><button type="submit" class="btn btn-primary">삭제</button></td>
                     </tr>
@@ -116,6 +116,51 @@
         }
     })();
     /*]]>*/
+</script>
+<script>
+    // IP 주소 해시 및 변환 함수
+    function hashIp(ip) {
+        // 간단한 해시 함수 (SHA-256)
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // 고정된 문자열 생성 함수
+        function generateFixedString(base64Hash) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < base64Hash.length && result.length < 8; i++) {
+                let char = base64Hash.charAt(i).toUpperCase();
+                if (chars.includes(char)) {
+                    result += char;
+                }
+            }
+            // 문자열이 8자리가 되지 않으면 채운다
+            while (result.length < 8) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // IP 주소 해싱 및 변환 실행
+        return sha256(ip).then(hash => {
+            const base64Hash = btoa(hash);
+            return generateFixedString(base64Hash);
+        });
+    }
+
+    // 페이지 로드 후 IP 주소 변환 실행
+    window.onload = function() {
+        const ipElements = document.querySelectorAll('.ip-address');
+        ipElements.forEach(async (element) => {
+            const ipAddress = element.innerText;
+            const encryptedIp = await hashIp(ipAddress);
+            element.innerText = encryptedIp;
+        });
+    };
 </script>
 </body>
 </html>
