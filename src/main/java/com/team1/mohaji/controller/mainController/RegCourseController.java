@@ -62,7 +62,6 @@ public class RegCourseController {
             return "redirect:/regCourse";
         }
         regCourseServiceImple.insertReg(memberId, subId, rcStat);
-        log.info("수강신청 완료");
         return "redirect:/regCourse";
     }
 
