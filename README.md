@@ -6,12 +6,12 @@
 
 # 팀원 소개
 
-e34652 = 노승탁 (팀장)
-jjuiru = 이지현 (팀원)
-havanaoh = 오혜빈 (팀원)
+e34652 = 노승탁 (팀장)<br>
+jjuiru = 이지현 (팀원)<br>
+havanaoh = 오혜빈 (팀원)<br>
 yuraKIMyura = 김유라 (팀원, 개인사정으로 하차)
 
 # 시연 영상
 
-기능시연: https://youtu.be/0Dg3f2ORtb4
+기능시연: https://youtu.be/0Dg3f2ORtb4<br>
 배포시연: https://youtu.be/h1-W1yTLkX4
